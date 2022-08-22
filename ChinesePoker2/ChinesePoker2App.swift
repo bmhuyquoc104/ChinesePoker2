@@ -12,6 +12,7 @@ struct ChinesePoker2App: App {
     var body: some Scene {
         WindowGroup {
             PlayView()
+                .environmentObject(CardModel())
         }
     }
 }
