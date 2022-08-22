@@ -15,6 +15,8 @@ struct PlayView: View {
                 ForEach(0 ..< model.cards.count, id: \.self){
                     index in
                     if (index < 3){
+                        let arr:[Card] = [model.cards[0],model.cards[1],model.cards[2]]
+                        let handType = "\(model.evaluateHand(cards: arr))"
                         Image(model.cards[index].image)
                             .resizable()
                             .scaledToFit()
@@ -30,6 +32,9 @@ struct PlayView: View {
                 ForEach(0 ..< model.cards.count, id: \.self){
                     index in
                     if (index >= 3 && index < 8 ){
+                        let arr:[Card] = [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]]
+                        let handType = "\(model.evaluateHand(cards: arr))"
+                        Text(handType)
                         Image(model.cards[index].image)
                             .resizable()
                             .scaledToFit()
@@ -45,6 +50,9 @@ struct PlayView: View {
                 ForEach(0 ..< model.cards.count, id: \.self){
                     index in
                     if (index >= 8 && index < 13 ){
+                        let arr:[Card] = [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]]
+                        let handType = "\(model.evaluateHand(cards: arr))"
+                        Text(handType)
                         Image(model.cards[index].image)
                             .resizable()
                             .scaledToFit()

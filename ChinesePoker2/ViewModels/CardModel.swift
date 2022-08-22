@@ -13,4 +13,8 @@ class CardModel:ObservableObject {
     init(){
         self.cards = Card.testData()
     }
+    
+    func evaluateHand(cards:Deck) -> HandType{
+        return HandType(cards: cards)
+    }
 }
