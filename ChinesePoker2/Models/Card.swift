@@ -21,10 +21,13 @@ enum Suit{
     case Club, Diamond, Heart,Spade
 }
 
-enum HandType{
-    case Invalid, HighCard, Pair, TwoPair,ThreeOfAKind,Straight,Flush,FullHouse,FourOfAKind,StraighFlush,RoyalFlush
+enum HandType:Int, CaseIterable, Comparable{
+    case HighCard = 1, Pair, TwoPair,ThreeOfAKind,Straight,Flush,FullHouse,FourOfAKind,StraighFlush,RoyalFlush
+    static func < (lhs:HandType,rhs:HandType) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
     init(cards:Deck){
-        var returnType: Self = .Invalid
+        var returnType: Self = .HighCard
         if (cards.count == 3) {
             let sortedHand = cards.sortByRank()
             if (sortedHand[1].rank == sortedHand[2].rank && sortedHand[0].rank == sortedHand[2].rank){
@@ -39,7 +42,6 @@ enum HandType{
         }
         if (cards.count == 5) {
             let sortedHand = cards.sortByRank()
-            print(sortedHand)
             if (sortedHand[0].rank == sortedHand[1].rank || sortedHand[1].rank == sortedHand[2].rank || sortedHand[2].rank == sortedHand[3].rank || sortedHand[3].rank == sortedHand[4].rank){
                 returnType = .Pair
             }
@@ -91,7 +93,7 @@ enum HandType{
             if (isFlush && isStraight) {
                 returnType = .StraighFlush
             }
-            if (isStraight && sortedHand[4].rank == .Ten){
+            if (isStraight && isFlush && sortedHand[4].rank == .Ten){
                 returnType = .RoyalFlush
             }
             
@@ -117,19 +119,25 @@ struct Card:Identifiable, Equatable, Hashable {
     }
     static func testData () -> [Card] {
         let cards = [
-            Card(rank: .Two, suit: .Club),
-            Card(rank: .Three, suit: .Club),
-            Card(rank: .Four, suit: .Club),
-            Card(rank: .Ten, suit: .Club),
-            Card(rank: .Jack, suit: .Club),
+            Card(rank: .King, suit: .Diamond),
+            Card(rank: .Ace, suit: .Spade),
+            Card(rank: .Queen, suit: .Heart),
+            
+           
+            
+            
+            
+            Card(rank: .King, suit: .Club),
+            Card(rank: .Jack, suit: .Spade),
             Card(rank: .Queen, suit: .Club),
             Card(rank: .King, suit: .Club),
             Card(rank: .Ace, suit: .Club),
-            Card(rank: .Nine, suit: .Club),
-            Card(rank: .Eight, suit: .Club),
-            Card(rank: .Seven, suit: .Club),
-            Card(rank: .Six, suit: .Club),
-            Card(rank: .Five, suit: .Club)
+            
+            Card(rank: .King, suit: .Spade),
+            Card(rank: .King, suit: .Spade),
+            Card(rank: .Ace, suit: .Club),
+            Card(rank: .Four, suit: .Spade),
+            Card(rank: .Five, suit: .Spade),
         ]
         return cards
     }
