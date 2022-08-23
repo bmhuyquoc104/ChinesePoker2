@@ -124,7 +124,7 @@ struct PlayView: View {
                         }
                         ZStack(alignment:.leading){
                             Rectangle().foregroundColor(.black).opacity(0.7).frame(width: geo.size.width/2.5, height: geo.size.height/2.7).shadow(radius: 0.5)
-                            let arr:[Card] = [model.cards[0],model.cards[1],model.cards[2]]
+                            let arr:Stack = [model.cards[0],model.cards[1],model.cards[2]]
                             let handType = "\(model.evaluateHand(cards: arr))"
                             if (handType == "StraighFlush"){
                                 Text(handType).font(.title3).foregroundColor(.yellow).padding(.leading)
@@ -326,12 +326,9 @@ struct PlayView: View {
                 model.evaluateFrontHand(cards: [model.cards[0],model.cards[1],model.cards[2]])
                 model.evaluateBackHand(cards: [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]])
                 model.evaluateMiddleHand(cards: [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]])
-                let arr:Deck = [model.cards[0],model.cards[1],model.cards[2]]
-                let arr2:Deck = [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]]
-                let arr3:Deck = [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]]
-                arr.sortByRank()
-                arr2.sortByRank()
-                arr3.sortByRank()
+                let arr:Stack = [model.cards[0],model.cards[1],model.cards[2]]
+                let arr2:Stack = [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]]
+                let arr3:Stack = [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]]
                 if (model.frontHandValue == model.middleHandValue && model.frontHandValue == 1){
                     let temp = [arr[0].rank.rawValue,arr[1].rank.rawValue,arr[2].rank.rawValue]
                     let temp2 = [arr2[0].rank.rawValue,arr2[1].rank.rawValue,arr2[2].rank.rawValue]
@@ -623,12 +620,9 @@ struct PlayView: View {
                 model.evaluateFrontHand(cards: [model.cards[0],model.cards[1],model.cards[2]])
                 model.evaluateBackHand(cards: [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]])
                 model.evaluateMiddleHand(cards: [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]])
-                let arr:Deck = [model.cards[0],model.cards[1],model.cards[2]]
-                let arr2:Deck = [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]]
-                let arr3:Deck = [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]]
-                arr.sortByRank()
-                arr2.sortByRank()
-                arr3.sortByRank()
+                let arr:Stack = [model.cards[0],model.cards[1],model.cards[2]]
+                let arr2:Stack = [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]]
+                let arr3:Stack = [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]]
                 if (model.frontHandValue == model.middleHandValue && model.frontHandValue == 1){
                     let temp = [arr[0].rank.rawValue,arr[1].rank.rawValue,arr[2].rank.rawValue]
                     let temp2 = [arr2[0].rank.rawValue,arr2[1].rank.rawValue,arr2[2].rank.rawValue]

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4432C45D28B51046009F7F9F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45C28B51046009F7F9F /* Player.swift */; };
+		4432C45F28B511ED009F7F9F /* ChinesePokerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */; };
+		4432C46128B518A1009F7F9F /* ChinesePokerGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */; };
 		44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */; };
 		44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413D28B36F4D00709ADA /* PlayView.swift */; };
 		44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA413F28B36F4F00709ADA /* Assets.xcassets */; };
@@ -14,9 +17,13 @@
 		44BA414D28B3774600709ADA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA414C28B3774600709ADA /* Card.swift */; };
 		44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */; };
 		44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857E28B39F0800DE15D7 /* CardModel.swift */; };
+		44D617B528B51EAB00F576C1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D617B428B51EAB00F576C1 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4432C45C28B51046009F7F9F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePokerGame.swift; sourceTree = "<group>"; };
+		4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePokerGameModel.swift; sourceTree = "<group>"; };
 		44BA413828B36F4D00709ADA /* ChinesePoker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinesePoker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePoker2App.swift; sourceTree = "<group>"; };
 		44BA413D28B36F4D00709ADA /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -25,6 +32,7 @@
 		44BA414C28B3774600709ADA /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		44D0857E28B39F0800DE15D7 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		44D617B428B51EAB00F576C1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				44BA414C28B3774600709ADA /* Card.swift */,
+				4432C45C28B51046009F7F9F /* Player.swift */,
+				4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -87,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				44BA413D28B36F4D00709ADA /* PlayView.swift */,
+				44D617B428B51EAB00F576C1 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,6 +107,7 @@
 			children = (
 				44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */,
 				44D0857E28B39F0800DE15D7 /* CardModel.swift */,
+				4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -171,9 +183,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */,
+				44D617B528B51EAB00F576C1 /* MainView.swift in Sources */,
+				4432C46128B518A1009F7F9F /* ChinesePokerGameModel.swift in Sources */,
 				44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */,
+				4432C45F28B511ED009F7F9F /* ChinesePokerGame.swift in Sources */,
 				44BA414D28B3774600709ADA /* Card.swift in Sources */,
 				44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */,
+				4432C45D28B51046009F7F9F /* Player.swift in Sources */,
 				44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,7 +325,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,7 +355,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

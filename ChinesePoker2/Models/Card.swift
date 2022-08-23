@@ -17,7 +17,7 @@ enum Rank: Int,CaseIterable,Comparable{
     }
 }
 
-enum Suit{
+enum Suit:CaseIterable{
     case Club, Diamond, Heart,Spade
 }
 
@@ -26,7 +26,7 @@ enum HandType:Int, CaseIterable, Comparable{
     static func < (lhs:HandType,rhs:HandType) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
-    init(cards:Deck){
+    init(cards:Stack){
         var returnType: Self = .HighCard
         if (cards.count == 3) {
             let sortedHand = cards.sortByRank()
@@ -144,11 +144,11 @@ struct Card:Identifiable, Equatable, Hashable {
     
 }
 
-typealias Deck = [Card]
+typealias Stack = [Card]
 
-extension Deck where Element == Card {
+extension Stack where Element == Card {
     func sortByRank () -> Self {
-        var sortedHand = Deck()
+        var sortedHand = Stack()
         var remainingCard = self
         for _ in 1...remainingCard.count{
             var highestCardIndex = 0
