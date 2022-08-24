@@ -13,6 +13,7 @@ struct ChinesePoker2App: App {
         WindowGroup {
             MainView()
                 .environmentObject(ChinesePokerGameModel())
+                .environmentObject(CardModel())
 //            PlayView()
 //                .environmentObject(CardModel())
         }

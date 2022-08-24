@@ -83,9 +83,6 @@ class ChinesePokerGameModel:ObservableObject {
         var possibleHands = Stack()
         
         for rank in Rank.allCases{
-            if let count = rankCount[rank]{
-                print ("\(rank)-\(count)")
-            }
             var thisRankCount = 0
             if (rankCount[rank] != nil){
                 thisRankCount = rankCount[rank]!
@@ -119,7 +116,6 @@ class ChinesePokerGameModel:ObservableObject {
             for i in 0...4{
                 var rankRawValue = 1
                 if rank <= Rank.Ten{
-                    print(rank)
                     rankRawValue = rank.rawValue + i
                 }
                 else if rank == Rank.Ace {
@@ -129,7 +125,6 @@ class ChinesePokerGameModel:ObservableObject {
                     }
                 }
                 if rankCount[Rank(rawValue: rankRawValue)!] != nil {
-                    print(rankRawValue)
                     isStraight = isStraight && rankCount[Rank(rawValue: rankRawValue)!]! > 0
                 }
                 else {
@@ -169,22 +164,21 @@ class ChinesePokerGameModel:ObservableObject {
         }
         
         else if isFullHouse{
-            let lastIndex = soretedRankCount.lastIndex ( where: {$0.value == 2})
-            for card in playerCardsByRank{
-                if card.rank == soretedRankCount[0].key{
-                    possibleHands.append(card)
-                }
-                if possibleHands.count < 5 {
-                    if card.rank == soretedRankCount[lastIndex!].key{
+            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
+            if let index = firstIndex{
+                for card in playerCardsByRank{
+                    if card.rank == soretedRankCount[0].key{
                         possibleHands.append(card)
                     }
+                        if card.rank == soretedRankCount[index].key{
+                            possibleHands.append(card)
+                        }
+                  
+                    
+                    
                 }
-                else{
-                    break
-                }
-                
-                
             }
+           
         }
         
         else if isFlush{
@@ -364,9 +358,6 @@ class ChinesePokerGameModel:ObservableObject {
         let backHandValue = "\(model.evaluateHand(cards: backHand))"
         let middleHandValue = "\(model.evaluateHand(cards: middleHand))"
         let frontHandValue = "\(model.evaluateHand(cards: frontHand))"
-        print(backHandValue)
-        print(middleHandValue)
-        print(frontHandValue)
         var botHand = Stack()
         botHand = [frontHand[0],frontHand[1],frontHand[2],middleHand[0],middleHand[1],middleHand[2],middleHand[3],middleHand[4],backHand[0],backHand[1],backHand[2],backHand[3],backHand[4]]
 //        var middleHand = Stack()
