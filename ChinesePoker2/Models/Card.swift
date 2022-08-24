@@ -119,25 +119,21 @@ struct Card:Identifiable, Equatable, Hashable {
     }
     static func testData () -> [Card] {
         let cards = [
-            Card(rank: .King, suit: .Diamond),
+            Card(rank: .Two, suit: .Diamond),
             Card(rank: .Ace, suit: .Spade),
             Card(rank: .Queen, suit: .Heart),
             
-           
-            
-            
-            
-            Card(rank: .King, suit: .Club),
-            Card(rank: .Jack, suit: .Spade),
-            Card(rank: .Queen, suit: .Club),
-            Card(rank: .King, suit: .Club),
-            Card(rank: .Ace, suit: .Club),
-            
+            Card(rank: .Ten, suit: .Club),
             Card(rank: .King, suit: .Spade),
-            Card(rank: .King, suit: .Spade),
-            Card(rank: .Ace, suit: .Club),
-            Card(rank: .Four, suit: .Spade),
+            Card(rank: .Queen, suit: .Diamond),
+            Card(rank: .Nine, suit: .Heart),
+            Card(rank: .Eight, suit: .Club),
+            
             Card(rank: .Five, suit: .Spade),
+            Card(rank: .Nine, suit: .Spade),
+            Card(rank: .Four, suit: .Club),
+            Card(rank: .Three, suit: .Diamond),
+            Card(rank: .King, suit: .Spade),
         ]
         return cards
     }
@@ -164,4 +160,5 @@ extension Stack where Element == Card {
         }
         return sortedHand
     }
+    
 }

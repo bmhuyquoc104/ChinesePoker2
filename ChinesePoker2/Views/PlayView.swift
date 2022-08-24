@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlayView: View {
     @EnvironmentObject var model: CardModel
+    @EnvironmentObject var playerModel:ChinesePokerGameModel
     @State var isValidHandFrontHand:Bool = false
     @State var isValidHandMiddleHand:Bool = false
     @State var isValidHandBackHand:Bool = false
@@ -16,18 +17,6 @@ struct PlayView: View {
     var body: some View {
         VStack (alignment:.leading){
             VStack{
-                //                if (isValidHandMiddleHand && isValidHandMiddleHand && isValidHandBackHand)   {
-                //                    VStack{
-                //                        Text("Good")
-                //
-                //                    }
-                //
-                //                }
-                //                else{
-                //                    VStack{
-                //                        Text("Not Good")
-                //                    }
-                //                }
                 if (isValidHandFrontHand && isValidHandMiddleHand && isValidHandBackHand) {
                     Text("Good")
                 }
@@ -36,6 +25,7 @@ struct PlayView: View {
                 }
                 
             }
+            // MAKR: FRONT HAND
             GeometryReader {
                 geo in
                 HStack {
@@ -65,61 +55,12 @@ struct PlayView: View {
                                         .onDrop(of: [.url], delegate: DropViewDelegate(card: model.cards[index],models: model))
                                 }
                             }
+                            
                             .onAppear {
-                                
-                                //                                else if (handType == "Pair") {
-                                //
-                                //                                }
-                                //
-                                //                                else if (handType == "ThreeOfAKind"){
-                                //
-                                //                                }
-                                
-                                model.evaluateFrontHand(cards: [model.cards[0],model.cards[1],model.cards[2]])
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
+                                model.evaluateFrontHand(cards: [playerModel.players[4].playerCards[0],playerModel.players[4].playerCards[1],playerModel.players[4].playerCards[2]])
                             }
                             .onChange(of: model.cards) { newValue in
                                 model.evaluateFrontHand(cards: [model.cards[0],model.cards[1],model.cards[2]])
-                                
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
                             }
                         }
                         ZStack(alignment:.leading){
@@ -137,6 +78,7 @@ struct PlayView: View {
                     }
                 }
             }
+            // MARK: MIDDLE HAND
             GeometryReader {
                 geo in
                 HStack {
@@ -168,49 +110,9 @@ struct PlayView: View {
                             }
                             .onChange(of: model.cards) { newValue in
                                 model.evaluateMiddleHand(cards: [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]])
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
                             }
                             .onAppear{
                                 model.evaluateMiddleHand(cards: [model.cards[3],model.cards[4],model.cards[5],model.cards[6],model.cards[7]])
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
                             }
                             
                         }
@@ -229,6 +131,7 @@ struct PlayView: View {
                     }
                 }
             }
+            // MARK: BACK HAND
             GeometryReader {
                 geo in
                 HStack {
@@ -259,51 +162,10 @@ struct PlayView: View {
                                 }
                             }
                             .onChange(of: model.cards) { newValue in
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                
                                 model.evaluateBackHand(cards: [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]])
                             }
                             .onAppear{
                                 model.evaluateBackHand(cards: [model.cards[8],model.cards[9],model.cards[10],model.cards[11],model.cards[12]])
-                                //                                if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = true
-                                //                                }
-                                //                                else if (model.frontHandValue < model.middleHandValue && model.middleHandValue > model.backHandValue){
-                                //                                    isValidHandFrontHand = true
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else if (model.frontHandValue > model.middleHandValue && model.middleHandValue < model.backHandValue){
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = true
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
-                                //                                else{
-                                //                                    isValidHandFrontHand = false
-                                //                                    isValidHandBackHand = false
-                                //                                    isValidHandMiddleHand = false
-                                //                                }
                             }
                         }
                         ZStack(alignment:.leading){
@@ -918,6 +780,5 @@ struct PlayView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         PlayView()
-            .previewLayout(.fixed(width: 844, height: 390))
     }
 }
