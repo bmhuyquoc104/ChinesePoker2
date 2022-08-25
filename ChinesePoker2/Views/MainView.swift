@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct MainView: View {
-    @EnvironmentObject var model:ChinesePokerGameModel
+    @EnvironmentObject var model:PlayerModel
     @EnvironmentObject var cardModel:CardModel
     @State private var showFrontHand: Bool = false
     @State private var isShowCompare: Bool = false
@@ -36,7 +36,7 @@ struct MainView: View {
     @State var frontHandPlayer = 0
     @State var middleHandPlayer = 0
     @State var backHandPlayer = 0
-    
+    @State var isShowResult = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // State variable to check if the button status
     @State var isTogglePreview = false
@@ -56,6 +56,11 @@ struct MainView: View {
                             .shadow(color: .black, radius: 15)
                         Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
                     }
+                    if (isShowResult){
+//                        if let rankExist = model.players[0].rank{
+//                            Text(rankExist)
+//                        }
+                    }
                     VStack(){
                         // MARK: BOT1
                         VStack {
@@ -69,7 +74,7 @@ struct MainView: View {
                                         .clipShape(Circle())
                                     VStack{
                                         Text(model.players[0].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[0].score{
+                                        if let score = model.players[0].money{
                                             Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                         }
                                     }
@@ -131,6 +136,7 @@ struct MainView: View {
                                     if (!showMiddleHand){
                                         Button {
                                             showFrontHand = false
+                                            isShowResult = true
                                             showMiddleHand = true
                                         } label: {
                                             // Show preview button
@@ -176,7 +182,7 @@ struct MainView: View {
                                     HStack(){
                                         VStack{
                                             Text(model.players[3].playerName).foregroundColor(.red).font(.system(size: 13))
-                                            if let score = model.players[3].score{
+                                            if let score = model.players[3].money{
                                                 Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                             }
                                         }
@@ -202,7 +208,7 @@ struct MainView: View {
                                         .clipShape(Circle())
                                     VStack{
                                         Text(model.players[1].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[1].score{
+                                        if let score = model.players[1].money{
                                             Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                         }
                                     }
@@ -242,7 +248,7 @@ struct MainView: View {
                                 HStack(){
                                     VStack{
                                         Text(model.players[2].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[2].score{
+                                        if let score = model.players[2].money{
                                             Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                         }
                                     }
@@ -293,9 +299,12 @@ struct MainView: View {
                                                              ,model.players[3].playerCards[10]
                                                              ,model.players[3].playerCards[11]
                                                              ,model.players[3].playerCards[12]]).rawValue
-            print(frontHandPlayer)
-            print(middleHandPlayer)
-            print(backHandPlayer)
+            
+            model.compareHand(bot1: [botHand1[0],botHand1[1],botHand1[2]],
+                                   bot2: [botHand2[0],botHand2[1],botHand2[2]],
+                                   bot3: [botHand3[0],botHand3[1],botHand3[2]],
+                              player: [model.players[3].playerCards[0],model.players[3].playerCards[1],model.players[3].playerCards[2]],type:"FrontHand")
+//            model.compareFrontHand(bot1: model.players[0], bot2: model.players[1], bot3: model.players[2], player: model.players[3])
         })
         .onAppear {
             botHand1 = model.botLogic(player: model.players[0])
@@ -315,7 +324,36 @@ struct MainView: View {
             backHandBotHand3 = cardModel.evaluateHand(cards: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]]).rawValue
             
             
+            model.compareHand(bot1: [botHand1[0],botHand1[1],botHand1[2]],
+                              bot2: [botHand2[0],botHand2[1],botHand2[2]],
+                              bot3: [botHand3[0],botHand3[1],botHand3[2]],
+                              player:[model.players[3].playerCards[0],model.players[3].playerCards[1],model.players[3].playerCards[2]],type: "FrontHand")
             
+            model.compareHand(bot1: [botHand1[3],botHand1[4],botHand1[5],botHand1[6],botHand1[7]],
+                              bot2: [botHand2[3],botHand2[4],botHand2[5],botHand2[6],botHand2[7]],
+                              bot3: [botHand3[3],botHand3[4],botHand3[5],botHand3[6],botHand3[7]],
+                              player:[model.players[3].playerCards[3],model.players[3].playerCards[4],model.players[3].playerCards[5],model.players[3].playerCards[6],model.players[3].playerCards[7]],type: "MiddleHand")
+            
+            model.compareHand(bot1: [botHand1[8],botHand1[9],botHand1[10],botHand1[11],botHand1[12]],
+                              bot2: [botHand2[8],botHand2[9],botHand2[10],botHand2[11],botHand2[12]],
+                              bot3: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]],
+                              player:[model.players[3].playerCards[8],model.players[3].playerCards[9],model.players[3].playerCards[10],model.players[3].playerCards[11],model.players[3].playerCards[12]],type: "BackHand")
+            
+            print(model.playerBot1?.rankFrontHand)
+            print(model.playerBot1?.rankMiddleHand)
+            print(model.playerBot1?.rankBackHand)
+
+            print(model.playerBot2?.rankFrontHand)
+            print(model.playerBot2?.rankMiddleHand)
+            print(model.playerBot2?.rankBackHand)
+            
+            print(model.playerBot3?.rankFrontHand)
+            print(model.playerBot3?.rankMiddleHand)
+            print(model.playerBot3?.rankBackHand)
+            
+            print(model.myPlayer?.rankFrontHand)
+            print(model.myPlayer?.rankMiddleHand)
+            print(model.myPlayer?.rankBackHand)
             
         }
     }
@@ -324,7 +362,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
-            MainView().environmentObject(ChinesePokerGameModel())
+            MainView().environmentObject(PlayerModel())
                 .environment(\.colorScheme,.dark)
             
         }

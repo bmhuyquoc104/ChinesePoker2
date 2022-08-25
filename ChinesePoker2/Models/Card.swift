@@ -162,3 +162,30 @@ extension Stack where Element == Card {
     }
     
 }
+struct Hand: Identifiable {
+    var id = UUID()
+    var stack:Stack
+    var frontHandScore: Int
+    var evaluatedScore: Int
+    var name: String
+}
+
+struct Deck {
+    var cards = Stack()
+    mutating func createDeck(){
+        for suit in Suit.allCases {
+            for rank in Rank.allCases{
+                cards.append(Card(rank: rank, suit: suit))
+            }
+        }
+    }
+    mutating func deckShuffle(){
+        cards.shuffle()
+    }
+    mutating func getCard() -> Card{
+        return cards.removeLast()
+    }
+    mutating func cardLength() -> Int {
+        return cards.count
+    }
+}

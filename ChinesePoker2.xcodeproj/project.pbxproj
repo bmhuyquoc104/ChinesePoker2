@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4432C45D28B51046009F7F9F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45C28B51046009F7F9F /* Player.swift */; };
-		4432C45F28B511ED009F7F9F /* ChinesePokerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */; };
-		4432C46128B518A1009F7F9F /* ChinesePokerGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */; };
+		4432C45F28B511ED009F7F9F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45E28B511ED009F7F9F /* Game.swift */; };
+		4432C46128B518A1009F7F9F /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C46028B518A1009F7F9F /* PlayerModel.swift */; };
 		44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */; };
 		44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413D28B36F4D00709ADA /* PlayView.swift */; };
 		44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA413F28B36F4F00709ADA /* Assets.xcassets */; };
@@ -18,12 +18,14 @@
 		44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */; };
 		44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857E28B39F0800DE15D7 /* CardModel.swift */; };
 		44D617B528B51EAB00F576C1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D617B428B51EAB00F576C1 /* MainView.swift */; };
+		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
+		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4432C45C28B51046009F7F9F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePokerGame.swift; sourceTree = "<group>"; };
-		4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePokerGameModel.swift; sourceTree = "<group>"; };
+		4432C45E28B511ED009F7F9F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		4432C46028B518A1009F7F9F /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		44BA413828B36F4D00709ADA /* ChinesePoker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinesePoker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePoker2App.swift; sourceTree = "<group>"; };
 		44BA413D28B36F4D00709ADA /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -33,6 +35,8 @@
 		44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		44D0857E28B39F0800DE15D7 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		44D617B428B51EAB00F576C1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 		44BA413A28B36F4D00709ADA /* ChinesePoker2 */ = {
 			isa = PBXGroup;
 			children = (
+				44EA836028B7936800375F9B /* Utils */,
 				44BA414B28B376C000709ADA /* ViewModels */,
 				44BA414A28B376BA00709ADA /* Views */,
 				44BA414928B376B300709ADA /* Models */,
@@ -88,7 +93,7 @@
 			children = (
 				44BA414C28B3774600709ADA /* Card.swift */,
 				4432C45C28B51046009F7F9F /* Player.swift */,
-				4432C45E28B511ED009F7F9F /* ChinesePokerGame.swift */,
+				4432C45E28B511ED009F7F9F /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -107,9 +112,18 @@
 			children = (
 				44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */,
 				44D0857E28B39F0800DE15D7 /* CardModel.swift */,
-				4432C46028B518A1009F7F9F /* ChinesePokerGameModel.swift */,
+				4432C46028B518A1009F7F9F /* PlayerModel.swift */,
+				44EA835E28B78D8E00375F9B /* GameModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		44EA836028B7936800375F9B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				44EA836128B7938100375F9B /* SortDeck.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,11 +198,13 @@
 			files = (
 				44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */,
 				44D617B528B51EAB00F576C1 /* MainView.swift in Sources */,
-				4432C46128B518A1009F7F9F /* ChinesePokerGameModel.swift in Sources */,
+				4432C46128B518A1009F7F9F /* PlayerModel.swift in Sources */,
 				44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */,
-				4432C45F28B511ED009F7F9F /* ChinesePokerGame.swift in Sources */,
+				4432C45F28B511ED009F7F9F /* Game.swift in Sources */,
+				44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */,
 				44BA414D28B3774600709ADA /* Card.swift in Sources */,
 				44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */,
+				44EA836228B7938100375F9B /* SortDeck.swift in Sources */,
 				4432C45D28B51046009F7F9F /* Player.swift in Sources */,
 				44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */,
 			);

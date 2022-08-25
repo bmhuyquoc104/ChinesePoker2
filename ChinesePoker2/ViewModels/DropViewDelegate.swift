@@ -11,7 +11,7 @@ import SwiftUI
 struct DropViewDelegate: DropDelegate{
     var  card:Card
     var models:CardModel
-    var playerModel:ChinesePokerGameModel
+    var playerModel:PlayerModel
     
     func performDrop(info: DropInfo) -> Bool {
         return true
