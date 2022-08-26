@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct MainView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model:PlayerModel
     @EnvironmentObject var cardModel:CardModel
     @State private var showFrontHand: Bool = false
@@ -40,7 +41,7 @@ struct MainView: View {
     @State var isShowMiddleHandResult = false
     @State var isShowBackHandResult = false
 
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // State variable to check if the button status
     @State var isTogglePreview = false
     
@@ -51,283 +52,287 @@ struct MainView: View {
         
         GeometryReader {
             geo in
-            VStack {
-                Spacer()
-                ZStack {
-                    ZStack(alignment:.center){
-                        Rectangle().foregroundColor(Color("BorderTable")).cornerRadius(100).frame(width: geo.size.width/5*4, height: geo.size.height/5*4.6)
-                            .shadow(color: .black, radius: 15)
-                        Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
-                    }
-                    if (isShowFrontHandResult){
-//                        if let rankExist = model.players[0].rank{
-//                            Text(rankExist)
-//                        }
-                    }
-                    VStack(){
-                        // MARK: BOT1
-                        VStack {
-                            ZStack(alignment:.bottomLeading){
-                                Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                    .opacity(0.8)
-                                HStack(){
-                                    
-                                    Image(model.players[0].image!).resizable().aspectRatio(contentMode: .fit)
-                                        .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                        .clipShape(Circle())
-                                    VStack{
-                                        Text(model.players[0].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[0].money{
-                                            Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                        }
-                                    }
-                                }
-                            }
-                            VStack(alignment:.leading,spacing:-10){
-                                HStack(spacing:-30){
-                                    Image(showFrontHand ? botHand1[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand1[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand1[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showMiddleHand ? botHand1[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand1[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand1[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand1[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand1[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showBackHand ? botHand1[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand1[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand1[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand1[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand1[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                            }
-                            VStack{
-                                if (isShowFrontHandResult){
-                                    Text("\((model.playerBot1?.rankFrontHand ?? 0)*100)")
-                                }
-                                if isShowMiddleHandResult{
-                                    Text("\((model.playerBot1?.rankMiddleHand ?? 0)*100)")
-                                }
-                                if isShowBackHandResult{
-                                    Text("\((model.playerBot1?.rankBackHand ?? 0)*100)")
-                                }
-                            }
+            ZStack {
+                
+                VStack {
+                    Spacer()
+                    ZStack {
+                        ZStack(alignment:.center){
+                            Rectangle().foregroundColor(Color("BorderTable")).cornerRadius(100).frame(width: geo.size.width/5*4, height: geo.size.height/5*4.6)
+                                .shadow(color: .black, radius: 15)
+                            Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
                         }
-                        Spacer()
-                        // MARK: PLAYER
-                        VStack() {
-                            VStack{
-                                if (isShowFrontHandResult){
-                                    Text("\((model.myPlayer?.rankFrontHand ?? 0)*100)")
-                                }
-                                if isShowMiddleHandResult{
-                                    Text("\((model.myPlayer?.rankMiddleHand ?? 0)*100)")
-                                }
-                                if isShowBackHandResult{
-                                    Text("\((model.myPlayer?.rankBackHand ?? 0)*100)")
-                                }
-                            }
-                            VStack(alignment:.leading,spacing:-10){
-                                HStack(spacing:-30){
-                                    Image(showFrontHand ? model.players[3].playerCards[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? model.players[3].playerCards[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? model.players[3].playerCards[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showMiddleHand ? model.players[3].playerCards[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? model.players[3].playerCards[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? model.players[3].playerCards[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? model.players[3].playerCards[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? model.players[3].playerCards[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showBackHand ? model.players[3].playerCards[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? model.players[3].playerCards[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? model.players[3].playerCards[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? model.players[3].playerCards[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? model.players[3].playerCards[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                            }
+                        if (isShowFrontHandResult){
+    //                        if let rankExist = model.players[0].rank{
+    //                            Text(rankExist)
+    //                        }
+                        }
+                        VStack(){
+                            // MARK: BOT1
                             VStack {
-                                if isShowCompare {
-                                    if (!showMiddleHand){
-                                        Button {
-                                            showFrontHand = false
-                                            showMiddleHand = true
-                                            isShowFrontHandResult = false
-                                            isShowMiddleHandResult = true
-                                        } label: {
-                                            // Show preview button
-                                            ZStack(alignment:.center){
-                                                Text("Compare").foregroundColor(.white).bold()
+                                ZStack(alignment:.bottomLeading){
+                                    Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
+                                        .opacity(0.8)
+                                    HStack(){
+                                        
+                                        Image(model.players[0].image!).resizable().aspectRatio(contentMode: .fit)
+                                            .frame(width: geo.size.width/8, height: geo.size.height/16)
+                                            .clipShape(Circle())
+                                        VStack{
+                                            Text(model.players[0].playerName).foregroundColor(.red).font(.system(size: 13))
+                                            if let score = model.players[0].money{
+                                                Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                             }
                                         }
                                     }
-                                    else{
+                                }
+                                VStack(alignment:.leading,spacing:-10){
+                                    HStack(spacing:-30){
+                                        Image(showFrontHand ? botHand1[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand1[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand1[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showMiddleHand ? botHand1[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand1[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand1[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand1[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand1[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showBackHand ? botHand1[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand1[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand1[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand1[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand1[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                }
+                                VStack{
+                                    if (isShowFrontHandResult){
+                                        Text("\((model.playerBot1?.rankFrontHand ?? 0)*100)")
+                                    }
+                                    if isShowMiddleHandResult{
+                                        Text("\((model.playerBot1?.rankMiddleHand ?? 0)*100)")
+                                    }
+                                    if isShowBackHandResult{
+                                        Text("\((model.playerBot1?.rankBackHand ?? 0)*100)")
+                                    }
+                                }
+                            }
+                            Spacer()
+                            // MARK: PLAYER
+                            VStack() {
+                                VStack{
+                                    if (isShowFrontHandResult){
+                                        Text("\((model.myPlayer?.rankFrontHand ?? 0)*100)")
+                                    }
+                                    if isShowMiddleHandResult{
+                                        Text("\((model.myPlayer?.rankMiddleHand ?? 0)*100)")
+                                    }
+                                    if isShowBackHandResult{
+                                        Text("\((model.myPlayer?.rankBackHand ?? 0)*100)")
+                                    }
+                                }
+                                VStack(alignment:.leading,spacing:-10){
+                                    HStack(spacing:-30){
+                                        Image(showFrontHand ? model.players[3].playerCards[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? model.players[3].playerCards[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? model.players[3].playerCards[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showMiddleHand ? model.players[3].playerCards[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? model.players[3].playerCards[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? model.players[3].playerCards[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? model.players[3].playerCards[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? model.players[3].playerCards[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showBackHand ? model.players[3].playerCards[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? model.players[3].playerCards[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? model.players[3].playerCards[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? model.players[3].playerCards[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? model.players[3].playerCards[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                }
+                                VStack {
+                                    if isShowCompare {
+                                        if (!showMiddleHand){
+                                            Button {
+                                                showFrontHand = false
+                                                showMiddleHand = true
+                                                isShowFrontHandResult = false
+                                                isShowMiddleHandResult = true
+                                            } label: {
+                                                // Show preview button
+                                                ZStack(alignment:.center){
+                                                    Text("Compare").foregroundColor(.white).bold()
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            Button {
+                                                showBackHand = true
+                                                isShowMiddleHandResult = false
+                                                showMiddleHand = false
+                                                isShowCompare = false
+                                                isShowBackHandResult = true
+                                            } label: {
+                                                // Show preview button
+                                                ZStack(alignment:.center){
+                                                    Text("Compare").foregroundColor(.white).bold()
+                                                }
+                                            }
+                                        }
+                                       
+                                    }
+                                    if isShowArrange{
                                         Button {
-                                            showBackHand = true
-                                            isShowMiddleHandResult = false
-                                            showMiddleHand = false
-                                            isShowCompare = false
-                                            isShowBackHandResult = true
+                                            self.isTogglePreview.toggle()
                                         } label: {
                                             // Show preview button
                                             ZStack(alignment:.center){
-                                                Text("Compare").foregroundColor(.white).bold()
+                                                Text("Arrange").foregroundColor(.white).bold()
                                             }
+                                        }
+                                        // Open the new screen cover
+                                        .sheet(isPresented: $isTogglePreview) {
+                                            PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange,isShowFrontHandResult:$isShowFrontHandResult)
+                                            
                                         }
                                     }
                                    
-                                }
-                                if isShowArrange{
-                                    Button {
-                                        self.isTogglePreview.toggle()
-                                    } label: {
-                                        // Show preview button
-                                        ZStack(alignment:.center){
-                                            Text("Arrange").foregroundColor(.white).bold()
+                                    
+                                    ZStack(alignment:.bottomTrailing){
+                                        Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
+                                            .opacity(0.8)
+                                        HStack(){
+                                            VStack{
+                                                Text(model.players[3].playerName).foregroundColor(.red).font(.system(size: 13))
+                                                if let score = model.players[3].money{
+                                                    Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
+                                                }
+                                            }
+                                            Image(model.players[3
+                                                               ].image!).resizable().aspectRatio(contentMode: .fit)
+                                                .frame(width: geo.size.width/8, height: geo.size.height/16)
+                                                .clipShape(Circle())
                                         }
                                     }
-                                    // Open the new screen cover
-                                    .sheet(isPresented: $isTogglePreview) {
-                                        PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange,isShowFrontHandResult:$isShowFrontHandResult)
+                                }
+                            }.offset(y:15)
+                        }.padding(.vertical,40)
+                        HStack{
+                            //MARK: BOT2
+                            VStack(alignment:.leading) {
+                                ZStack(alignment:.bottomLeading){
+                                    Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
+                                        .opacity(0.8)
+                                    HStack(){
                                         
+                                        Image(model.players[1].image!).resizable().aspectRatio(contentMode: .fit)
+                                            .frame(width: geo.size.width/8, height: geo.size.height/16)
+                                            .clipShape(Circle())
+                                        VStack{
+                                            Text(model.players[1].playerName).foregroundColor(.red).font(.system(size: 13))
+                                            if let score = model.players[1].money{
+                                                Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
+                                            }
+                                        }
                                     }
                                 }
-                               
-                                
+                                VStack(alignment:.leading,spacing:-10){
+                                    HStack(spacing:-30){
+                                        Image(showFrontHand ? botHand2[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand2[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand2[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showMiddleHand ? botHand2[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand2[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand2[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand2[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand2[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showBackHand ? botHand2[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand2[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand2[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand2[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand2[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                }
+                                VStack{
+                                    if (isShowFrontHandResult){
+                                        Text("\((model.playerBot2?.rankFrontHand ?? 0)*100)")
+                                    }
+                                    if isShowMiddleHandResult{
+                                        Text("\((model.playerBot2?.rankMiddleHand ?? 0)*100)")
+                                    }
+                                    if isShowBackHandResult{
+                                        Text("\((model.playerBot2?.rankBackHand ?? 0)*100)")
+                                    }
+                                }.padding(.leading)
+                            }.offset(y:-30)
+                            
+                            
+                            Spacer()
+                            //MARK: BOT3
+                            VStack (alignment:.trailing) {
                                 ZStack(alignment:.bottomTrailing){
                                     Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
                                         .opacity(0.8)
                                     HStack(){
                                         VStack{
-                                            Text(model.players[3].playerName).foregroundColor(.red).font(.system(size: 13))
-                                            if let score = model.players[3].money{
+                                            Text(model.players[2].playerName).foregroundColor(.red).font(.system(size: 13))
+                                            if let score = model.players[2].money{
                                                 Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                             }
                                         }
-                                        Image(model.players[3
-                                                           ].image!).resizable().aspectRatio(contentMode: .fit)
+                                        Image(model.players[2].image!).resizable().aspectRatio(contentMode: .fit)
                                             .frame(width: geo.size.width/8, height: geo.size.height/16)
                                             .clipShape(Circle())
                                     }
                                 }
-                            }
-                        }.offset(y:15)
-                    }.padding(.vertical,40)
-                    HStack{
-                        //MARK: BOT2
-                        VStack(alignment:.leading) {
-                            ZStack(alignment:.bottomLeading){
-                                Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                    .opacity(0.8)
-                                HStack(){
-                                    
-                                    Image(model.players[1].image!).resizable().aspectRatio(contentMode: .fit)
-                                        .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                        .clipShape(Circle())
-                                    VStack{
-                                        Text(model.players[1].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[1].money{
-                                            Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                        }
+                                VStack(alignment:.trailing,spacing:-10){
+                                    HStack(spacing:-30){
+                                        Image(showFrontHand ? botHand3[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand3[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showFrontHand ? botHand3[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showMiddleHand ? botHand3[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand3[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand3[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand3[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showMiddleHand ? botHand3[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                    }
+                                    HStack(spacing:-30){
+                                        Image(showBackHand ? botHand3[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand3[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand3[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand3[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
+                                        Image(showBackHand ? botHand3[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                     }
                                 }
-                            }
-                            VStack(alignment:.leading,spacing:-10){
-                                HStack(spacing:-30){
-                                    Image(showFrontHand ? botHand2[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand2[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand2[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showMiddleHand ? botHand2[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand2[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand2[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand2[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand2[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showBackHand ? botHand2[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand2[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand2[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand2[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand2[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                            }
-                            VStack{
-                                if (isShowFrontHandResult){
-                                    Text("\((model.playerBot2?.rankFrontHand ?? 0)*100)")
-                                }
-                                if isShowMiddleHandResult{
-                                    Text("\((model.playerBot2?.rankMiddleHand ?? 0)*100)")
-                                }
-                                if isShowBackHandResult{
-                                    Text("\((model.playerBot2?.rankBackHand ?? 0)*100)")
-                                }
-                            }.padding(.leading)
-                        }.offset(y:-30)
-                        
-                        
-                        Spacer()
-                        //MARK: BOT3
-                        VStack (alignment:.trailing) {
-                            ZStack(alignment:.bottomTrailing){
-                                Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                    .opacity(0.8)
-                                HStack(){
-                                    VStack{
-                                        Text(model.players[2].playerName).foregroundColor(.red).font(.system(size: 13))
-                                        if let score = model.players[2].money{
-                                            Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                        }
+                                VStack{
+                                    if (isShowFrontHandResult){
+                                        Text("\((model.playerBot3?.rankFrontHand ?? 0)*100)")
                                     }
-                                    Image(model.players[2].image!).resizable().aspectRatio(contentMode: .fit)
-                                        .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                        .clipShape(Circle())
-                                }
-                            }
-                            VStack(alignment:.trailing,spacing:-10){
-                                HStack(spacing:-30){
-                                    Image(showFrontHand ? botHand3[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand3[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showFrontHand ? botHand3[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showMiddleHand ? botHand3[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand3[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand3[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand3[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showMiddleHand ? botHand3[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                                HStack(spacing:-30){
-                                    Image(showBackHand ? botHand3[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand3[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand3[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand3[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    Image(showBackHand ? botHand3[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                }
-                            }
-                            VStack{
-                                if (isShowFrontHandResult){
-                                    Text("\((model.playerBot3?.rankFrontHand ?? 0)*100)")
-                                }
-                                if isShowMiddleHandResult{
-                                    Text("\((model.playerBot3?.rankMiddleHand ?? 0)*100)")
-                                }
-                                if isShowBackHandResult{
-                                    Text("\((model.playerBot3?.rankBackHand ?? 0)*100)")
-                                }
-                            }.padding(.trailing)
-                        }.offset(y:-30)
-                    }.padding()
-                }
-                Spacer()
-                
-            }.background(Color("Background")).ignoresSafeArea()
+                                    if isShowMiddleHandResult{
+                                        Text("\((model.playerBot3?.rankMiddleHand ?? 0)*100)")
+                                    }
+                                    if isShowBackHandResult{
+                                        Text("\((model.playerBot3?.rankBackHand ?? 0)*100)")
+                                    }
+                                }.padding(.trailing)
+                            }.offset(y:-30)
+                        }.padding()
+                    }
+                    Spacer()
+                    
+                }.background(Color("Background")).ignoresSafeArea()
+               
+            }
         }
         .onChange(of: model.players[3].playerCards, perform: {
             newValue in

@@ -169,14 +169,11 @@ class PlayerModel:ObservableObject {
         }
         
         else if isFullHouse{
-            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
+//            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
                 for card in playerCardsByRank{
                     if possibleHands.count < 5 {
-                        if card.rank == soretedRankCount[0].key{
+                        if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
                             possibleHands.append(card)
-                        }
-                        if card.rank == soretedRankCount[firstIndex ?? soretedRankCount.count - 1].key{
-                                possibleHands.append(card)
                         }
                     }
                     else{

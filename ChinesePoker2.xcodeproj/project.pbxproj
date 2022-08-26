@@ -14,6 +14,7 @@
 		447F89DF28B823B100A18B7A /* PlayerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89DE28B823B100A18B7A /* PlayerProfileView.swift */; };
 		447F89E128B823C900A18B7A /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E028B823C900A18B7A /* LeaderBoardView.swift */; };
 		447F89E328B832AF00A18B7A /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E228B832AF00A18B7A /* RuleView.swift */; };
+		447F89E528B867C000A18B7A /* ChooseModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E428B867C000A18B7A /* ChooseModeView.swift */; };
 		44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */; };
 		44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413D28B36F4D00709ADA /* PlayView.swift */; };
 		44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA413F28B36F4F00709ADA /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		447F89DE28B823B100A18B7A /* PlayerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileView.swift; sourceTree = "<group>"; };
 		447F89E028B823C900A18B7A /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
 		447F89E228B832AF00A18B7A /* RuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
+		447F89E428B867C000A18B7A /* ChooseModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseModeView.swift; sourceTree = "<group>"; };
 		44BA413828B36F4D00709ADA /* ChinesePoker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinesePoker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePoker2App.swift; sourceTree = "<group>"; };
 		44BA413D28B36F4D00709ADA /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				447F89DE28B823B100A18B7A /* PlayerProfileView.swift */,
 				447F89E028B823C900A18B7A /* LeaderBoardView.swift */,
 				447F89E228B832AF00A18B7A /* RuleView.swift */,
+				447F89E428B867C000A18B7A /* ChooseModeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			files = (
 				44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */,
 				44D617B528B51EAB00F576C1 /* MainView.swift in Sources */,
+				447F89E528B867C000A18B7A /* ChooseModeView.swift in Sources */,
 				4432C46128B518A1009F7F9F /* PlayerModel.swift in Sources */,
 				447F89DF28B823B100A18B7A /* PlayerProfileView.swift in Sources */,
 				447F89E128B823C900A18B7A /* LeaderBoardView.swift in Sources */,
