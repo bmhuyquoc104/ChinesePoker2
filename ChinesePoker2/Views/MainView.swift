@@ -36,7 +36,10 @@ struct MainView: View {
     @State var frontHandPlayer = 0
     @State var middleHandPlayer = 0
     @State var backHandPlayer = 0
-    @State var isShowResult = false
+    @State private var isShowFrontHandResult:Bool = false
+    @State var isShowMiddleHandResult = false
+    @State var isShowBackHandResult = false
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // State variable to check if the button status
     @State var isTogglePreview = false
@@ -56,7 +59,7 @@ struct MainView: View {
                             .shadow(color: .black, radius: 15)
                         Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
                     }
-                    if (isShowResult){
+                    if (isShowFrontHandResult){
 //                        if let rankExist = model.players[0].rank{
 //                            Text(rankExist)
 //                        }
@@ -101,11 +104,32 @@ struct MainView: View {
                                     Image(showBackHand ? botHand1[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                 }
                             }
-                            
+                            VStack{
+                                if (isShowFrontHandResult){
+                                    Text("\((model.playerBot1?.rankFrontHand ?? 0)*100)")
+                                }
+                                if isShowMiddleHandResult{
+                                    Text("\((model.playerBot1?.rankMiddleHand ?? 0)*100)")
+                                }
+                                if isShowBackHandResult{
+                                    Text("\((model.playerBot1?.rankBackHand ?? 0)*100)")
+                                }
+                            }
                         }
                         Spacer()
                         // MARK: PLAYER
                         VStack() {
+                            VStack{
+                                if (isShowFrontHandResult){
+                                    Text("\((model.myPlayer?.rankFrontHand ?? 0)*100)")
+                                }
+                                if isShowMiddleHandResult{
+                                    Text("\((model.myPlayer?.rankMiddleHand ?? 0)*100)")
+                                }
+                                if isShowBackHandResult{
+                                    Text("\((model.myPlayer?.rankBackHand ?? 0)*100)")
+                                }
+                            }
                             VStack(alignment:.leading,spacing:-10){
                                 HStack(spacing:-30){
                                     Image(showFrontHand ? model.players[3].playerCards[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
@@ -127,17 +151,14 @@ struct MainView: View {
                                     Image(showBackHand ? model.players[3].playerCards[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                 }
                             }
-
-                            
-                            
-                            
                             VStack {
                                 if isShowCompare {
                                     if (!showMiddleHand){
                                         Button {
                                             showFrontHand = false
-                                            isShowResult = true
                                             showMiddleHand = true
+                                            isShowFrontHandResult = false
+                                            isShowMiddleHandResult = true
                                         } label: {
                                             // Show preview button
                                             ZStack(alignment:.center){
@@ -148,8 +169,10 @@ struct MainView: View {
                                     else{
                                         Button {
                                             showBackHand = true
+                                            isShowMiddleHandResult = false
                                             showMiddleHand = false
                                             isShowCompare = false
+                                            isShowBackHandResult = true
                                         } label: {
                                             // Show preview button
                                             ZStack(alignment:.center){
@@ -170,7 +193,7 @@ struct MainView: View {
                                     }
                                     // Open the new screen cover
                                     .sheet(isPresented: $isTogglePreview) {
-                                        PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange)
+                                        PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange,isShowFrontHandResult:$isShowFrontHandResult)
                                         
                                     }
                                 }
@@ -193,7 +216,7 @@ struct MainView: View {
                                     }
                                 }
                             }
-                        }
+                        }.offset(y:15)
                     }.padding(.vertical,40)
                     HStack{
                         //MARK: BOT2
@@ -235,8 +258,18 @@ struct MainView: View {
                                     Image(showBackHand ? botHand2[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                 }
                             }
-                            
-                        }
+                            VStack{
+                                if (isShowFrontHandResult){
+                                    Text("\((model.playerBot2?.rankFrontHand ?? 0)*100)")
+                                }
+                                if isShowMiddleHandResult{
+                                    Text("\((model.playerBot2?.rankMiddleHand ?? 0)*100)")
+                                }
+                                if isShowBackHandResult{
+                                    Text("\((model.playerBot2?.rankBackHand ?? 0)*100)")
+                                }
+                            }.padding(.leading)
+                        }.offset(y:-30)
                         
                         
                         Spacer()
@@ -278,8 +311,18 @@ struct MainView: View {
                                     Image(showBackHand ? botHand3[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                 }
                             }
-                            
-                        }
+                            VStack{
+                                if (isShowFrontHandResult){
+                                    Text("\((model.playerBot3?.rankFrontHand ?? 0)*100)")
+                                }
+                                if isShowMiddleHandResult{
+                                    Text("\((model.playerBot3?.rankMiddleHand ?? 0)*100)")
+                                }
+                                if isShowBackHandResult{
+                                    Text("\((model.playerBot3?.rankBackHand ?? 0)*100)")
+                                }
+                            }.padding(.trailing)
+                        }.offset(y:-30)
                     }.padding()
                 }
                 Spacer()
@@ -301,10 +344,20 @@ struct MainView: View {
                                                              ,model.players[3].playerCards[12]]).rawValue
             
             model.compareHand(bot1: [botHand1[0],botHand1[1],botHand1[2]],
-                                   bot2: [botHand2[0],botHand2[1],botHand2[2]],
-                                   bot3: [botHand3[0],botHand3[1],botHand3[2]],
-                              player: [model.players[3].playerCards[0],model.players[3].playerCards[1],model.players[3].playerCards[2]],type:"FrontHand")
-//            model.compareFrontHand(bot1: model.players[0], bot2: model.players[1], bot3: model.players[2], player: model.players[3])
+                              bot2: [botHand2[0],botHand2[1],botHand2[2]],
+                              bot3: [botHand3[0],botHand3[1],botHand3[2]],
+                              player:[model.players[3].playerCards[0],model.players[3].playerCards[1],model.players[3].playerCards[2]],type: "FrontHand")
+            
+            model.compareHand(bot1: [botHand1[3],botHand1[4],botHand1[5],botHand1[6],botHand1[7]],
+                              bot2: [botHand2[3],botHand2[4],botHand2[5],botHand2[6],botHand2[7]],
+                              bot3: [botHand3[3],botHand3[4],botHand3[5],botHand3[6],botHand3[7]],
+                              player:[model.players[3].playerCards[3],model.players[3].playerCards[4],model.players[3].playerCards[5],model.players[3].playerCards[6],model.players[3].playerCards[7]],type: "MiddleHand")
+            
+            model.compareHand(bot1: [botHand1[8],botHand1[9],botHand1[10],botHand1[11],botHand1[12]],
+                              bot2: [botHand2[8],botHand2[9],botHand2[10],botHand2[11],botHand2[12]],
+                              bot3: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]],
+                              player:[model.players[3].playerCards[8],model.players[3].playerCards[9],model.players[3].playerCards[10],model.players[3].playerCards[11],model.players[3].playerCards[12]],type: "BackHand")
+
         })
         .onAppear {
             botHand1 = model.botLogic(player: model.players[0])
@@ -339,22 +392,6 @@ struct MainView: View {
                               bot3: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]],
                               player:[model.players[3].playerCards[8],model.players[3].playerCards[9],model.players[3].playerCards[10],model.players[3].playerCards[11],model.players[3].playerCards[12]],type: "BackHand")
             
-            print(model.playerBot1?.rankFrontHand)
-            print(model.playerBot1?.rankMiddleHand)
-            print(model.playerBot1?.rankBackHand)
-
-            print(model.playerBot2?.rankFrontHand)
-            print(model.playerBot2?.rankMiddleHand)
-            print(model.playerBot2?.rankBackHand)
-            
-            print(model.playerBot3?.rankFrontHand)
-            print(model.playerBot3?.rankMiddleHand)
-            print(model.playerBot3?.rankBackHand)
-            
-            print(model.myPlayer?.rankFrontHand)
-            print(model.myPlayer?.rankMiddleHand)
-            print(model.myPlayer?.rankBackHand)
-            
         }
     }
 }
@@ -363,7 +400,8 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
             MainView().environmentObject(PlayerModel())
-                .environment(\.colorScheme,.dark)
+                .environmentObject(CardModel())
+//                .environment(\.colorScheme,.dark)
             
         }
     }

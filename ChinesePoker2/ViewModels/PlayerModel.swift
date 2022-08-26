@@ -170,20 +170,19 @@ class PlayerModel:ObservableObject {
         
         else if isFullHouse{
             let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
-            if let index = firstIndex{
                 for card in playerCardsByRank{
-                    if card.rank == soretedRankCount[0].key{
-                        possibleHands.append(card)
-                    }
-                        if card.rank == soretedRankCount[index].key{
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[0].key{
                             possibleHands.append(card)
                         }
-                  
-                    
-                    
+                        if card.rank == soretedRankCount[firstIndex ?? soretedRankCount.count - 1].key{
+                                possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
                 }
-            }
-           
         }
         
         else if isFlush{
@@ -380,6 +379,12 @@ class PlayerModel:ObservableObject {
         let bot3Value = model.evaluateHand(cards: bot3).rawValue
         let playerValue = model.evaluateHand(cards: player).rawValue
         
+        print("player value: \(playerValue)")
+        print("bot1Value: \(bot1Value)")
+        print("bot2Value: \(bot2Value)")
+        print("bot3Value: \(bot3Value)")
+
+        
         let soretedBot1 = bot1.sorted {
             return $0.rank.rawValue > $1.rank.rawValue
         }
@@ -410,97 +415,15 @@ class PlayerModel:ObservableObject {
             return $0.frontHandScore > $1.frontHandScore
         }
         
-        rankDeck(hand: handArr[0], type: type, value: 1)
-        rankDeck(hand: handArr[1], type: type, value: 2)
-        rankDeck(hand: handArr[2], type: type, value: 3)
-        rankDeck(hand: handArr[3], type: type, value: 4)
+        rankDeck(hand: handArr[0], type: type, value: 2)
+        rankDeck(hand: handArr[1], type: type, value: 1)
+        rankDeck(hand: handArr[2], type: type, value: -1)
+        rankDeck(hand: handArr[3], type: type, value: -2)
         
-
-//        switch arr[0].name{
-//        case "bot1":
-//            if (type == "FrontHand"){
-//                playerBot1!.rankFrontHand = 4
-//            }
-//            if (type == "MiddleHand"){
-//                playerBot1!.rankMiddleHand = 4
-//            }
-//            if (type == "BackHand"){
-//                playerBot1!.rankBackHand = 4
-//            }
-//        case "bot2":
-//            if (type == "FrontHand"){
-//                playerBot2!.rankFrontHand = 4
-//            }
-//            if (type == "MiddleHand"){
-//                playerBot2!.rankMiddleHand = 4
-//            }
-//            if (type == "BackHand"){
-//                playerBot2!.rankBackHand = 4
-//            }
-//        case "bot3":
-//            if (type == "FrontHand"){
-//                playerBot3!.rankFrontHand = 4
-//            }
-//            if (type == "MiddleHand"){
-//                playerBot3!.rankMiddleHand = 4
-//            }
-//            if (type == "BackHand"){
-//                playerBot3!.rankBackHand = 4
-//            }
-//        case "player":
-//            if (type == "FrontHand"){
-//                myPlayer!.rankFrontHand = 4
-//            }
-//            if (type == "MiddleHand"){
-//                myPlayer!.rankMiddleHand = 4
-//            }
-//            if (type == "BackHand"){
-//                myPlayer!.rankBackHand = 4
-//            }
-//        default:
-//            return
-//        }
-//
-//        switch arr[1].name{
-//        case "bot1":
-//            playerBot1!.rank = 3
-//        case "bot2":
-//            playerBot2!.rank = 3
-//        case "bot3":
-//            playerBot3!.rank = 3
-//        case "player":
-//            myPlayer!.rank = 3
-//        default:
-//            return
-//        }
-//
-//        switch arr[2].name{
-//        case "bot1":
-//            playerBot1!.rank = 2
-//        case "bot2":
-//            playerBot2!.rank = 2
-//        case "bot3":
-//            playerBot3!.rank = 2
-//        case "player":
-//            myPlayer!.rank = 2
-//        default:
-//            return
-//        }
-////
-//        switch arr[3].name{
-//        case "bot1":
-//            if type ==
-//            playerBot1!.rank = 1
-//        case "bot2":
-//            playerBot2!.rank = 1
-//        case "bot3":
-//            playerBot3!.rank = 1
-//        case "player":
-//            myPlayer!.rank = 1
-//        default:
-//            return
-//        }
-        
+//        print(handArr[0].stack)
+//        print(handArr[1].stack)
+//        print(handArr[2].stack)
+//        print(handArr[3].stack)
         
     }
     
@@ -641,15 +564,27 @@ class PlayerModel:ObservableObject {
 
         }
         else if value == 2{
-            score += soretedStack[0].rank.rawValue * 10 + soretedStack[1].rank.rawValue * 10 + soretedStack[2].rank.rawValue
-        }
-        else if value == 3{
-            score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100
+            if (soretedStack.count == 3){
+                score += soretedStack[0].rank.rawValue * 20 + soretedStack[1].rank.rawValue * 20 + soretedStack[2].rank.rawValue
+            }
+            else{
+                score += soretedStack[0].rank.rawValue * 20 + soretedStack[1].rank.rawValue * 10 + soretedStack[2].rank.rawValue
+                + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+            }
         }
         else if value == 4{
-            for i in 0..<soretedStack.count - 1{
-                let first = sortedStackByRankAndOccurence[i].key.rawValue
-                let second = sortedStackByRankAndOccurence[i+2].key.rawValue
+            if (soretedStack.count == 3){
+                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100  + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+            }
+            else{
+                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100 + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+            }
+          
+        }
+        else if value == 3{
+            for i in 0..<sortedStackByRankAndOccurence.count - 1{
+                let first = sortedStackByRankAndOccurence[0].key.rawValue
+                let second = sortedStackByRankAndOccurence[2].key.rawValue
                 let temp = second - first
                 if (temp == 1) {
                     var tempScore = 0

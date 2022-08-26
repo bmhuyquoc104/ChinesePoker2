@@ -11,9 +11,12 @@ import SwiftUI
 struct ChinesePoker2App: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            StartView()
                 .environmentObject(PlayerModel())
                 .environmentObject(CardModel())
+//            MainView()
+//                .environmentObject(PlayerModel())
+//                .environmentObject(CardModel())
 //            PlayView()
 //                .environmentObject(CardModel())
         }

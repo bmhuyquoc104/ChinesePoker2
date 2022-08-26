@@ -10,6 +10,10 @@
 		4432C45D28B51046009F7F9F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45C28B51046009F7F9F /* Player.swift */; };
 		4432C45F28B511ED009F7F9F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C45E28B511ED009F7F9F /* Game.swift */; };
 		4432C46128B518A1009F7F9F /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4432C46028B518A1009F7F9F /* PlayerModel.swift */; };
+		447F89DD28B8235600A18B7A /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89DC28B8235600A18B7A /* StartView.swift */; };
+		447F89DF28B823B100A18B7A /* PlayerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89DE28B823B100A18B7A /* PlayerProfileView.swift */; };
+		447F89E128B823C900A18B7A /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E028B823C900A18B7A /* LeaderBoardView.swift */; };
+		447F89E328B832AF00A18B7A /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E228B832AF00A18B7A /* RuleView.swift */; };
 		44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */; };
 		44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413D28B36F4D00709ADA /* PlayView.swift */; };
 		44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA413F28B36F4F00709ADA /* Assets.xcassets */; };
@@ -20,12 +24,17 @@
 		44D617B528B51EAB00F576C1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D617B428B51EAB00F576C1 /* MainView.swift */; };
 		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
 		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
+		44EA836828B7B79B00375F9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836728B7B79B00375F9B /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4432C45C28B51046009F7F9F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4432C45E28B511ED009F7F9F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4432C46028B518A1009F7F9F /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		447F89DC28B8235600A18B7A /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		447F89DE28B823B100A18B7A /* PlayerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileView.swift; sourceTree = "<group>"; };
+		447F89E028B823C900A18B7A /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
+		447F89E228B832AF00A18B7A /* RuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
 		44BA413828B36F4D00709ADA /* ChinesePoker2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinesePoker2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePoker2App.swift; sourceTree = "<group>"; };
 		44BA413D28B36F4D00709ADA /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -37,6 +46,7 @@
 		44D617B428B51EAB00F576C1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
+		44EA836728B7B79B00375F9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +113,11 @@
 			children = (
 				44BA413D28B36F4D00709ADA /* PlayView.swift */,
 				44D617B428B51EAB00F576C1 /* MainView.swift */,
+				44EA836728B7B79B00375F9B /* HomeView.swift */,
+				447F89DC28B8235600A18B7A /* StartView.swift */,
+				447F89DE28B823B100A18B7A /* PlayerProfileView.swift */,
+				447F89E028B823C900A18B7A /* LeaderBoardView.swift */,
+				447F89E228B832AF00A18B7A /* RuleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,12 +214,17 @@
 				44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */,
 				44D617B528B51EAB00F576C1 /* MainView.swift in Sources */,
 				4432C46128B518A1009F7F9F /* PlayerModel.swift in Sources */,
+				447F89DF28B823B100A18B7A /* PlayerProfileView.swift in Sources */,
+				447F89E128B823C900A18B7A /* LeaderBoardView.swift in Sources */,
 				44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */,
 				4432C45F28B511ED009F7F9F /* Game.swift in Sources */,
+				447F89DD28B8235600A18B7A /* StartView.swift in Sources */,
 				44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */,
 				44BA414D28B3774600709ADA /* Card.swift in Sources */,
 				44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */,
 				44EA836228B7938100375F9B /* SortDeck.swift in Sources */,
+				447F89E328B832AF00A18B7A /* RuleView.swift in Sources */,
+				44EA836828B7B79B00375F9B /* HomeView.swift in Sources */,
 				4432C45D28B51046009F7F9F /* Player.swift in Sources */,
 				44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */,
 			);

@@ -15,6 +15,7 @@ struct PlayView: View {
     @Binding var showFrontHand: Bool
     @Binding var isShowCompare: Bool
     @Binding var isShowArrange: Bool
+    @Binding var isShowFrontHandResult: Bool
 
     @State var isValidHandFrontHand:Bool = false
     @State var isValidHandMiddleHand:Bool = false
@@ -192,6 +193,7 @@ struct PlayView: View {
                                showFrontHand = true
                                isShowCompare = true
                                isShowArrange = false
+                               isShowFrontHandResult = true
                            } label: {
                                Text("Done")
                            }.padding(.top,10)
@@ -675,7 +677,6 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                            print(isValid)
                             if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
                                 && isValid){
                                 isValidHandFrontHand = true
@@ -715,7 +716,7 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                           if (isValid && sortedByValueDictionary[2] <= sortedByValueDictionary2[2]){
+                           if (isValid){
                                isValidHandFrontHand = true
                                isValidHandBackHand = true
                                isValidHandMiddleHand = true
@@ -753,7 +754,6 @@ struct PlayView: View {
                                    continue
                                }
                            }
-                           print(isValid)
                            if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
                                && isValid){
                                isValidHandFrontHand = true
