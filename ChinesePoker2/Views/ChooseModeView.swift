@@ -11,6 +11,7 @@ struct ChooseModeView: View {
     @State private var betAmount: Double = 0
     @State private var mode = "Easy"
     @State private var modeIndex = 0
+    @State private var isPresented = false
     @Binding var isShowMode:Bool
     let modes = ["Easy","Medium","Hard"]
 
@@ -72,13 +73,16 @@ struct ChooseModeView: View {
                         HStack{
                             Spacer()
                             Button {
-                                print("huy")
+                                isPresented = true
                             } label: {
                                 ZStack{
                                     Rectangle().foregroundColor(Color("primary")).clipShape(Capsule()).frame(width: geo.size.width/2.5, height: geo.size.height/12).shadow(color: .white, radius: 3)
                                     Text("PLAY").foregroundColor(.white).font(.system(size: 23))
                                 }
                                 
+                            }
+                            .fullScreenCover(isPresented: $isPresented) {
+                                MainView()
                             }
                             Spacer()
                         }.padding(.top)

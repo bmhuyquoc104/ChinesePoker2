@@ -11,7 +11,7 @@ struct PlayView: View {
     // Get the presentation mode from other views
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model: CardModel
-    @EnvironmentObject var playerModel:PlayerModel
+    @EnvironmentObject var playerModel:GameModel
     @Binding var showFrontHand: Bool
     @Binding var isShowCompare: Bool
     @Binding var isShowArrange: Bool

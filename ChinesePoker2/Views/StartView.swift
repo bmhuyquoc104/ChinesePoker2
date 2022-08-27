@@ -13,7 +13,9 @@ struct StartView: View {
         @State private var tabSelection = 1
         // Initializer delegation
         init() {
-            // Customize the tab bar for the whole app
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = UIColor(Color("Background").opacity(0.9))
+            UITabBar.appearance().scrollEdgeAppearance = appearance
             UITabBar.appearance().unselectedItemTintColor = UIColor(.white)
             UITabBar.appearance().barTintColor = UIColor(Color("primary"))
         }
@@ -43,7 +45,11 @@ struct StartView: View {
                         Text("Top Player")
                     }
                 }.tag(3)
-            }.accentColor(Color("primary"))
+            }.accentColor(Color("secondary"))
+                .onAppear(perform: {
+                                       playSound(sound: "HomeView", type: "wav")
+                    audioPlayer?.numberOfLoops = -1
+                                   })
         }
 }
 

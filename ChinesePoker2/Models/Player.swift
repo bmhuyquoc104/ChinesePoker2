@@ -12,11 +12,19 @@ struct Player: Identifiable {
     var id = UUID()
     var playerCards = Stack()
     var isBot = true
-    var money: Int?
-    var image: String?
+    var money: Int
+    var image: String
     var rankFrontHand:Int?
     var rankMiddleHand:Int?
     var rankBackHand:Int?
-    var achievement:String?
+    var achievements:[Achievement]
 }
+
+struct Achievement: Identifiable,Hashable{
+    var id = UUID()
+    var name:String
+    var description:String
+    var image:String
+}
+
 

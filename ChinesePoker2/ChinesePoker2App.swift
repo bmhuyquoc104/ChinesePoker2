@@ -14,6 +14,7 @@ struct ChinesePoker2App: App {
             StartView()
                 .environmentObject(PlayerModel())
                 .environmentObject(CardModel())
+                .environmentObject(GameModel())
 //            MainView()
 //                .environmentObject(PlayerModel())
 //                .environmentObject(CardModel())

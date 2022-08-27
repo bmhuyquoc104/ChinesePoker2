@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import AVFoundation
+
 
 struct HomeView: View {
+
     @State private var isShowMainView = false
     @State private var isShowRule = false
     @State private var isShowSetting = false
@@ -63,6 +66,10 @@ struct HomeView: View {
 
             }
             }.background(Color("Background"))
+            
+//            .onDisappear{
+//                audioPlayer?.stop()
+//            }
     }
 }
 

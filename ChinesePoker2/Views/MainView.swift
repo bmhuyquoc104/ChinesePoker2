@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-
+import AVFoundation
 
 struct MainView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var model:PlayerModel
+    @EnvironmentObject var model:GameModel
     @EnvironmentObject var cardModel:CardModel
     @State private var showFrontHand: Bool = false
     @State private var isShowCompare: Bool = false
@@ -75,7 +75,7 @@ struct MainView: View {
                                         .opacity(0.8)
                                     HStack(){
                                         
-                                        Image(model.players[0].image!).resizable().aspectRatio(contentMode: .fit)
+                                        Image(model.players[0].image).resizable().aspectRatio(contentMode: .fit)
                                             .frame(width: geo.size.width/8, height: geo.size.height/16)
                                             .clipShape(Circle())
                                         VStack{
@@ -213,7 +213,7 @@ struct MainView: View {
                                                 }
                                             }
                                             Image(model.players[3
-                                                               ].image!).resizable().aspectRatio(contentMode: .fit)
+                                                               ].image).resizable().aspectRatio(contentMode: .fit)
                                                 .frame(width: geo.size.width/8, height: geo.size.height/16)
                                                 .clipShape(Circle())
                                         }
@@ -229,7 +229,7 @@ struct MainView: View {
                                         .opacity(0.8)
                                     HStack(){
                                         
-                                        Image(model.players[1].image!).resizable().aspectRatio(contentMode: .fit)
+                                        Image(model.players[1].image).resizable().aspectRatio(contentMode: .fit)
                                             .frame(width: geo.size.width/8, height: geo.size.height/16)
                                             .clipShape(Circle())
                                         VStack{
@@ -288,7 +288,7 @@ struct MainView: View {
                                                 Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
                                             }
                                         }
-                                        Image(model.players[2].image!).resizable().aspectRatio(contentMode: .fit)
+                                        Image(model.players[2].image).resizable().aspectRatio(contentMode: .fit)
                                             .frame(width: geo.size.width/8, height: geo.size.height/16)
                                             .clipShape(Circle())
                                     }
@@ -365,6 +365,9 @@ struct MainView: View {
 
         })
         .onAppear {
+           
+            playSound(sound: "MainView", type: "wav")
+audioPlayer?.numberOfLoops = -1
             botHand1 = model.botLogic(player: model.players[0])
             frontHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[0],botHand1[1],botHand1[2]]).rawValue
             middleHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[3],botHand1[4],botHand1[5],botHand1[6],botHand1[7]]).rawValue
