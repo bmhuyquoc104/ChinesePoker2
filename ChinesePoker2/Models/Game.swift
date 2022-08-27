@@ -11,9 +11,7 @@ struct Game:Identifiable {
    var id = UUID()
    var players: [Player]
    var mode: String?
-    var betAmount: Int?
-    
-
+   var betAmount: Int?
 }
 
 

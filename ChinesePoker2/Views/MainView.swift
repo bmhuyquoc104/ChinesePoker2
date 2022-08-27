@@ -14,7 +14,7 @@ struct MainView: View {
     @EnvironmentObject var cardModel:CardModel
     @State private var showFrontHand: Bool = false
     @State private var isShowCompare: Bool = false
-    @State private var isShowArrange:Bool = true
+    @State private var isShowArrange:Bool = false
     
     @State var showMiddleHand = false
     @State var showBackHand = false
@@ -43,6 +43,7 @@ struct MainView: View {
 
     // State variable to check if the button status
     @State var isTogglePreview = false
+    @State var isToggleGameSetting = true
     
     let columns = [
         GridItem(.adaptive(minimum: 90),spacing:-75)
@@ -52,7 +53,6 @@ struct MainView: View {
         GeometryReader {
             geo in
             ZStack {
-                
                 VStack {
                     Spacer()
                     ZStack {
@@ -84,6 +84,13 @@ struct MainView: View {
                                             }
                                         }
                                     }
+                                    HStack{
+                                        Button {
+                                            isToggleGameSetting = true
+                                        } label: {
+                                            Image(systemName: "lightbulb.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
+                                        }
+                                    }.offset(x:180,y:-15)
                                 }
                                 VStack(alignment:.leading,spacing:-10){
                                     HStack(spacing:-30){
@@ -153,6 +160,7 @@ struct MainView: View {
                                         Image(showBackHand ? model.players[3].playerCards[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
                                     }
                                 }
+                                //MARK: PLAYER Button
                                 VStack {
                                     if isShowCompare {
                                         if (!showMiddleHand){
@@ -271,7 +279,7 @@ struct MainView: View {
                                         Text("\((model.playerBot2?.rankBackHand ?? 0)*100)")
                                     }
                                 }.padding(.leading)
-                            }.offset(y:-30)
+                            }.offset(x:-10,y:-30)
                             
                             
                             Spacer()
@@ -329,8 +337,43 @@ struct MainView: View {
                     }
                     Spacer()
                     
-                }.background(Color("Background")).ignoresSafeArea()
-               
+                }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting ? 3 : 0)
+                //MARK: GAME SETTING
+                if (isToggleGameSetting){
+                    ZStack{
+                        Rectangle().foregroundColor(Color("Table")).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: geo.size.width/7*6, height: geo.size.height/2.8).shadow(color: .white, radius: 3)
+                        VStack (alignment:.leading){
+                                VStack(spacing:0){
+                                    HStack{
+                                        Button {
+                                            isToggleGameSetting = false
+                                        } label: {
+                                            Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
+                                        }.offset(x:130,y:-20)
+                                    }
+                                    Text("Game Setting").font(.title).foregroundColor(.white).offset(x:20,y:-20)
+                                }
+                            VStack(alignment:.leading,spacing:15){
+                                HStack(spacing:20){
+                                    Text("🎖Ranking:").foregroundColor(.white).font(.system(size: 25))
+                                    Text("Master").foregroundColor(Color("secondary")).font(.system(size: 25))
+                                }
+                                HStack(spacing:20){
+                                    Text("💰 Bet:").foregroundColor(.white).font(.system(size: 25))
+                                    Text("\(model.betAmount ?? 0)").foregroundColor(Color("secondary")).font(.system(size: 25))
+                                }
+                                HStack(spacing:20){
+                                    Text("🎮 Mode:").foregroundColor(.white).font(.system(size: 25))
+                                    Text(model.mode ?? "lele").foregroundColor(Color("secondary")).font(.system(size: 25))
+                                }
+                            }
+                        
+                        }
+                    }
+                }
+                else{
+                    ProgressView()
+                }
             }
         }
         .onChange(of: model.players[3].playerCards, perform: {
@@ -364,7 +407,8 @@ struct MainView: View {
 
         })
         .onAppear {
-           
+            print(model.betAmount)
+            print(model.mode)
             MusicPlayer.shared.startBackgroundMusic()
             audioPlayer?.stop()
             botHand1 = model.botLogic(player: model.players[0])
@@ -406,7 +450,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
-            MainView().environmentObject(PlayerModel())
+            MainView().environmentObject(GameModel())
                 .environmentObject(CardModel())
 //                .environment(\.colorScheme,.dark)
             

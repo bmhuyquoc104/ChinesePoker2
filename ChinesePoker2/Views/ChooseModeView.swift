@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct ChooseModeView: View {
-    @State private var betAmount: Double = 0
+    @EnvironmentObject var gameModel: GameModel
+    @State private var bet: Int = 0
     @State private var mode = "Easy"
     @State private var modeIndex = 0
     @State private var isPresented = false
     @Binding var isShowMode:Bool
     let modes = ["Easy","Medium","Hard"]
-
     var width: CGFloat
     var height: CGFloat
+    
+    var intProxy: Binding<Double>{
+           Binding<Double>(get: {
+               //returns the score as a Double
+               return Double(bet)
+           }, set: {
+               //rounds the double to an Int
+               print($0.description)
+               bet = Int($0)
+           })
+       }
     
     var body: some View {
         
@@ -66,9 +77,9 @@ struct ChooseModeView: View {
                             HStack {
                                 Image(systemName: "dollarsign.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("secondary")).frame(width: 30, height: 30)
                                 Text("Bet Amount:").foregroundColor(.white)
-                                Text("\(betAmount, specifier: "%.1f")").foregroundColor(.white)
+                                Text("\(bet)").foregroundColor(.white)
                             }.padding()
-                            Slider(value: $betAmount, in: 100...1000).padding(.horizontal)
+                            Slider(value: intProxy, in: 100...1000, step: 100.0).padding(.horizontal)
                         }
                         HStack{
                             Spacer()
@@ -94,14 +105,20 @@ struct ChooseModeView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
                 Spacer()
 
+            }.onChange(of: modeIndex) { newValue in
+                gameModel.mode = modes[modeIndex]
+                
+            }.onChange(of: bet) { newValue in
+                gameModel.betAmount = bet
             }
         }
             }
         
     }
     
-//    struct ChooseModeView_Previews: PreviewProvider {
-//        static var previews: some View {
-//            ChooseModeView(isShowMode:true,width:400,height:400)
-//        }
-//    }
+    struct ChooseModeView_Previews: PreviewProvider {
+        static var previews: some View {
+            ChooseModeView(isShowMode:.constant(false),width:400,height:400)
+                .environmentObject(GameModel())
+        }
+    }
