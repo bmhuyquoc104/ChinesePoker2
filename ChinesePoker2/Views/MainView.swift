@@ -41,7 +41,6 @@ struct MainView: View {
     @State var isShowMiddleHandResult = false
     @State var isShowBackHandResult = false
 
-//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // State variable to check if the button status
     @State var isTogglePreview = false
     
@@ -195,7 +194,7 @@ struct MainView: View {
                                             }
                                         }
                                         // Open the new screen cover
-                                        .sheet(isPresented: $isTogglePreview) {
+                                        .fullScreenCover(isPresented: $isTogglePreview) {
                                             PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange,isShowFrontHandResult:$isShowFrontHandResult)
                                             
                                         }
@@ -366,8 +365,8 @@ struct MainView: View {
         })
         .onAppear {
            
-            playSound(sound: "MainView", type: "wav")
-audioPlayer?.numberOfLoops = -1
+            MusicPlayer.shared.startBackgroundMusic()
+            audioPlayer?.stop()
             botHand1 = model.botLogic(player: model.players[0])
             frontHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[0],botHand1[1],botHand1[2]]).rawValue
             middleHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[3],botHand1[4],botHand1[5],botHand1[6],botHand1[7]]).rawValue

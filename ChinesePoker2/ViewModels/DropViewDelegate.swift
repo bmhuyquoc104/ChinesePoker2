@@ -33,10 +33,11 @@ struct DropViewDelegate: DropDelegate{
             return card.id == self.card.id
         } ?? 0
         if (fromIndex != toIndex){
-            withAnimation(.easeIn(duration: 3.0)){
+            withAnimation(.easeIn(duration: 1.0)){
                 let fromCard = playerModel.players[3].playerCards[fromIndex]
                 playerModel.players[3].playerCards[fromIndex] = playerModel.players[3].playerCards[toIndex]
                 playerModel.players[3].playerCards[toIndex] = fromCard
+                playSound(sound: "CardArrange", type: "mp3")
             }
         }
     }
