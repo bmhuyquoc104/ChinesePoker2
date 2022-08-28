@@ -24,7 +24,6 @@ struct ChooseModeView: View {
                return Double(bet)
            }, set: {
                //rounds the double to an Int
-               print($0.description)
                bet = Int($0)
            })
        }
@@ -79,7 +78,7 @@ struct ChooseModeView: View {
                                 Text("Bet Amount:").foregroundColor(.white)
                                 Text("\(bet)").foregroundColor(.white)
                             }.padding()
-                            Slider(value: intProxy, in: 100...1000, step: 100.0).padding(.horizontal)
+                            Slider(value: intProxy, in: 500...1000, step: 100).padding(.horizontal)
                         }
                         HStack{
                             Spacer()
@@ -92,8 +91,10 @@ struct ChooseModeView: View {
                                 }
                                 
                             }
-                            .fullScreenCover(isPresented: $isPresented) {
-                                MainView()
+                            .fullScreenCover(isPresented: $isPresented,onDismiss: {
+                                MainView(isShowMode: $isShowMode)
+                            }) {
+                                MainView(isShowMode:$isShowMode)
                             }
                             Spacer()
                         }.padding(.top)

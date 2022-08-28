@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct ChinesePoker2App: App {
+
     var body: some Scene {
         WindowGroup {
             StartView()

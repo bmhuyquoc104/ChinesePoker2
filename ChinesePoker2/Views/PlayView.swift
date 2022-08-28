@@ -165,7 +165,6 @@ struct PlayView: View {
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit).frame(width: geo.size.width/5.35)
                                                 .onDrag {
-//                                                    playSound(sound: "CardArrange", type: "mp3")
                                                     model.currentCard = playerModel.players[3].playerCards[index]
                                                     return NSItemProvider(contentsOf: URL(string: "\(playerModel.players[3].playerCards[index].id)")!)!
                                                 }
@@ -853,6 +852,13 @@ struct PlayView: View {
                     // Button to close the current full screen over view
                     Button {
                         playSound(sound: "Done", type: "wav")
+                        if (playerModel.myPlayer?.rankFrontHand ?? 0 > 0){
+                            playSound(sound: "WinHand", type: "mp3")
+                        }
+                        else{
+                            playSound(sound: "LoseHand", type: "mp3")
+
+                        }
                         presentationMode.wrappedValue.dismiss()
                         showFrontHand = true
                         isShowCompare = true

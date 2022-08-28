@@ -51,6 +51,7 @@ struct HomeView: View {
                     }.padding()
                     Button {
                         isShowMode = true
+                        playSound(sound: "ClickButton", type: "mp3")
                     } label: {
                         ZStack {
                             Rectangle().foregroundColor(Color("primary")).clipShape(Capsule()).frame(width: geo.size.width/2.5, height: geo.size.height/12).shadow(color: .white, radius: 3)

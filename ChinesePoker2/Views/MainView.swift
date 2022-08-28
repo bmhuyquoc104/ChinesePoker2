@@ -9,12 +9,16 @@ import SwiftUI
 import AVFoundation
 
 struct MainView: View {
+    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model:GameModel
     @EnvironmentObject var cardModel:CardModel
     @State private var showFrontHand: Bool = false
     @State private var isShowCompare: Bool = false
-    @State private var isShowArrange:Bool = false
+    @State private var isShowArrange:Bool = true
+    @State private var isShowDone:Bool = false
+    @State private var isShowGameOver:Bool = false
+    @Binding var isShowMode:Bool
     
     @State var showMiddleHand = false
     @State var showBackHand = false
@@ -40,10 +44,10 @@ struct MainView: View {
     @State private var isShowFrontHandResult:Bool = false
     @State var isShowMiddleHandResult = false
     @State var isShowBackHandResult = false
-
+    
     // State variable to check if the button status
     @State var isTogglePreview = false
-    @State var isToggleGameSetting = true
+    @State var isToggleGameSetting = false
     
     let columns = [
         GridItem(.adaptive(minimum: 90),spacing:-75)
@@ -62,276 +66,172 @@ struct MainView: View {
                             Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
                         }
                         if (isShowFrontHandResult){
-    //                        if let rankExist = model.players[0].rank{
-    //                            Text(rankExist)
-    //                        }
+                            //                        if let rankExist = model.players[0].rank{
+                            //                            Text(rankExist)
+                            //                        }
                         }
                         VStack(){
                             // MARK: BOT1
                             VStack {
-                                ZStack(alignment:.bottomLeading){
-                                    Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                        .opacity(0.8)
-                                    HStack(){
-                                        
-                                        Image(model.players[0].image).resizable().aspectRatio(contentMode: .fit)
-                                            .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                            .clipShape(Circle())
-                                        VStack{
-                                            Text(model.players[0].playerName).foregroundColor(.red).font(.system(size: 13))
-                                            if let score = model.players[0].money{
-                                                Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                            }
-                                        }
-                                    }
-                                    HStack{
-                                        Button {
-                                            isToggleGameSetting = true
-                                        } label: {
-                                            Image(systemName: "lightbulb.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
-                                        }
-                                    }.offset(x:180,y:-15)
+                                ZStack{
+                                    Button {isToggleGameSetting = true
+                                    } label: {
+                                        Image(systemName: "lightbulb.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
+                                    }.offset(x:140,y:-5)
+                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot1?.playerName ?? "", image: model.playerBot1!.image, money: model.playerBot1?.money ?? 0, alignment: .bottomTrailing)
                                 }
-                                VStack(alignment:.leading,spacing:-10){
-                                    HStack(spacing:-30){
-                                        Image(showFrontHand ? botHand1[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand1[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand1[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showMiddleHand ? botHand1[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand1[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand1[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand1[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand1[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showBackHand ? botHand1[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand1[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand1[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand1[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand1[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                }
-                                VStack{
-                                    if (isShowFrontHandResult){
-                                        Text("\((model.playerBot1?.rankFrontHand ?? 0)*100)")
-                                    }
-                                    if isShowMiddleHandResult{
-                                        Text("\((model.playerBot1?.rankMiddleHand ?? 0)*100)")
-                                    }
-                                    if isShowBackHandResult{
-                                        Text("\((model.playerBot1?.rankBackHand ?? 0)*100)")
-                                    }
-                                }
+                                PlayerDeckView(cards: botHand1, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
+                                //MARK: Rank Hand bot1
+                                RankHandPlayerView(
+                                    isShowFrontHandResult: $isShowFrontHandResult,
+                                    isShowMiddleHandResult: $isShowMiddleHandResult,
+                                    isShowBackHandResult: $isShowBackHandResult,
+                                    frontHandProfit: (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
+                                    secondHandProfit: (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
+                                    thirdHandProfit: (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                    frontHandRank: model.playerBot1?.rankFrontHand ?? 0,
+                                    secondHandRank: model.playerBot1?.rankMiddleHand ?? 0,
+                                    thirdHandRank: model.playerBot1?.rankBackHand ?? 0
+                                )
                             }
                             Spacer()
                             // MARK: PLAYER
                             VStack() {
-                                VStack{
-                                    if (isShowFrontHandResult){
-                                        Text("\((model.myPlayer?.rankFrontHand ?? 0)*100)")
-                                    }
-                                    if isShowMiddleHandResult{
-                                        Text("\((model.myPlayer?.rankMiddleHand ?? 0)*100)")
-                                    }
-                                    if isShowBackHandResult{
-                                        Text("\((model.myPlayer?.rankBackHand ?? 0)*100)")
-                                    }
-                                }
-                                VStack(alignment:.leading,spacing:-10){
-                                    HStack(spacing:-30){
-                                        Image(showFrontHand ? model.players[3].playerCards[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? model.players[3].playerCards[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? model.players[3].playerCards[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showMiddleHand ? model.players[3].playerCards[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? model.players[3].playerCards[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? model.players[3].playerCards[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? model.players[3].playerCards[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? model.players[3].playerCards[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showBackHand ? model.players[3].playerCards[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? model.players[3].playerCards[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? model.players[3].playerCards[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? model.players[3].playerCards[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? model.players[3].playerCards[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                }
+                                //MARK: Rank Hand Player
+                                RankHandPlayerView(
+                                    isShowFrontHandResult: $isShowFrontHandResult,
+                                    isShowMiddleHandResult: $isShowMiddleHandResult,
+                                    isShowBackHandResult: $isShowBackHandResult,
+                                    frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
+                                    secondHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
+                                    thirdHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                    frontHandRank: model.myPlayer?.rankFrontHand ?? 0,
+                                    secondHandRank: model.myPlayer?.rankMiddleHand ?? 0,
+                                    thirdHandRank: model.myPlayer?.rankBackHand ?? 0
+                                )
+                                
+                                PlayerDeckView(cards: model.players[3].playerCards, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
                                 //MARK: PLAYER Button
-                                VStack {
+                                HStack (spacing:20){
+                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.myPlayer?.playerName ?? "", image: model.myPlayer!.image, money: model.myPlayer?.money ?? 0, alignment: .bottomTrailing)
                                     if isShowCompare {
                                         if (!showMiddleHand){
                                             Button {
+                                                playSound(sound: "ClickButton", type: "mp3")
+                                                if (model.myPlayer?.rankMiddleHand ?? 0 > 0){
+                                                    playSound(sound: "WinHand", type: "mp3")
+                                                }
+                                                else{
+                                                    playSound(sound: "LoseHand", type: "mp3")
+                                                    
+                                                }
                                                 showFrontHand = false
                                                 showMiddleHand = true
                                                 isShowFrontHandResult = false
                                                 isShowMiddleHandResult = true
                                             } label: {
-                                                // Show preview button
-                                                ZStack(alignment:.center){
-                                                    Text("Compare").foregroundColor(.white).bold()
-                                                }
+                                                ButtonView(width: geo.size.width/3.8, height: geo.size.height/17, text: "Compare", color: "primary")
                                             }
                                         }
                                         else{
                                             Button {
+                                                playSound(sound: "ClickButton", type: "mp3")
+                                                if (model.myPlayer?.rankBackHand ?? 0 > 0){
+                                                    playSound(sound: "WinHand", type: "mp3")
+                                                }
+                                                else{
+                                                    playSound(sound: "LoseHand", type: "mp3")
+                                                }
                                                 showBackHand = true
                                                 isShowMiddleHandResult = false
                                                 showMiddleHand = false
                                                 isShowCompare = false
                                                 isShowBackHandResult = true
+                                                isShowDone = true
                                             } label: {
                                                 // Show preview button
-                                                ZStack(alignment:.center){
-                                                    Text("Compare").foregroundColor(.white).bold()
-                                                }
+                                                ButtonView(width: geo.size.width/3.8, height: geo.size.height/17, text: "Compare", color: "primary")
                                             }
                                         }
-                                       
+                                        
+                                    }
+                                    if(isShowDone){
+                                        
+                                        Button {
+                                            playSound(sound: "Done", type: "wav")
+                                            let frontHandProfit = (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0)
+                                            let middleHandProfit = (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0)
+                                            let backHandProfit = (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0)
+                                            model.myPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
+                                            
+                                            isShowDone = false
+                                            isShowGameOver = true
+                                        } label: {
+                                            ButtonView(width: geo.size.width/3.8, height: geo.size.height/17, text: "Done", color: "primary")
+                                        }
                                     }
                                     if isShowArrange{
                                         Button {
+                                            playSound(sound: "ClickButton", type: "mp3")
                                             self.isTogglePreview.toggle()
                                         } label: {
-                                            // Show preview button
-                                            ZStack(alignment:.center){
-                                                Text("Arrange").foregroundColor(.white).bold()
-                                            }
+                                            ButtonView(width: geo.size.width/3.8, height: geo.size.height/17, text: "Arrange", color: "primary")
                                         }
                                         // Open the new screen cover
                                         .fullScreenCover(isPresented: $isTogglePreview) {
                                             PlayView(showFrontHand: $showFrontHand,isShowCompare:$isShowCompare,isShowArrange:$isShowArrange,isShowFrontHandResult:$isShowFrontHandResult)
-                                            
                                         }
                                     }
-                                   
-                                    
-                                    ZStack(alignment:.bottomTrailing){
-                                        Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                            .opacity(0.8)
-                                        HStack(){
-                                            VStack{
-                                                Text(model.players[3].playerName).foregroundColor(.red).font(.system(size: 13))
-                                                if let score = model.players[3].money{
-                                                    Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                                }
-                                            }
-                                            Image(model.players[3
-                                                               ].image).resizable().aspectRatio(contentMode: .fit)
-                                                .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                                .clipShape(Circle())
-                                        }
-                                    }
-                                }
+                                }.padding()
                             }.offset(y:15)
                         }.padding(.vertical,40)
                         HStack{
                             //MARK: BOT2
                             VStack(alignment:.leading) {
-                                ZStack(alignment:.bottomLeading){
-                                    Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                        .opacity(0.8)
-                                    HStack(){
-                                        
-                                        Image(model.players[1].image).resizable().aspectRatio(contentMode: .fit)
-                                            .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                            .clipShape(Circle())
-                                        VStack{
-                                            Text(model.players[1].playerName).foregroundColor(.red).font(.system(size: 13))
-                                            if let score = model.players[1].money{
-                                                Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                            }
-                                        }
-                                    }
+                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot2?.playerName ?? "", image: model.playerBot2!.image, money: model.playerBot2?.money ?? 0, alignment: .bottomTrailing)
+                                PlayerDeckView(cards: botHand2, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
+                                //MARK: Rank Hand bot2
+                                HStack{
+                                    Spacer()
+                                    RankHandPlayerView(
+                                        isShowFrontHandResult: $isShowFrontHandResult,
+                                        isShowMiddleHandResult: $isShowMiddleHandResult,
+                                        isShowBackHandResult: $isShowBackHandResult,
+                                        frontHandProfit: (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
+                                        secondHandProfit: (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
+                                        thirdHandProfit: (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                        frontHandRank: model.playerBot2?.rankFrontHand ?? 0,
+                                        secondHandRank: model.playerBot2?.rankMiddleHand ?? 0,
+                                        thirdHandRank: model.playerBot2?.rankBackHand ?? 0
+                                    )
+                                    Spacer()
                                 }
-                                VStack(alignment:.leading,spacing:-10){
-                                    HStack(spacing:-30){
-                                        Image(showFrontHand ? botHand2[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand2[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand2[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showMiddleHand ? botHand2[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand2[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand2[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand2[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand2[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showBackHand ? botHand2[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand2[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand2[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand2[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand2[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                }
-                                VStack{
-                                    if (isShowFrontHandResult){
-                                        Text("\((model.playerBot2?.rankFrontHand ?? 0)*100)")
-                                    }
-                                    if isShowMiddleHandResult{
-                                        Text("\((model.playerBot2?.rankMiddleHand ?? 0)*100)")
-                                    }
-                                    if isShowBackHandResult{
-                                        Text("\((model.playerBot2?.rankBackHand ?? 0)*100)")
-                                    }
-                                }.padding(.leading)
                             }.offset(x:-10,y:-30)
                             
                             
                             Spacer()
                             //MARK: BOT3
                             VStack (alignment:.trailing) {
-                                ZStack(alignment:.bottomTrailing){
-                                    Rectangle().foregroundColor(Color("Table")).frame(width: geo.size.width/7*2.2, height: geo.size.height/16).clipShape(Capsule())
-                                        .opacity(0.8)
-                                    HStack(){
-                                        VStack{
-                                            Text(model.players[2].playerName).foregroundColor(.red).font(.system(size: 13))
-                                            if let score = model.players[2].money{
-                                                Text("$\(score)").foregroundColor(.yellow).font(.system(size: 13))
-                                            }
-                                        }
-                                        Image(model.players[2].image).resizable().aspectRatio(contentMode: .fit)
-                                            .frame(width: geo.size.width/8, height: geo.size.height/16)
-                                            .clipShape(Circle())
-                                    }
+                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot3?.playerName ?? "", image: model.playerBot3!.image, money: model.playerBot3?.money ?? 0, alignment: .bottomTrailing)
+                                PlayerDeckView(cards: botHand3, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .trailing)
+                                //MARK: Rank Hand bot 3
+                                HStack{
+                                    Spacer()
+                                    RankHandPlayerView(
+                                        isShowFrontHandResult: $isShowFrontHandResult,
+                                        isShowMiddleHandResult: $isShowMiddleHandResult,
+                                        isShowBackHandResult: $isShowBackHandResult,
+                                        frontHandProfit: (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
+                                        secondHandProfit: (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
+                                        thirdHandProfit: (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                        frontHandRank: model.playerBot3?.rankFrontHand ?? 0,
+                                        secondHandRank: model.playerBot3?.rankMiddleHand ?? 0,
+                                        thirdHandRank: model.playerBot3?.rankBackHand ?? 0
+                                    )
+                                    
+                                    Spacer()
+                                    
                                 }
-                                VStack(alignment:.trailing,spacing:-10){
-                                    HStack(spacing:-30){
-                                        Image(showFrontHand ? botHand3[0].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand3[1].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showFrontHand ? botHand3[2].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showMiddleHand ? botHand3[3].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand3[4].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand3[5].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand3[6].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showMiddleHand ? botHand3[7].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                    HStack(spacing:-30){
-                                        Image(showBackHand ? botHand3[8].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand3[9].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand3[10].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand3[11].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                        Image(showBackHand ? botHand3[12].image : "card_flip").resizable().aspectRatio(contentMode: .fit).frame(width: 60, height: 60).animation( .easeInOut, value: showFrontHand)
-                                    }
-                                }
-                                VStack{
-                                    if (isShowFrontHandResult){
-                                        Text("\((model.playerBot3?.rankFrontHand ?? 0)*100)")
-                                    }
-                                    if isShowMiddleHandResult{
-                                        Text("\((model.playerBot3?.rankMiddleHand ?? 0)*100)")
-                                    }
-                                    if isShowBackHandResult{
-                                        Text("\((model.playerBot3?.rankBackHand ?? 0)*100)")
-                                    }
-                                }.padding(.trailing)
                             }.offset(y:-30)
                         }.padding()
                     }
@@ -340,39 +240,12 @@ struct MainView: View {
                 }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting ? 3 : 0)
                 //MARK: GAME SETTING
                 if (isToggleGameSetting){
-                    ZStack{
-                        Rectangle().foregroundColor(Color("Table")).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: geo.size.width/7*6, height: geo.size.height/2.8).shadow(color: .white, radius: 3)
-                        VStack (alignment:.leading){
-                                VStack(spacing:0){
-                                    HStack{
-                                        Button {
-                                            isToggleGameSetting = false
-                                        } label: {
-                                            Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
-                                        }.offset(x:130,y:-20)
-                                    }
-                                    Text("Game Setting").font(.title).foregroundColor(.white).offset(x:20,y:-20)
-                                }
-                            VStack(alignment:.leading,spacing:15){
-                                HStack(spacing:20){
-                                    Text("🎖Ranking:").foregroundColor(.white).font(.system(size: 25))
-                                    Text("Master").foregroundColor(Color("secondary")).font(.system(size: 25))
-                                }
-                                HStack(spacing:20){
-                                    Text("💰 Bet:").foregroundColor(.white).font(.system(size: 25))
-                                    Text("\(model.betAmount ?? 0)").foregroundColor(Color("secondary")).font(.system(size: 25))
-                                }
-                                HStack(spacing:20){
-                                    Text("🎮 Mode:").foregroundColor(.white).font(.system(size: 25))
-                                    Text(model.mode ?? "lele").foregroundColor(Color("secondary")).font(.system(size: 25))
-                                }
-                            }
-                        
-                        }
-                    }
+                    GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 0, mode: model.mode ?? "")
                 }
-                else{
-                    ProgressView()
+            
+                //MARK: GAME OVER
+                if(isShowGameOver){
+                    GameOverView(frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0), middleHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0), backHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0), width: geo.size.width, height: geo.size.height, money: model.myPlayer?.money ?? 0, isShowGameOver: $isShowGameOver, isShowMode: $isShowMode)
                 }
             }
         }
@@ -404,12 +277,10 @@ struct MainView: View {
                               bot2: [botHand2[8],botHand2[9],botHand2[10],botHand2[11],botHand2[12]],
                               bot3: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]],
                               player:[model.players[3].playerCards[8],model.players[3].playerCards[9],model.players[3].playerCards[10],model.players[3].playerCards[11],model.players[3].playerCards[12]],type: "BackHand")
-
+            
         })
         .onAppear {
-            print(model.betAmount)
-            print(model.mode)
-            MusicPlayer.shared.startBackgroundMusic()
+            //            MusicPlayer.shared.startBackgroundMusic()
             audioPlayer?.stop()
             botHand1 = model.botLogic(player: model.players[0])
             frontHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[0],botHand1[1],botHand1[2]]).rawValue
@@ -442,18 +313,16 @@ struct MainView: View {
                               bot2: [botHand2[8],botHand2[9],botHand2[10],botHand2[11],botHand2[12]],
                               bot3: [botHand3[8],botHand3[9],botHand3[10],botHand3[11],botHand3[12]],
                               player:[model.players[3].playerCards[8],model.players[3].playerCards[9],model.players[3].playerCards[10],model.players[3].playerCards[11],model.players[3].playerCards[12]],type: "BackHand")
-            
         }
     }
+    
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
-            MainView().environmentObject(GameModel())
+            MainView(isShowMode: .constant(true)).environmentObject(GameModel())
                 .environmentObject(CardModel())
-//                .environment(\.colorScheme,.dark)
-            
         }
     }
 }

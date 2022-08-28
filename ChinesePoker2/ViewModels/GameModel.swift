@@ -9,7 +9,7 @@ import Foundation
 
 class GameModel:ObservableObject{
     @Published var mode:String?
-    @Published var players:[Player]
+    @Published var players = [Player]()
     @Published var betAmount:Int?
     @Published var playerBot1: Player?
     @Published var playerBot2:Player?
@@ -17,9 +17,14 @@ class GameModel:ObservableObject{
     @Published var myPlayer:Player?
     
     init(){
+       createPlayers()
+    }
+    
+    func createPlayers(){
         let bot = [
             Player(playerName: "Steve",isBot: true, money: 5000, image: "avatar2",achievements: []),
-            Player(playerName: "Chris",  isBot: true, money: 3000, image: "avatar1",achievements: []),
+            Player(playerName: "Chris",  isBot: true,
+                   money: 3000, image: "avatar1",achievements: []),
             Player(playerName: "David",  isBot: true, money: 2000, image: "avatar3",achievements: []),
             
         ]
@@ -46,6 +51,7 @@ class GameModel:ObservableObject{
         playerBot3 = players[2]
         myPlayer = players[3]
     }
+    
     func arrangeDeck(stack:Stack) ->Stack {
         var isPair = false
         var isTwoPair = false
@@ -760,4 +766,10 @@ class GameModel:ObservableObject{
             return
         }
     }
+    func reload() async {
+          do {
+              createPlayers()
+          } catch {
+          }
+      }
 }
