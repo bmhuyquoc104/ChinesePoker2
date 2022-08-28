@@ -31,15 +31,15 @@ struct RuleView: View {
                         
                         VStack (alignment:.leading,spacing:15){
                             Text("II. Setting").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("Each player organizes their cards into the three poker hands:").foregroundColor(.white)
+                            Text("Each player organizes their cards into three poker hands:").foregroundColor(.white)
                             Text("- One 3-card poker hand (the front).").padding(.leading).foregroundColor(.white)
                             Text("- Two 5-card hands (the middle and the back where they attempt to build the highest-ranking poker hands.").padding(.leading).foregroundColor(.white)
-                            Text("- NOTE: The back must be the highest-ranked hand of and the front must be the lowest-raked hand of the the three.").padding(.leading).foregroundColor(.white)
+                            Text("- NOTE: The back must be the highest-ranked hand and the front must be the lowest-ranked hand of the three.").padding(.leading).foregroundColor(.white)
                         }
                         
                         VStack(alignment:.leading,spacing:15){
                             Text("III. Revealing of Hands.").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("Players turn their cards face-up, exposing their front, middle, and back hands to compare and determine the highest-ranked to lowest-ranked hand.").foregroundColor(.white)
+                            Text("Players turn their cards face-up, exposing their front, middle, and back hands to compare and determine the highest-ranked to lowest-ranked hand hand.").foregroundColor(.white)
                         }
                         VStack(alignment:.leading,spacing:15){
                             Text("IV. Scoring").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
@@ -51,12 +51,12 @@ struct RuleView: View {
                         }
                         VStack(alignment:.leading,spacing:15){
                             Text("V. Next Hand").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("After the hand concludes with all points being awarded, the player press compare button to move to the next hand.").foregroundColor(.white)
+                            Text("After compare the current hand and all points being awarded, the player press compare button to move to the next hand.").foregroundColor(.white)
                         }
                         
                         VStack(alignment:.leading,spacing:15){
                             Text("VI. End game").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("After comparing all hands, the player see all players result (winning or losing amount of beg).").foregroundColor(.white)
+                            Text("After comparing all hands, the player see the result (winning or losing amount of bet).").foregroundColor(.white)
                             Text("Player can play again or leave the table.").foregroundColor(.white)
                         }
                         

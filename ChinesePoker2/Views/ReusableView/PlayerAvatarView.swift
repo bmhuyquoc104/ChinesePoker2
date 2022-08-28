@@ -17,7 +17,7 @@ struct PlayerAvatarView: View {
     
     var body: some View {
         ZStack(alignment:alignment){
-            Rectangle().foregroundColor(Color("Table")).frame(width: width/7*2.2, height: height/16).clipShape(Capsule())
+            Rectangle().foregroundColor(Color("Table")).frame(width: width/7*2.5, height: height/16).clipShape(Capsule())
                 .opacity(0.8)
             HStack(){
                 VStack{

@@ -40,6 +40,8 @@
 		44D736C728BB28050011903F /* PlayerAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736C628BB28050011903F /* PlayerAvatarView.swift */; };
 		44D736C928BB2EF00011903F /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736C828BB2EF00011903F /* GameOverView.swift */; };
 		44D736CB28BB36060011903F /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CA28BB36060011903F /* GameInfoView.swift */; };
+		44D736CD28BB700F0011903F /* BackHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CC28BB700F0011903F /* BackHomeView.swift */; };
+		44D736CF28BB9A440011903F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CE28BB9A440011903F /* LaunchView.swift */; };
 		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
 		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
 		44EA836828B7B79B00375F9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836728B7B79B00375F9B /* HomeView.swift */; };
@@ -80,6 +82,8 @@
 		44D736C628BB28050011903F /* PlayerAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAvatarView.swift; sourceTree = "<group>"; };
 		44D736C828BB2EF00011903F /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		44D736CA28BB36060011903F /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
+		44D736CC28BB700F0011903F /* BackHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackHomeView.swift; sourceTree = "<group>"; };
+		44D736CE28BB9A440011903F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
 		44EA836728B7B79B00375F9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				447F89F928B9C4E400A18B7A /* AchievementView.swift */,
 				44D736C828BB2EF00011903F /* GameOverView.swift */,
 				44D736CA28BB36060011903F /* GameInfoView.swift */,
+				44D736CC28BB700F0011903F /* BackHomeView.swift */,
+				44D736CE28BB9A440011903F /* LaunchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,12 +314,14 @@
 				44BA414D28B3774600709ADA /* Card.swift in Sources */,
 				44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */,
 				44EA836228B7938100375F9B /* SortDeck.swift in Sources */,
+				44D736CD28BB700F0011903F /* BackHomeView.swift in Sources */,
 				44D736C128BB1B3C0011903F /* ButtonView.swift in Sources */,
 				447F89E328B832AF00A18B7A /* RuleView.swift in Sources */,
 				44D736C528BB23E90011903F /* RankHandPlayerView.swift in Sources */,
 				44EA836828B7B79B00375F9B /* HomeView.swift in Sources */,
 				4432C45D28B51046009F7F9F /* Player.swift in Sources */,
 				44D736C928BB2EF00011903F /* GameOverView.swift in Sources */,
+				44D736CF28BB9A440011903F /* LaunchView.swift in Sources */,
 				44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

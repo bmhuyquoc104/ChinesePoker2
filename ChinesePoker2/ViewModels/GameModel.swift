@@ -15,12 +15,12 @@ class GameModel:ObservableObject{
     @Published var playerBot2:Player?
     @Published var playerBot3:Player?
     @Published var myPlayer:Player?
-    
     init(){
-       createPlayers()
+       createPlayers(currentPlayer: Player(playerName: "Huy", isBot: false, money: 70000, image: "daredevil",achievements: [Achievement(name: "Silver", description: "Earn $100", image: "Silver"),Achievement(name: "Platinum", description: "Earn $500", image: "Platinum"),Achievement(name: "Gold", description: "Earn $1000", image: "Gold"),Achievement(name: "Diamond", description: "Earn $10000", image: "Diamond"),Achievement(name: "Master", description: "Earn $50000", image: "Master"),Achievement(name: "Challenger", description: "Earn $100000", image: "Challenger"),Achievement(name: "", description: "1day streak", image: "1day-streak")]))
     }
     
-    func createPlayers(){
+    // Function create all players (3 bots and current player)
+    func createPlayers(currentPlayer:Player){
         let bot = [
             Player(playerName: "Steve",isBot: true, money: 5000, image: "avatar2",achievements: []),
             Player(playerName: "Chris",  isBot: true,
@@ -29,8 +29,10 @@ class GameModel:ObservableObject{
             
         ]
         players = bot
-        players.append(Player(playerName: "Huy", isBot: false, money: 70000, image: "daredevil",achievements: [Achievement(name: "Silver", description: "Earn $100", image: "Silver"),Achievement(name: "Platinum", description: "Earn $500", image: "Platinum"),Achievement(name: "Gold", description: "Earn $1000", image: "Gold"),Achievement(name: "Diamond", description: "Earn $10000", image: "Diamond"),Achievement(name: "Master", description: "Earn $50000", image: "Master"),Achievement(name: "Challenger", description: "Earn $100000", image: "Challenger"),Achievement(name: "", description: "1day streak", image: "1day-streak")]))
+   
+        print(currentPlayer)
         
+        players.append(currentPlayer)
         
         
         var deck = Deck()
@@ -51,6 +53,9 @@ class GameModel:ObservableObject{
         playerBot3 = players[2]
         myPlayer = players[3]
     }
+    
+    
+    
     
     func arrangeDeck(stack:Stack) ->Stack {
         var isPair = false
@@ -123,151 +128,27 @@ class GameModel:ObservableObject{
             isFourOfAKind = cardRankCount > 3
             isFullHouse = cardRankCount > 2 && cardRankCount2 > 1
             
-            if isStraight {
-                continue
-            }
-            else{
-                isStraight = true
-            }
-            for i in 0...4{
-                var rankRawValue = 1
-                if rank <= Rank.Ten{
-                    rankRawValue = rank.rawValue + i
-                }
-                else if rank == Rank.Ace {
-                    rankRawValue = (rank.rawValue + i) % 13
-                    if rankRawValue == 0{
-                        rankRawValue = 13
-                    }
-                }
-                if rankCount[Rank(rawValue: rankRawValue)!] != nil {
-                    isStraight = isStraight && rankCount[Rank(rawValue: rankRawValue)!]! > 0
-                }
-                else {
-                    isStraight = false
-                }
-            }
             for suit in Suit.allCases{
                 var thisSuitCount = 0
                 if suitCount[suit] != nil {
                     thisSuitCount = suitCount[suit]!
                 }
-                isFlush = thisSuitCount > 5
+                isFlush = thisSuitCount == 5
             }
             if (isStraight && isFlush){
                 isStraightFlush = true
             }
         }
         
-        //        if (isStraightFlush){
-        //            continue
-        //        }
         
-        if isFourOfAKind {
-            for card in playerCardsByRank{
-                if card.rank == soretedRankCount[0].key{
-                    possibleHands.append(card)
-                }
-                if possibleHands.count < 5 {
-                    if card.rank == soretedRankCount[soretedRankCount.count - 1].key{
-                        possibleHands.append(card)
-                    }
-                }
-                else{
-                    break
-                }
-            }
-        }
-        
-        else if isFullHouse{
-            //            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
-            for card in playerCardsByRank{
-                if possibleHands.count < 5 {
-                    if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
-                        possibleHands.append(card)
-                    }
-                }
-                else{
-                    break
-                }
-            }
-        }
-        
-        else if isFlush{
-            for card in playerCardsByRank {
-                if possibleHands.count < 5 {
-                    if card.suit == sortedSuitCount[0].key{
-                        possibleHands.append(card)
-                    }
-                }
-                else{
-                    break
-                }
-            }
-        }
-        
-        //        else if isStraight{
-        //            var count = 0
-        //            var tempArr = [Rank:Int]()
-        //            for i in 0..<sortedByKeyRank.count - 1{
-        //                let current = sortedByKeyRank[i].key.rawValue
-        //                let next = sortedByKeyRank[i+1].key.rawValue
-        //                let temp = current - next
-        //                if temp == 1 {
-        //                    count += 1
-        //                }
-        //                else if temp == 0 {
-        //                    continue
-        //                }
-        //                else {
-        //                    count = 0
-        //                }
-        //                if count == 5{
-        //                    for card in playerCardsByRank{
-        //                        if card.rank == sortedByKeyRank[i].key ||
-        //                            card.rank == sortedByKeyRank[i-1].key ||
-        //                            card.rank == sortedByKeyRank[i-2].key ||
-        //                            card.rank == sortedByKeyRank[i-3].key ||
-        //                            card.rank == sortedByKeyRank[i-4].key {
-        //                            possibleHands.append(card)
-        //                        }
-        //                    }
-        //                    break
-        //                }
-        //            }
-        //            if count < 5 {
-        //                for card in playerCardsByRank{
-        //                    if card.rank == sortedByKeyRank[0].key ||
-        //                        card.rank == sortedByKeyRank[soretedRankCount.count-1].key ||
-        //                        card.rank == sortedByKeyRank[soretedRankCount.count-2].key ||
-        //                        card.rank == sortedByKeyRank[soretedRankCount.count-3].key ||
-        //                        card.rank == sortedByKeyRank[soretedRankCount.count-4].key {
-        //                        possibleHands.append(card)
-        //                    }
-        //                }
-        //            }
-        //            if possibleHands.count > 5{
-        //                for i in 0..<possibleHands.count - 1 {
-        //                    let currentIndex = possibleHands[i].rank.rawValue
-        //                    let nextIndex = possibleHands[i+1].rank.rawValue
-        //                    if (currentIndex == nextIndex){
-        //                        possibleHands.remove(at: i)
-        //                        if (possibleHands.count == 5){
-        //                            break
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        
-        else if isThreeOfAKind{
-            if (playerCardsByRank.count != 3) {
+        if mode == "Hard"{
+            if isFourOfAKind {
                 for card in playerCardsByRank{
                     if card.rank == soretedRankCount[0].key{
                         possibleHands.append(card)
                     }
-                    if possibleHands.count<5 {
-                        if card.rank == soretedRankCount[soretedRankCount.count-1].key || card.rank == soretedRankCount[soretedRankCount.count-2].key{
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[soretedRankCount.count - 1].key{
                             possibleHands.append(card)
                         }
                     }
@@ -276,31 +157,286 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            else{
+            
+            else if isFullHouse{
+                //            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
                 for card in playerCardsByRank{
-                    if card.rank == soretedRankCount[0].key{
-                        possibleHands.append(card)
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
                     }
                 }
             }
             
-        }
-        else if isTwoPair{
-            for card in playerCardsByRank{
-                if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
-                    possibleHands.append(card)
+            else if isFlush{
+                for card in playerCardsByRank {
+                    if possibleHands.count < 5 {
+                        if card.suit == sortedSuitCount[0].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
                 }
-                if possibleHands.count < 5 {
-                    if card.rank == soretedRankCount[soretedRankCount.count-1].key{
-                        possibleHands.append(card)
+            }
+            
+            else if isThreeOfAKind{
+                if (playerCardsByRank.count != 3) {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count<5 {
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key || card.rank == soretedRankCount[soretedRankCount.count-2].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
                     }
                 }
                 else{
-                    break
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
+            
+            else if isTwoPair{
+                for card in playerCardsByRank{
+                    if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
+                        possibleHands.append(card)
+                    }
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
                 }
             }
+            
+            else if isPair {
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count < 5{
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-2].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-3].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+            }
+            
+            else {
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key ||
+                                card.rank == soretedRankCount[3].key ||
+                                card.rank == soretedRankCount[4].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
         }
-        else if isPair {
+        
+        
+        
+        else if mode == "Medium"{
+            if isFlush{
+                for card in playerCardsByRank {
+                    if possibleHands.count < 5 {
+                        if card.suit == sortedSuitCount[0].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
+                }
+            }
+            else if isThreeOfAKind{
+                if (playerCardsByRank.count != 3) {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count<5 {
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key || card.rank == soretedRankCount[soretedRankCount.count-2].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
+            
+            else if isTwoPair{
+                for card in playerCardsByRank{
+                    if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
+                        possibleHands.append(card)
+                    }
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
+                }
+            }
+            
+            else if isPair {
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count < 5{
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-2].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-3].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+            }
+            
+            else {
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key ||
+                                card.rank == soretedRankCount[3].key ||
+                                card.rank == soretedRankCount[4].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        else if mode == "Easy"{
+             if isThreeOfAKind{
+                if (playerCardsByRank.count != 3) {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count<5 {
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key || card.rank == soretedRankCount[soretedRankCount.count-2].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
+            
+            else if isTwoPair{
+                for card in playerCardsByRank{
+                    if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
+                        possibleHands.append(card)
+                    }
+                    if possibleHands.count < 5 {
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                    else{
+                        break
+                    }
+                }
+            }
+            else if isPair {
             if playerCardsByRank.count != 3 {
                 for card in playerCardsByRank{
                     if card.rank == soretedRankCount[0].key{
@@ -329,35 +465,39 @@ class GameModel:ObservableObject{
                 }
             }
         }
-        else {
-            if playerCardsByRank.count != 3 {
-                for card in playerCardsByRank{
-                    if  card.rank == soretedRankCount[0].key ||
-                            card.rank == soretedRankCount[1].key ||
-                            card.rank == soretedRankCount[2].key ||
-                            card.rank == soretedRankCount[3].key ||
-                            card.rank == soretedRankCount[4].key{
-                        possibleHands.append(card)
-                    }
-                }
-            }
-            else{
-                for card in playerCardsByRank{
-                    if  card.rank == soretedRankCount[0].key ||
-                            card.rank == soretedRankCount[1].key ||
-                            card.rank == soretedRankCount[2].key{
-                        possibleHands.append(card)
-                    }
-                }
-            }
             
+            else {
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key ||
+                                card.rank == soretedRankCount[3].key ||
+                                card.rank == soretedRankCount[4].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if  card.rank == soretedRankCount[0].key ||
+                                card.rank == soretedRankCount[1].key ||
+                                card.rank == soretedRankCount[2].key{
+                            possibleHands.append(card)
+                        }
+                    }
+                }
+                
+            }
         }
+  
         var botHand = Stack()
         botHand = possibleHands
         return botHand
     }
     
     
+    // Function to determine the logic for the bot
     func botLogic(player:Player) -> Stack {
         var playerCardsByRank = player.playerCards
         let backHand = arrangeDeck(stack: playerCardsByRank)
@@ -366,10 +506,6 @@ class GameModel:ObservableObject{
         let middleHand = arrangeDeck(stack: playerCardsByRank)
         playerCardsByRank.removeAll(where: { middleHand.contains($0) })
         let frontHand = arrangeDeck(stack: playerCardsByRank)
-        let model = CardModel()
-        let backHandValue = "\(model.evaluateHand(cards: backHand))"
-        let middleHandValue = "\(model.evaluateHand(cards: middleHand))"
-        let frontHandValue = "\(model.evaluateHand(cards: frontHand))"
         var botHand = Stack()
         botHand = [frontHand[0],frontHand[1],frontHand[2],middleHand[0],middleHand[1],middleHand[2],middleHand[3],middleHand[4],backHand[0],backHand[1],backHand[2],backHand[3],backHand[4]]
         //        var middleHand = Stack()
@@ -379,6 +515,7 @@ class GameModel:ObservableObject{
         return botHand
     }
     
+    // Function to compare the hand
     func compareHand(bot1:Stack,bot2:Stack,bot3:Stack,player:Stack,type:String){
         
         let model = CardModel()
@@ -582,7 +719,7 @@ class GameModel:ObservableObject{
         }
         else if value == 4{
             if (soretedStack.count == 3){
-                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100  + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100
             }
             else{
                 score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100 + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
@@ -766,10 +903,5 @@ class GameModel:ObservableObject{
             return
         }
     }
-    func reload() async {
-          do {
-              createPlayers()
-          } catch {
-          }
-      }
+
 }

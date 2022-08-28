@@ -22,6 +22,7 @@ struct GameInfoView: View {
                     HStack{
                         Button {
                             isToggleGameSetting = false
+                            playSound(sound: "ClickButton", type: "mp3")
                         } label: {
                             Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
                         }.offset(x:130,y:-20)

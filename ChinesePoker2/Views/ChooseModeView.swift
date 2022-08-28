@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChooseModeView: View {
     @EnvironmentObject var gameModel: GameModel
-    @State private var bet: Int = 0
+    @State private var bet: Int = 100
     @State private var mode = "Easy"
     @State private var modeIndex = 0
     @State private var isPresented = false
@@ -78,7 +78,7 @@ struct ChooseModeView: View {
                                 Text("Bet Amount:").foregroundColor(.white)
                                 Text("\(bet)").foregroundColor(.white)
                             }.padding()
-                            Slider(value: intProxy, in: 500...1000, step: 100).padding(.horizontal)
+                            Slider(value: intProxy, in: 100...2000, step: 100).padding(.horizontal)
                         }
                         HStack{
                             Spacer()
@@ -91,9 +91,7 @@ struct ChooseModeView: View {
                                 }
                                 
                             }
-                            .fullScreenCover(isPresented: $isPresented,onDismiss: {
-                                MainView(isShowMode: $isShowMode)
-                            }) {
+                            .fullScreenCover(isPresented: $isPresented) {
                                 MainView(isShowMode:$isShowMode)
                             }
                             Spacer()
@@ -111,6 +109,9 @@ struct ChooseModeView: View {
                 
             }.onChange(of: bet) { newValue in
                 gameModel.betAmount = bet
+            }
+            .onAppear{
+                gameModel.mode = modes[modeIndex]
             }
         }
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Player: Identifiable {
+struct Player: Identifiable,Codable {
     var playerName: String
     var id = UUID()
     var playerCards = Stack()
@@ -18,9 +18,12 @@ struct Player: Identifiable {
     var rankMiddleHand:Int?
     var rankBackHand:Int?
     var achievements:[Achievement]
+    private enum CodingKeys: String, CodingKey {
+            case playerName, id,money,image,isBot,achievements
+    }
 }
 
-struct Achievement: Identifiable,Hashable{
+struct Achievement: Identifiable,Hashable,Codable{
     var id = UUID()
     var name:String
     var description:String

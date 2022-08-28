@@ -13,11 +13,14 @@ struct MainView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model:GameModel
     @EnvironmentObject var cardModel:CardModel
+    @EnvironmentObject var playerModel:PlayerModel
     @State private var showFrontHand: Bool = false
     @State private var isShowCompare: Bool = false
     @State private var isShowArrange:Bool = true
     @State private var isShowDone:Bool = false
     @State private var isShowGameOver:Bool = false
+    @State private var isToggleHomeButton:Bool = false
+    
     @Binding var isShowMode:Bool
     
     @State var showMiddleHand = false
@@ -65,20 +68,25 @@ struct MainView: View {
                                 .shadow(color: .black, radius: 15)
                             Rectangle().foregroundColor(Color("Table")).cornerRadius(100).frame(width: geo.size.width/5*3.5, height: geo.size.height/5*4.3)
                         }
-                        if (isShowFrontHandResult){
-                            //                        if let rankExist = model.players[0].rank{
-                            //                            Text(rankExist)
-                            //                        }
-                        }
                         VStack(){
                             // MARK: BOT1
                             VStack {
                                 ZStack{
+                                    // Game Info button
                                     Button {isToggleGameSetting = true
+                                        playSound(sound: "ClickButton", type: "mp3")
+
                                     } label: {
                                         Image(systemName: "lightbulb.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
                                     }.offset(x:140,y:-5)
                                     PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot1?.playerName ?? "", image: model.playerBot1!.image, money: model.playerBot1?.money ?? 0, alignment: .bottomTrailing)
+                                    // Back home button
+                                    Button {
+                                        playSound(sound: "ClickButton", type: "mp3")
+                                        isToggleHomeButton = true
+                                    } label: {
+                                        Image(systemName: "house.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
+                                    }.offset(x:-140,y:-5)
                                 }
                                 PlayerDeckView(cards: botHand1, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
                                 //MARK: Rank Hand bot1
@@ -163,7 +171,7 @@ struct MainView: View {
                                             let middleHandProfit = (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0)
                                             let backHandProfit = (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0)
                                             model.myPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
-                                            
+                                            playerModel.currentPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
                                             isShowDone = false
                                             isShowGameOver = true
                                         } label: {
@@ -237,7 +245,7 @@ struct MainView: View {
                     }
                     Spacer()
                     
-                }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting ? 3 : 0)
+                }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting || isShowGameOver || isToggleHomeButton ? 3 : 0)
                 //MARK: GAME SETTING
                 if (isToggleGameSetting){
                     GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 0, mode: model.mode ?? "")
@@ -247,8 +255,15 @@ struct MainView: View {
                 if(isShowGameOver){
                     GameOverView(frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0), middleHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0), backHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0), width: geo.size.width, height: geo.size.height, money: model.myPlayer?.money ?? 0, isShowGameOver: $isShowGameOver, isShowMode: $isShowMode)
                 }
+                
+                if (isToggleHomeButton){
+                    BackHomeView(isToggleHomeButton: $isToggleHomeButton,isShowMode:$isShowMode, width: geo.size.width, height: geo.size.height)
+                }
             }
         }
+        .onChange(of: playerModel.currentPlayer?.money, perform: { value in
+            playerModel.updateAchivement()
+        })
         .onChange(of: model.players[3].playerCards, perform: {
             newValue in
             frontHandPlayer =  cardModel.evaluateHand(cards: [model.players[3].playerCards[0],model.players[3].playerCards[1],model.players[3].playerCards[2]]).rawValue
@@ -280,7 +295,7 @@ struct MainView: View {
             
         })
         .onAppear {
-            //            MusicPlayer.shared.startBackgroundMusic()
+            MusicPlayer.shared.startBackgroundMusic()
             audioPlayer?.stop()
             botHand1 = model.botLogic(player: model.players[0])
             frontHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[0],botHand1[1],botHand1[2]]).rawValue

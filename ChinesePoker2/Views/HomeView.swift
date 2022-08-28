@@ -28,14 +28,7 @@ struct HomeView: View {
                 
                 VStack(spacing:35){
                     HStack{
-                        
-                        Button {
-                            print("huy")
-                        } label: {
-                            Image(systemName: "gearshape.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("ButtonBackground")).shadow(color: Color.white.opacity(0.7), radius: 5, x: 1, y: 1)
-                        }
                         Spacer()
-                        
                         Button {
                             isShowRule = true
                         } label: {
@@ -46,7 +39,7 @@ struct HomeView: View {
                         }
                     }.padding()
                     VStack(spacing:20){
-                        Text("CHINESE POKER").font(.title).foregroundColor(Color("secondary"))
+                        Text("CHINESE POKER").font(.title).foregroundColor(.white)
                         Image("home_image1").resizable().aspectRatio(contentMode: .fit)
                     }.padding()
                     Button {
@@ -67,10 +60,6 @@ struct HomeView: View {
 
             }
             }.background(Color("Background"))
-            
-//            .onDisappear{
-//                audioPlayer?.stop()
-//            }
     }
 }
 

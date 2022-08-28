@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameOverView: View {
     @EnvironmentObject var gameModel:GameModel
+    @EnvironmentObject var playerModel:PlayerModel
     @Environment(\.presentationMode) var presentationMode
 
     var frontHandProfit: Int
@@ -49,7 +50,7 @@ struct GameOverView: View {
                             playSound(sound: "ClickButton", type: "mp3")
                             presentationMode.wrappedValue.dismiss()
                             isShowMode = false
-                            gameModel.createPlayers()
+                            gameModel.createPlayers(currentPlayer: playerModel.currentPlayer!)
                         } label: {
                             ZStack {
                                 Rectangle().foregroundColor(Color("secondary")).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: width/2.5, height: height/12).shadow(color: .white, radius: 3)
@@ -60,7 +61,7 @@ struct GameOverView: View {
                             playSound(sound: "ClickButton", type: "mp3")
                             presentationMode.wrappedValue.dismiss()
                             isShowGameOver = false
-                            gameModel.createPlayers()
+                            gameModel.createPlayers(currentPlayer:playerModel.currentPlayer!)
                         } label: {
                             ZStack {
                                 Rectangle().foregroundColor(Color("primary")).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: width/2.5, height: height/12).shadow(color: .white, radius: 3)

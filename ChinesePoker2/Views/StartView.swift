@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct StartView: View {
- 
+    @StateObject var gameModel = GameModel()
+    @EnvironmentObject var playerModel:PlayerModel
     // State variable to check the current tab selection
         @State private var tabSelection = 1
         // Initializer delegation
-        init() {
-            let appearance = UITabBarAppearance()
-            appearance.backgroundColor = UIColor(Color("Background").opacity(0.9))
-            UITabBar.appearance().scrollEdgeAppearance = appearance
-            UITabBar.appearance().unselectedItemTintColor = UIColor(.white)
-            UITabBar.appearance().barTintColor = UIColor(Color("primary"))
-        }
+
+        var name:String
         var body: some View {
             // Create tabview for display purposes
             TabView(selection:$tabSelection){
@@ -47,15 +43,21 @@ struct StartView: View {
                 }.tag(3)
             }.accentColor(Color("secondary"))
                 .onAppear(perform: {
-                                       playSound(sound: "HomeView", type: "wav")
+                    playSound(sound: "HomeView", type: "wav")
                     audioPlayer?.numberOfLoops = -1
+                    print(playerModel.findPlayerByName(name: name))
+                    gameModel.createPlayers(currentPlayer: playerModel.currentPlayer!)
+
                                    })
+                .environmentObject(gameModel)
+
         }
 }
 
-struct StartView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartView()
-        StartView().environment(\.colorScheme, .dark)
-    }
-}
+//struct StartView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StartView().environmentObject(GameModel())
+//
+//        StartView().environment(\.colorScheme, .dark)
+//    }
+//}
