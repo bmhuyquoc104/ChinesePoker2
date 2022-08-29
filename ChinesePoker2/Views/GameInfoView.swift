@@ -11,6 +11,7 @@ struct GameInfoView: View {
     var width:CGFloat
     var height:CGFloat
     @Binding var isToggleGameSetting:Bool
+    @EnvironmentObject var playerModel:PlayerModel
     var betAmount:Int
     var mode:String
     
@@ -32,7 +33,7 @@ struct GameInfoView: View {
                 VStack(alignment:.leading,spacing:15){
                     HStack(spacing:20){
                         Text("🏆 Ranking:").foregroundColor(.white).font(.system(size: 25))
-                        Text("Master").foregroundColor(Color("secondary")).font(.system(size: 25))
+                        Text(playerModel.ranking ?? "Silver").foregroundColor(Color("secondary")).font(.system(size: 25))
                     }
                     HStack(spacing:20){
                         Text("💰 Bet:").foregroundColor(.white).font(.system(size: 25))
@@ -45,6 +46,12 @@ struct GameInfoView: View {
                 }
                 
             }
+        }
+        .onChange(of: playerModel.currentPlayer?.money, perform: { newValue in
+            playerModel.updateAchivement()
+        })
+        .onAppear{
+            playerModel.updateAchivement()
         }
     }
 }

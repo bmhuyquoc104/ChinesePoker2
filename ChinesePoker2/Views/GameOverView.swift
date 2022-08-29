@@ -26,7 +26,7 @@ struct GameOverView: View {
         VStack{
             let totalProfit = frontHandProfit + middleHandProfit + backHandProfit
             ZStack{
-                Rectangle().foregroundColor(.white).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: width/10*9.5, height: height/2.8).shadow(color: .white, radius: 3)
+                Rectangle().foregroundColor(.white).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: width/10*9.5, height: height/2.5).shadow(color: .white, radius: 3)
                 VStack (spacing:20){
                     HStack{
                         Spacer()
@@ -42,6 +42,9 @@ struct GameOverView: View {
                         HStack{
                             Text("Current Balance").foregroundColor(.black).font(.system(size: 20)).bold()
                             Text("$\(money)").foregroundColor( Color("secondary")).font(.system(size: 20)).bold()
+                        }
+                        if money <= 0 {
+                            Text("Don't worry! We will give you back $5000. Good luck this time!").foregroundColor(.black).font(.system(size: 20)).bold().padding()
                         }
                     }
                    
@@ -61,7 +64,7 @@ struct GameOverView: View {
                             playSound(sound: "ClickButton", type: "mp3")
                             presentationMode.wrappedValue.dismiss()
                             isShowGameOver = false
-                            gameModel.createPlayers(currentPlayer:playerModel.currentPlayer!)
+                            gameModel.createPlayers(currentPlayer: playerModel.currentPlayer!)
                         } label: {
                             ZStack {
                                 Rectangle().foregroundColor(Color("primary")).clipShape(RoundedRectangle(cornerRadius: 10)).frame(width: width/2.5, height: height/12).shadow(color: .white, radius: 3)

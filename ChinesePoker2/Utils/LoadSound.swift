@@ -10,12 +10,12 @@ import AVFoundation
 
 var audioPlayer: AVAudioPlayer?
 
-class MusicPlayer {
-    static let shared = MusicPlayer()
+class backgroundMusicPlayer {
+    static let shared = backgroundMusicPlayer()
     var audioPlayer: AVAudioPlayer?
 
-    func startBackgroundMusic() {
-        if let bundle = Bundle.main.path(forResource: "MainView", ofType: "wav") {
+    func startBackgroundMusic(sound: String, type: String) {
+        if let bundle = Bundle.main.path(forResource: sound, ofType: type) {
             let backgroundMusic = NSURL(fileURLWithPath: bundle)
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
@@ -43,13 +43,8 @@ func playSound(sound: String, type: String) {
     
     if let path = Bundle.main.path(forResource: sound, ofType: type) {
         do {
-            let audioSession = AVAudioSession.sharedInstance()
-                try AVAudioSession.sharedInstance().setCategory(
-                    .ambient, mode: .default, options: [.mixWithOthers])
                 audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                 audioPlayer?.play()
-            
-            
         } catch {
             print("ERROR")
         }

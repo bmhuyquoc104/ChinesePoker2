@@ -42,6 +42,7 @@
 		44D736CB28BB36060011903F /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CA28BB36060011903F /* GameInfoView.swift */; };
 		44D736CD28BB700F0011903F /* BackHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CC28BB700F0011903F /* BackHomeView.swift */; };
 		44D736CF28BB9A440011903F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CE28BB9A440011903F /* LaunchView.swift */; };
+		44D736D128BCA0D30011903F /* Background2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44D736D028BCA0D30011903F /* Background2.wav */; };
 		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
 		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
 		44EA836828B7B79B00375F9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836728B7B79B00375F9B /* HomeView.swift */; };
@@ -84,6 +85,7 @@
 		44D736CA28BB36060011903F /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		44D736CC28BB700F0011903F /* BackHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackHomeView.swift; sourceTree = "<group>"; };
 		44D736CE28BB9A440011903F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		44D736D028BCA0D30011903F /* Background2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Background2.wav; path = ../../../../../Downloads/Background2.wav; sourceTree = "<group>"; };
 		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
 		44EA836728B7B79B00375F9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		447F89E628B9380500A18B7A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44D736D028BCA0D30011903F /* Background2.wav */,
 				44D736BB28BA5D200011903F /* ClickButton.mp3 */,
 				447F89F128B94BC300A18B7A /* CardArrange.mp3 */,
 				447F89F228B94BC300A18B7A /* Done.wav */,
@@ -284,6 +287,7 @@
 				447F89F728B94BC300A18B7A /* CardArrange.mp3 in Resources */,
 				447F89F828B94BC300A18B7A /* Done.wav in Resources */,
 				447F89F428B94BC300A18B7A /* LoseHand.mp3 in Resources */,
+				44D736D128BCA0D30011903F /* Background2.wav in Resources */,
 				447F89E828B9384600A18B7A /* MainView.wav in Resources */,
 				447F89F628B94BC300A18B7A /* LoseGame.mp3 in Resources */,
 			);

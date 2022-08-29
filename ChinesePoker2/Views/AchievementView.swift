@@ -35,6 +35,7 @@ struct AchievementView: View {
                         ForEach(player.achievements, id: \.self) {
                             achievement in
                             Button {
+                                playSound(sound: "ClickButton", type: "mp3")
                                 selectedAchievement = achievement
                             } label: {
                                 VStack{

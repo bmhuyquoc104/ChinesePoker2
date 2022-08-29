@@ -18,6 +18,7 @@ struct PlayView: View {
     @Binding var isShowArrange: Bool
     @Binding var isShowFrontHandResult: Bool
     
+    @State var showAlert:Bool = false
     @State var isValidHandFrontHand:Bool = false
     @State var isValidHandMiddleHand:Bool = false
     @State var isValidHandBackHand:Bool = false
@@ -60,7 +61,7 @@ struct PlayView: View {
                                     ForEach(0 ..< playerModel.players[3].playerCards.count, id: \.self){
                                         index in
                                         if (index < 3){
-                                            
+                                    
                                             Image(playerModel.players[3].playerCards[index].image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit).frame(width: geo.size.width/5.35)
@@ -674,12 +675,25 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                            if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
+                            if (sortedByValueDictionary[0] < sortedByValueDictionary2[0]
+                                ){
+                                isValidHandFrontHand = true
+                                isValidHandBackHand = true
+                                isValidHandMiddleHand = true
+                            }
+                            else if (sortedByValueDictionary[0] == sortedByValueDictionary2[0]
                                 && isValid){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
                                 isValidHandMiddleHand = true
                             }
+                            else if
+                                (sortedByValueDictionary[0] == sortedByValueDictionary2[0]
+                                    && !isValid){
+                                isValidHandFrontHand = true
+                                isValidHandBackHand = false
+                                isValidHandMiddleHand = false
+                                }
                             else{
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = false
@@ -751,11 +765,21 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                            if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
-                                && isValid){
+                            if (sortedByValueDictionary[0] < sortedByValueDictionary2[0]
+                                ){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
                                 isValidHandMiddleHand = true
+                            }
+                            else if (sortedByValueDictionary[0] == sortedByValueDictionary2[0] && isValid){
+                                isValidHandFrontHand = true
+                                isValidHandBackHand = true
+                                isValidHandMiddleHand = true
+                            }
+                            else if (sortedByValueDictionary[0] == sortedByValueDictionary2[0] && !isValid){
+                                isValidHandFrontHand = true
+                                isValidHandBackHand = false
+                                isValidHandMiddleHand = false
                             }
                             else{
                                 isValidHandFrontHand = true
@@ -850,25 +874,41 @@ struct PlayView: View {
                 }
                 VStack{
                     // Button to close the current full screen over view
-                    Button {
-                        playSound(sound: "Done", type: "wav")
-                        if (playerModel.myPlayer?.rankFrontHand ?? 0 > 0){
-                            playSound(sound: "WinHand", type: "mp3")
+                    if !(isValidHandFrontHand && isValidHandMiddleHand && isValidHandBackHand){
+                        Button {
+                            playSound(sound: "ClickButton", type: "wav")
+                           showAlert = true
+                        } label: {
+                            ZStack {
+                                Rectangle().foregroundColor(Color("primary").opacity(0.4)).clipShape(Capsule()).frame(width: geo.size.width/2.8, height: geo.size.height/15).shadow(color: .white.opacity(0.6), radius: 3)
+                                Text("Complete").foregroundColor(.white).font(.system(size: 20))
+                            }}.padding(.top,30).alert(isPresented: $showAlert) {
+                                Alert(title: Text("BAD ARRANGE"), message: Text("Please rearrange the deck."), dismissButton: .default(Text("Accept it!")))
+                            }
                         }
-                        else{
-                            playSound(sound: "LoseHand", type: "mp3")
+                        
+                    else{
+                        Button {
+                            playSound(sound: "Done", type: "wav")
+                            if (playerModel.myPlayer?.rankFrontHand ?? 0 > 0){
+                                playSound(sound: "WinHand", type: "mp3")
+                            }
+                            else{
+                                playSound(sound: "LoseHand", type: "mp3")
 
-                        }
-                        presentationMode.wrappedValue.dismiss()
-                        showFrontHand = true
-                        isShowCompare = true
-                        isShowArrange = false
-                        isShowFrontHandResult = true
-                    } label: {
-                        ZStack {
-                            Rectangle().foregroundColor(Color("primary")).clipShape(Capsule()).frame(width: geo.size.width/2.8, height: geo.size.height/15).shadow(color: .white.opacity(0.6), radius: 3)
-                            Text("Complete").foregroundColor(.white).font(.system(size: 20))
-                        }}.padding(.top,30)
+                            }
+                            presentationMode.wrappedValue.dismiss()
+                            showFrontHand = true
+                            isShowCompare = true
+                            isShowArrange = false
+                            isShowFrontHandResult = true
+                        } label: {
+                            ZStack {
+                                Rectangle().foregroundColor(Color("primary")).clipShape(Capsule()).frame(width: geo.size.width/2.8, height: geo.size.height/15).shadow(color: .white.opacity(0.6), radius: 3)
+                                Text("Complete").foregroundColor(.white).font(.system(size: 20))
+                            }}.padding(.top,30)
+                    }
+                  
                 }
                 Spacer()
             }

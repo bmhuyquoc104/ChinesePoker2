@@ -10,7 +10,7 @@ import AVFoundation
 
 
 struct HomeView: View {
-
+    @EnvironmentObject var playerModel:PlayerModel
     @State private var isShowMainView = false
     @State private var isShowRule = false
     @State private var isShowSetting = false
@@ -30,7 +30,10 @@ struct HomeView: View {
                     HStack{
                         Spacer()
                         Button {
-                            isShowRule = true
+                            playSound(sound: "ClickButton", type: "mp3")
+                            withAnimation (.easeInOut(duration: 0.7)){
+                                isShowRule = true
+                            }
                         } label: {
                             Image(systemName: "questionmark.circle.fill").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("ButtonBackground")).shadow(color: Color.white.opacity(0.7), radius: 5, x: 1, y: 1)
                         }
@@ -39,11 +42,26 @@ struct HomeView: View {
                         }
                     }.padding()
                     VStack(spacing:20){
-                        Text("CHINESE POKER").font(.title).foregroundColor(.white)
+                        if playerModel.typeOfUser == "new"{
+                            HStack{
+                                Text("Hello").font(.title).foregroundColor(.white)
+                                Text(playerModel.currentPlayer?.playerName ?? "").font(.title).foregroundColor(Color("secondary"))
+                            }
+                            Text ("Nice to see you. Let's have some fun").font(.system(size: 18)).foregroundColor(.white)
+
+                        }
+                        else if playerModel.typeOfUser == "old"{
+                            HStack{
+                            Text("Welcome back").font(.title).foregroundColor(.white)
+                            Text(playerModel.currentPlayer?.playerName ?? "").font(.title).foregroundColor(Color("secondary"))
+                            }
+                        }
                         Image("home_image1").resizable().aspectRatio(contentMode: .fit)
                     }.padding()
                     Button {
-                        isShowMode = true
+                        withAnimation (.easeInOut(duration: 0.7)) {
+                            isShowMode = true
+                        }
                         playSound(sound: "ClickButton", type: "mp3")
                     } label: {
                         ZStack {
@@ -57,9 +75,9 @@ struct HomeView: View {
                 .background(Color("Background")).blur(radius: isShowMode ? 4 : 0)
             if isShowMode{
                 ChooseModeView(isShowMode:$isShowMode,width: geo.size.width/14*13, height: geo.size.height/1.7).padding(.horizontal)
-
             }
             }.background(Color("Background"))
+
     }
 }
 

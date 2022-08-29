@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChooseModeView: View {
     @EnvironmentObject var gameModel: GameModel
+    @EnvironmentObject var playerModel:PlayerModel
     @State private var bet: Int = 100
     @State private var mode = "Easy"
     @State private var modeIndex = 0
@@ -42,7 +43,10 @@ struct ChooseModeView: View {
                             Text("Create Table").font(.title).foregroundColor(.white).offset(x:20)
                             Spacer()
                             Button {
-                                isShowMode = false
+                                playSound(sound: "ClickButton", type: "mp3")
+                                withAnimation (.easeInOut(duration: 0.7)) {
+                                    isShowMode = false
+                                }
                             } label: {
                                 Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
                             }
@@ -52,7 +56,7 @@ struct ChooseModeView: View {
                                 Text("🏆").font(.system(size: 30))
                                 Text("Level").foregroundColor(.white)
                                 Spacer()
-                                Text("Professional").foregroundColor(.white)
+                                Text(playerModel.ranking ?? "").foregroundColor(.white)
                                 Spacer()
                             }.padding(.horizontal)
                           
@@ -83,7 +87,10 @@ struct ChooseModeView: View {
                         HStack{
                             Spacer()
                             Button {
-                                isPresented = true
+                                playSound(sound: "ClickButton", type: "mp3")
+                                withAnimation(.easeInOut(duration: 3))  {
+                                    isPresented = true
+                                }
                             } label: {
                                 ZStack{
                                     Rectangle().foregroundColor(Color("primary")).clipShape(Capsule()).frame(width: geo.size.width/2.5, height: geo.size.height/12).shadow(color: .white, radius: 3)
@@ -91,8 +98,12 @@ struct ChooseModeView: View {
                                 }
                                 
                             }
-                            .fullScreenCover(isPresented: $isPresented) {
-                                MainView(isShowMode:$isShowMode)
+                            .fullScreenCover(isPresented: $isPresented,onDismiss: {
+                                backgroundMusicPlayer.shared.startBackgroundMusic(sound: "MainView", type: "wav")
+
+                            }) {
+                                MainView(isShowMode:$isShowMode).animation(.easeInOut(duration: 1))
+
                             }
                             Spacer()
                         }.padding(.top)
@@ -110,8 +121,13 @@ struct ChooseModeView: View {
             }.onChange(of: bet) { newValue in
                 gameModel.betAmount = bet
             }
+            .onChange(of: playerModel.currentPlayer?.money, perform: { newValue in
+                playerModel.updateAchivement()
+            })
             .onAppear{
                 gameModel.mode = modes[modeIndex]
+                playerModel.updateAchivement()
+
             }
         }
             }

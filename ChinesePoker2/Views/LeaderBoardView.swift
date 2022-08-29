@@ -26,10 +26,12 @@ struct LeaderBoardView: View {
                     VStack{
                         HStack(spacing:25){
                                 Button {
+                                    playSound(sound: "ClickButton", type: "mp3")
                                     selectedPlayer = playerModel.realPlayers[1]
                                 } label: {
                                     VStack{
-                                    Image(playerModel.realPlayers[1].image).resizable().aspectRatio(contentMode: .fit)
+
+                                        Image(playerModel.realPlayers[1].image).resizable().aspectRatio(contentMode: .fit)
                                         .clipShape(Capsule()).frame(width: 80, height: 80).shadow(color: .yellow.opacity(0.6), radius: 10)
                                     Text(playerModel.realPlayers[1].playerName).foregroundColor(.white)
                                     Text("$\(playerModel.realPlayers[1].money)").foregroundColor(Color("secondary"))
@@ -40,6 +42,7 @@ struct LeaderBoardView: View {
                                     AchievementView(player: player)
                                 }
                             Button {
+                                playSound(sound: "ClickButton", type: "mp3")
                                 selectedPlayer = playerModel.realPlayers[0]
                             } label: {
                                 VStack{
@@ -55,6 +58,7 @@ struct LeaderBoardView: View {
                                 AchievementView(player: player)
                             }
                             Button {
+                                playSound(sound: "ClickButton", type: "mp3")
                                 selectedPlayer = playerModel.realPlayers[2]
                             } label: {
                                 VStack{
@@ -75,6 +79,7 @@ struct LeaderBoardView: View {
                         ForEach(3..<playerModel.realPlayers.count,id:\.self){
                             index in
                             Button {
+                                playSound(sound: "ClickButton", type: "mp3")
                                 selectedPlayer = playerModel.realPlayers[index]
                             } label: {
                                 HStack{

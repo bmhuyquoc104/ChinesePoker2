@@ -11,18 +11,14 @@ class PlayerModel:ObservableObject {
     @Published public var realPlayers:[Player] = [Player]()
     @Published public var currentPlayer:Player?
     @Published var currentIndex:Int?
+    @Published var ranking:String?
+    @Published var typeOfUser:String?
     let savedKey = "players"
     init(){
-       getDataFromUserDefault()
+        getDataFromUserDefault()
     }
     
     func getDataFromUserDefault(){
-        if let data = UserDefaults.standard.data(forKey: savedKey) {
-                if let decoded = try? JSONDecoder().decode([Player].self, from: data) {
-                    realPlayers = decoded
-                    return
-                }
-            }
         let players = [
             Player(playerName: "Huy", isBot: false, money: 70000000, image: "daredevil",achievements: [
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
@@ -88,7 +84,19 @@ class PlayerModel:ObservableObject {
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
                 Achievement(name: "1 Day Streak", description: "1day streak", image: "1day-streak"),
             ])]
-            realPlayers = players
+
+        if let data = UserDefaults.standard.data(forKey: savedKey) {
+                if let decoded = try? JSONDecoder().decode([Player].self, from: data) {
+                    realPlayers = decoded
+                    if realPlayers.isEmpty {
+                        realPlayers = players
+                        save()
+                    }
+                    else{
+                        return
+                    }
+                }
+            }
     }
     
     func findPlayerByName(name:String){
@@ -99,12 +107,20 @@ class PlayerModel:ObservableObject {
             self.currentPlayer = Player(playerName: name, money: 10000, image: "avatar4", achievements: [
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
                 Achievement(name: "1 Day Streak", description: "1day streak", image: "1day-streak")])
+            self.typeOfUser = "new"
             self.realPlayers.append(currentPlayer!)
+            save()
 
         }
         else{
             self.currentPlayer = realPlayers[playerIndex]
+            self.typeOfUser = "old"
         }        
+    }
+    
+    func removeAll() {
+        realPlayers.removeAll()
+        save()
     }
     
     func save() {
@@ -133,10 +149,15 @@ class PlayerModel:ObservableObject {
         }
     }
     
+    
     func updateAchivement(){
         let money = currentPlayer?.money ?? 10000
         print(money)
-        if money >= 20000 && money < 50000 {
+        if money < 20000 {
+            ranking = "Silver"
+        }
+        else if money >= 20000 && money < 50000 {
+            ranking = "Platinum"
             if ((!currentPlayer!.achievements.contains(where: { Achievement in
                 Achievement.name == "Platinum"
             }))){
@@ -144,6 +165,7 @@ class PlayerModel:ObservableObject {
             }
         }
         else if money >= 50000 && money < 100000 {
+            ranking = "Gold"
             if ((!currentPlayer!.achievements.contains(where: { Achievement in
                 Achievement.name == "Gold"
             }))){
@@ -151,6 +173,7 @@ class PlayerModel:ObservableObject {
             }
         }
         else if money >= 100000 && money < 1000000 {
+            ranking = "Diamond"
             if ((!currentPlayer!.achievements.contains(where: { Achievement in
                 Achievement.name == "Diamond"
             }))){
@@ -158,6 +181,7 @@ class PlayerModel:ObservableObject {
             }
         }
         else if money >= 1000000 && money < 10000000 {
+            ranking = "Master"
             if ((!currentPlayer!.achievements.contains(where: { Achievement in
                 Achievement.name == "Master"
             }))){
@@ -165,6 +189,7 @@ class PlayerModel:ObservableObject {
             }
         }
         else if money >= 10000000{
+            ranking = "Challenger"
             if ((!currentPlayer!.achievements.contains(where: { Achievement in
                 Achievement.name == "Challenger"
             }))){
@@ -176,5 +201,12 @@ class PlayerModel:ObservableObject {
         }
         realPlayers.remove(at: playerIndex!)
         realPlayers.append(currentPlayer!)
+        save()
+    }
+    
+    func resetMoneyForUser() {
+        if currentPlayer?.money ?? 0 <= 0 {
+            currentPlayer?.money = 5000
+        }
     }
 }

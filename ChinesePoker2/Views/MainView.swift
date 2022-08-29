@@ -94,9 +94,9 @@ struct MainView: View {
                                     isShowFrontHandResult: $isShowFrontHandResult,
                                     isShowMiddleHandResult: $isShowMiddleHandResult,
                                     isShowBackHandResult: $isShowBackHandResult,
-                                    frontHandProfit: (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
-                                    secondHandProfit: (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
-                                    thirdHandProfit: (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                    frontHandProfit: (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                    secondHandProfit: (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                    thirdHandProfit: (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 100),
                                     frontHandRank: model.playerBot1?.rankFrontHand ?? 0,
                                     secondHandRank: model.playerBot1?.rankMiddleHand ?? 0,
                                     thirdHandRank: model.playerBot1?.rankBackHand ?? 0
@@ -110,9 +110,9 @@ struct MainView: View {
                                     isShowFrontHandResult: $isShowFrontHandResult,
                                     isShowMiddleHandResult: $isShowMiddleHandResult,
                                     isShowBackHandResult: $isShowBackHandResult,
-                                    frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
-                                    secondHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
-                                    thirdHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                    frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                    secondHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                    thirdHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 100),
                                     frontHandRank: model.myPlayer?.rankFrontHand ?? 0,
                                     secondHandRank: model.myPlayer?.rankMiddleHand ?? 0,
                                     thirdHandRank: model.myPlayer?.rankBackHand ?? 0
@@ -167,10 +167,31 @@ struct MainView: View {
                                         
                                         Button {
                                             playSound(sound: "Done", type: "wav")
-                                            let frontHandProfit = (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0)
-                                            let middleHandProfit = (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0)
-                                            let backHandProfit = (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0)
+                                            // Player Profit
+                                            let frontHandProfit = (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfit = (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfit = (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            
+                                            // Player bot1
+                                            let frontHandProfitBot1 = (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot1 = (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot1 = (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            
+                                            // Player bot2
+                                            let frontHandProfitBot2 = (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot2 = (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot2 = (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            
+                                            // Player bot3
+                                            let frontHandProfitBot3 = (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot3 = (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot3 = (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            
+                                            model.playerBot1?.money += frontHandProfitBot1 + middleHandProfitBot1 + backHandProfitBot1
+                                            model.playerBot2?.money += frontHandProfitBot2 + middleHandProfitBot2 + backHandProfitBot2
+                                            model.playerBot3?.money += frontHandProfitBot3 + middleHandProfitBot3 + backHandProfitBot3
                                             model.myPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
+                                            
                                             playerModel.currentPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
                                             isShowDone = false
                                             isShowGameOver = true
@@ -205,9 +226,9 @@ struct MainView: View {
                                         isShowFrontHandResult: $isShowFrontHandResult,
                                         isShowMiddleHandResult: $isShowMiddleHandResult,
                                         isShowBackHandResult: $isShowBackHandResult,
-                                        frontHandProfit: (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
-                                        secondHandProfit: (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
-                                        thirdHandProfit: (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                        frontHandProfit: (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                        secondHandProfit: (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                        thirdHandProfit: (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 100),
                                         frontHandRank: model.playerBot2?.rankFrontHand ?? 0,
                                         secondHandRank: model.playerBot2?.rankMiddleHand ?? 0,
                                         thirdHandRank: model.playerBot2?.rankBackHand ?? 0
@@ -229,9 +250,9 @@ struct MainView: View {
                                         isShowFrontHandResult: $isShowFrontHandResult,
                                         isShowMiddleHandResult: $isShowMiddleHandResult,
                                         isShowBackHandResult: $isShowBackHandResult,
-                                        frontHandProfit: (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 0),
-                                        secondHandProfit: (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 0),
-                                        thirdHandProfit: (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 0),
+                                        frontHandProfit: (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                        secondHandProfit: (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                        thirdHandProfit: (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 100),
                                         frontHandRank: model.playerBot3?.rankFrontHand ?? 0,
                                         secondHandRank: model.playerBot3?.rankMiddleHand ?? 0,
                                         thirdHandRank: model.playerBot3?.rankBackHand ?? 0
@@ -248,21 +269,22 @@ struct MainView: View {
                 }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting || isShowGameOver || isToggleHomeButton ? 3 : 0)
                 //MARK: GAME SETTING
                 if (isToggleGameSetting){
-                    GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 0, mode: model.mode ?? "")
+                    GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 100, mode: model.mode ?? "").animation(.easeInOut, value: isShowGameOver)
                 }
             
                 //MARK: GAME OVER
                 if(isShowGameOver){
-                    GameOverView(frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 0), middleHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 0), backHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 0), width: geo.size.width, height: geo.size.height, money: model.myPlayer?.money ?? 0, isShowGameOver: $isShowGameOver, isShowMode: $isShowMode)
+                    GameOverView(frontHandProfit: (model.myPlayer?.rankFrontHand ?? 0)*(model.betAmount ?? 100), middleHandProfit: (model.myPlayer?.rankMiddleHand ?? 0)*(model.betAmount ?? 100), backHandProfit: (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 100), width: geo.size.width, height: geo.size.height, money: model.myPlayer?.money ?? 0, isShowGameOver: $isShowGameOver, isShowMode: $isShowMode).animation(.easeInOut, value: isShowGameOver)
                 }
                 
                 if (isToggleHomeButton){
-                    BackHomeView(isToggleHomeButton: $isToggleHomeButton,isShowMode:$isShowMode, width: geo.size.width, height: geo.size.height)
+                    BackHomeView(isToggleHomeButton: $isToggleHomeButton,isShowMode:$isShowMode, width: geo.size.width, height: geo.size.height).animation(.easeInOut, value: isShowGameOver)
                 }
             }
         }
         .onChange(of: playerModel.currentPlayer?.money, perform: { value in
             playerModel.updateAchivement()
+            playerModel.resetMoneyForUser()
         })
         .onChange(of: model.players[3].playerCards, perform: {
             newValue in
@@ -295,7 +317,7 @@ struct MainView: View {
             
         })
         .onAppear {
-            MusicPlayer.shared.startBackgroundMusic()
+            backgroundMusicPlayer.shared.startBackgroundMusic(sound: "Background2", type: "wav")
             audioPlayer?.stop()
             botHand1 = model.botLogic(player: model.players[0])
             frontHandBotHand1 = cardModel.evaluateHand(cards: [botHand1[0],botHand1[1],botHand1[2]]).rawValue

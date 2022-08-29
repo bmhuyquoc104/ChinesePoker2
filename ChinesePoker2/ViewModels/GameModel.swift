@@ -22,13 +22,12 @@ class GameModel:ObservableObject{
     // Function create all players (3 bots and current player)
     func createPlayers(currentPlayer:Player){
         let bot = [
-            Player(playerName: "Steve",isBot: true, money: 5000, image: "avatar2",achievements: []),
-            Player(playerName: "Chris",  isBot: true,
-                   money: 3000, image: "avatar1",achievements: []),
-            Player(playerName: "David",  isBot: true, money: 2000, image: "avatar3",achievements: []),
-            
+            Player(playerName: "Steve",isBot: true, money: 820000, image: "avatar5",achievements: []),
+            Player(playerName: "XiaoBao",isBot: true, money: 5000, image: "avatar4",achievements: []),
+            Player(playerName: "Seri",isBot: true, money: 66000, image: "avatar6",achievements: [])
         ]
         players = bot
+   
    
         print(currentPlayer)
         
@@ -709,20 +708,20 @@ class GameModel:ObservableObject{
             
         }
         else if value == 2{
-            if (soretedStack.count == 3){
-                score += soretedStack[0].rank.rawValue * 20 + soretedStack[1].rank.rawValue * 20 + soretedStack[2].rank.rawValue
+            if (sortedStackByRankAndOccurence.count == 2){
+                score += sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[1].key.rawValue
             }
             else{
-                score += soretedStack[0].rank.rawValue * 20 + soretedStack[1].rank.rawValue * 10 + soretedStack[2].rank.rawValue
-                + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+                score += sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[1].key.rawValue
+                + sortedStackByRankAndOccurence[2].key.rawValue + sortedStackByRankAndOccurence[3].key.rawValue
             }
         }
         else if value == 4{
-            if (soretedStack.count == 3){
-                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100
+            if (sortedStackByRankAndOccurence.count == 1){
+                score += sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100
             }
             else{
-                score += soretedStack[0].rank.rawValue * 100 + soretedStack[1].rank.rawValue * 100 + soretedStack[2].rank.rawValue * 100 + soretedStack[3].rank.rawValue + soretedStack[4].rank.rawValue
+                score += sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[1].key.rawValue + sortedStackByRankAndOccurence[2].key.rawValue
             }
             
         }
@@ -837,11 +836,11 @@ class GameModel:ObservableObject{
             }
         }
         else if value == 7 {
-            score += soretedStack[0].rank.rawValue * 1000 + soretedStack[1].rank.rawValue * 1000 + soretedStack[2].rank.rawValue * 1000 + soretedStack[3].rank.rawValue * 10 + soretedStack[4].rank.rawValue * 10
+            score += sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[1].key.rawValue * 10 + sortedStackByRankAndOccurence[1].key.rawValue * 10
             
         }
         else if value == 8 {
-            score += soretedStack[0].rank.rawValue * 1200 + soretedStack[1].rank.rawValue * 1200 + soretedStack[2].rank.rawValue * 1200 + soretedStack[3].rank.rawValue * 1200 + soretedStack[4].rank.rawValue * 1
+            score += sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[1].key.rawValue * 1
         }
         else if value == 9{
             for i in soretedStack {
