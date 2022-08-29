@@ -43,6 +43,7 @@
 		44D736CD28BB700F0011903F /* BackHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CC28BB700F0011903F /* BackHomeView.swift */; };
 		44D736CF28BB9A440011903F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CE28BB9A440011903F /* LaunchView.swift */; };
 		44D736D128BCA0D30011903F /* Background2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44D736D028BCA0D30011903F /* Background2.wav */; };
+		44D736D528BCEF850011903F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44D736D428BCEF850011903F /* Launch Screen.storyboard */; };
 		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
 		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
 		44EA836828B7B79B00375F9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836728B7B79B00375F9B /* HomeView.swift */; };
@@ -86,6 +87,7 @@
 		44D736CC28BB700F0011903F /* BackHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackHomeView.swift; sourceTree = "<group>"; };
 		44D736CE28BB9A440011903F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		44D736D028BCA0D30011903F /* Background2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Background2.wav; path = ../../../../../Downloads/Background2.wav; sourceTree = "<group>"; };
+		44D736D428BCEF850011903F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../../../Daredevil-App/Daredevil App/Views/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
 		44EA836728B7B79B00375F9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		44BA414A28B376BA00709ADA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				44D736D428BCEF850011903F /* Launch Screen.storyboard */,
 				44D736BF28BB1B290011903F /* ReusableView */,
 				44BA413D28B36F4D00709ADA /* PlayView.swift */,
 				44D617B428B51EAB00F576C1 /* MainView.swift */,
@@ -283,6 +286,7 @@
 				447F89EC28B94B4A00A18B7A /* HomeView.wav in Resources */,
 				44BA414328B36F4F00709ADA /* Preview Assets.xcassets in Resources */,
 				44D736BC28BA5D200011903F /* ClickButton.mp3 in Resources */,
+				44D736D528BCEF850011903F /* Launch Screen.storyboard in Resources */,
 				44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */,
 				447F89F728B94BC300A18B7A /* CardArrange.mp3 in Resources */,
 				447F89F828B94BC300A18B7A /* Done.wav in Resources */,
@@ -461,6 +465,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -491,6 +496,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -25,7 +25,7 @@ struct RuleView: View {
                     VStack(alignment:.leading,spacing:20){
                         VStack(alignment:.leading,spacing:15){
                             Text("I. Dealing").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("Each player will receive 13 random cards from the dealer in counter clock wise order.").foregroundColor(.white)
+                            Text("Each player will receive 13 random cards from dealer in clock wise order.").foregroundColor(.white)
                             
                         }
                         
@@ -33,30 +33,30 @@ struct RuleView: View {
                             Text("II. Setting").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
                             Text("Each player organizes their cards into three poker hands:").foregroundColor(.white)
                             Text("- One 3-card poker hand (the front).").padding(.leading).foregroundColor(.white)
-                            Text("- Two 5-card hands (the middle and the back where they attempt to build the highest-ranking poker hands.").padding(.leading).foregroundColor(.white)
-                            Text("- NOTE: The back must be the highest-ranked hand and the front must be the lowest-ranked hand of the three.").padding(.leading).foregroundColor(.white)
+                            Text("- Two 5-card hands (the middle and the back where they attempt to build the highest-ranked poker hands.").padding(.leading).foregroundColor(.white)
+                            Text("- NOTE: The back must be the highest-ranked where the front must be the lowest-ranked hand out of the three.").padding(.leading).foregroundColor(.white)
                         }
                         
                         VStack(alignment:.leading,spacing:15){
                             Text("III. Revealing of Hands.").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("Players turn their cards face-up, exposing their front, middle, and back hands to compare and determine the highest-ranked to lowest-ranked hand hand.").foregroundColor(.white)
+                            Text("Players turn their cards face-up, exposing their front, middle, and back hands to compare and determine the highest-ranked to lowest-ranked hand .").foregroundColor(.white)
                         }
                         VStack(alignment:.leading,spacing:15){
                             Text("IV. Scoring").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
                             Text("This part is where winning hands are determined.").foregroundColor(.white)
-                            Text("The player has the highest-ranked hand win double ammount of the bet.").foregroundColor(.white)
-                            Text("The player has the second highest-ranked hand win equal of the bet.").foregroundColor(.white)
-                            Text("The player has the lowest-ranked hand lose double ammount of the bet.").foregroundColor(.white)
-                            Text("The player has the second loweset-ranked hand lose double ammount of the bet.").foregroundColor(.white)
+                            Text("The player has the highest-ranked hand win double of the bet amount.").foregroundColor(.white)
+                            Text("The player has the second highest-ranked hand win equal of the bet amout.").foregroundColor(.white)
+                            Text("The player has the lowest-ranked hand lose double of the bet amount.").foregroundColor(.white)
+                            Text("The player has the second loweset-ranked hand lose equal of the bet amount.").foregroundColor(.white)
                         }
                         VStack(alignment:.leading,spacing:15){
                             Text("V. Next Hand").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("After compare the current hand and all points being awarded, the player press compare button to move to the next hand.").foregroundColor(.white)
+                            Text("After compare the current hand and all money being awarded, the player press compare button to move to the next hand.").foregroundColor(.white)
                         }
                         
                         VStack(alignment:.leading,spacing:15){
                             Text("VI. End game").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("After comparing all hands, the player see the result (winning or losing amount of bet).").foregroundColor(.white)
+                            Text("After comparing all hands, the player see the result (winning or losing money).").foregroundColor(.white)
                             Text("Player can play again or leave the table.").foregroundColor(.white)
                         }
                         

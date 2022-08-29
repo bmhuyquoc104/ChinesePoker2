@@ -56,7 +56,7 @@ struct HomeView: View {
                             Text(playerModel.currentPlayer?.playerName ?? "").font(.title).foregroundColor(Color("secondary"))
                             }
                         }
-                        Image("home_image1").resizable().aspectRatio(contentMode: .fit)
+                        Image("home_image2").resizable().aspectRatio(contentMode: .fit)
                     }.padding()
                     Button {
                         withAnimation (.easeInOut(duration: 0.7)) {
@@ -77,6 +77,9 @@ struct HomeView: View {
                 ChooseModeView(isShowMode:$isShowMode,width: geo.size.width/14*13, height: geo.size.height/1.7).padding(.horizontal)
             }
             }.background(Color("Background"))
+//            .onAppear {
+//                playerModel.removeAll()
+//            }
 
     }
 }

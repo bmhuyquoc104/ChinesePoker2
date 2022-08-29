@@ -11,24 +11,22 @@ class GameModel:ObservableObject{
     @Published var mode:String?
     @Published var players = [Player]()
     @Published var betAmount:Int?
-    @Published var playerBot1: Player?
-    @Published var playerBot2:Player?
-    @Published var playerBot3:Player?
+    @Published var playerBot1: Player = Player(playerName: "Steve",isBot: true, money: 2000, image: "avatar5",achievements: [])
+    @Published var playerBot2:Player = Player(playerName: "XiaoBao",isBot: true, money: 5000, image: "avatar4",achievements: [])
+    @Published var playerBot3:Player = Player(playerName: "Seri",isBot: true, money: 1000, image: "avatar6",achievements: [])
     @Published var myPlayer:Player?
     init(){
-       createPlayers(currentPlayer: Player(playerName: "Huy", isBot: false, money: 70000, image: "daredevil",achievements: [Achievement(name: "Silver", description: "Earn $100", image: "Silver"),Achievement(name: "Platinum", description: "Earn $500", image: "Platinum"),Achievement(name: "Gold", description: "Earn $1000", image: "Gold"),Achievement(name: "Diamond", description: "Earn $10000", image: "Diamond"),Achievement(name: "Master", description: "Earn $50000", image: "Master"),Achievement(name: "Challenger", description: "Earn $100000", image: "Challenger"),Achievement(name: "", description: "1day streak", image: "1day-streak")]))
+        createPlayers(currentPlayer: Player(playerName: "Huy", isBot: false, money: 70000, image: "daredevil",achievements: [Achievement(name: "Silver", description: "Earn $100", image: "Silver"),Achievement(name: "Platinum", description: "Earn $500", image: "Platinum"),Achievement(name: "Gold", description: "Earn $1000", image: "Gold"),Achievement(name: "Diamond", description: "Earn $10000", image: "Diamond"),Achievement(name: "Master", description: "Earn $50000", image: "Master"),Achievement(name: "Challenger", description: "Earn $100000", image: "Challenger"),Achievement(name: "", description: "1day streak", image: "1day-streak")]))
     }
     
     // Function create all players (3 bots and current player)
     func createPlayers(currentPlayer:Player){
         let bot = [
-            Player(playerName: "Steve",isBot: true, money: 820000, image: "avatar5",achievements: []),
-            Player(playerName: "XiaoBao",isBot: true, money: 5000, image: "avatar4",achievements: []),
-            Player(playerName: "Seri",isBot: true, money: 66000, image: "avatar6",achievements: [])
+            playerBot1,playerBot2,playerBot3
         ]
         players = bot
-   
-   
+        
+        
         print(currentPlayer)
         
         players.append(currentPlayer)
@@ -47,9 +45,9 @@ class GameModel:ObservableObject{
                 players[i].playerCards.append(card)
             }
         }
-        playerBot1 = players[0]
-        playerBot2 = players[1]
-        playerBot3 = players[2]
+        //        playerBot1 = players[0]
+        //        playerBot2 = players[1]
+        //        playerBot3 = players[2]
         myPlayer = players[3]
     }
     
@@ -394,7 +392,7 @@ class GameModel:ObservableObject{
         }
         
         else if mode == "Easy"{
-             if isThreeOfAKind{
+            if isThreeOfAKind{
                 if (playerCardsByRank.count != 3) {
                     for card in playerCardsByRank{
                         if card.rank == soretedRankCount[0].key{
@@ -436,34 +434,34 @@ class GameModel:ObservableObject{
                 }
             }
             else if isPair {
-            if playerCardsByRank.count != 3 {
-                for card in playerCardsByRank{
-                    if card.rank == soretedRankCount[0].key{
-                        possibleHands.append(card)
+                if playerCardsByRank.count != 3 {
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if possibleHands.count < 5{
+                            if card.rank == soretedRankCount[soretedRankCount.count-1].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-2].key ||
+                                card.rank == soretedRankCount[soretedRankCount.count-3].key{
+                                possibleHands.append(card)
+                            }
+                        }
+                        else{
+                            break
+                        }
                     }
-                    if possibleHands.count < 5{
-                        if card.rank == soretedRankCount[soretedRankCount.count-1].key ||
-                            card.rank == soretedRankCount[soretedRankCount.count-2].key ||
-                            card.rank == soretedRankCount[soretedRankCount.count-3].key{
+                }
+                else{
+                    for card in playerCardsByRank{
+                        if card.rank == soretedRankCount[0].key{
+                            possibleHands.append(card)
+                        }
+                        if card.rank == soretedRankCount[soretedRankCount.count-1].key{
                             possibleHands.append(card)
                         }
                     }
-                    else{
-                        break
-                    }
                 }
             }
-            else{
-                for card in playerCardsByRank{
-                    if card.rank == soretedRankCount[0].key{
-                        possibleHands.append(card)
-                    }
-                    if card.rank == soretedRankCount[soretedRankCount.count-1].key{
-                        possibleHands.append(card)
-                    }
-                }
-            }
-        }
             
             else {
                 if playerCardsByRank.count != 3 {
@@ -489,7 +487,7 @@ class GameModel:ObservableObject{
                 
             }
         }
-  
+        
         var botHand = Stack()
         botHand = possibleHands
         return botHand
@@ -860,33 +858,33 @@ class GameModel:ObservableObject{
         switch hand.name{
         case "bot1":
             if (type == "FrontHand"){
-                playerBot1!.rankFrontHand = value
+                playerBot1.rankFrontHand = value
             }
             if (type == "MiddleHand"){
-                playerBot1!.rankMiddleHand = value
+                playerBot1.rankMiddleHand = value
             }
             if (type == "BackHand"){
-                playerBot1!.rankBackHand = value
+                playerBot1.rankBackHand = value
             }
         case "bot2":
             if (type == "FrontHand"){
-                playerBot2!.rankFrontHand = value
+                playerBot2.rankFrontHand = value
             }
             if (type == "MiddleHand"){
-                playerBot2!.rankMiddleHand = value
+                playerBot2.rankMiddleHand = value
             }
             if (type == "BackHand"){
-                playerBot2!.rankBackHand = value
+                playerBot2.rankBackHand = value
             }
         case "bot3":
             if (type == "FrontHand"){
-                playerBot3!.rankFrontHand = value
+                playerBot3.rankFrontHand = value
             }
             if (type == "MiddleHand"){
-                playerBot3!.rankMiddleHand = value
+                playerBot3.rankMiddleHand = value
             }
             if (type == "BackHand"){
-                playerBot3!.rankBackHand = value
+                playerBot3.rankBackHand = value
             }
         case "player":
             if (type == "FrontHand"){
@@ -902,5 +900,31 @@ class GameModel:ObservableObject{
             return
         }
     }
-
+    
+    func updateBot3() {
+        if playerBot3.money <= 0 {
+            playerBot3.money = 100000
+            playerBot3.image = "avatar3"
+            playerBot3.playerName = "Vermouth"
+        }
+    }
+    func updateBot2(){
+        if playerBot2.money <= 0 {
+            playerBot2.money = 100000
+            playerBot2.image = "avatar5"
+            playerBot2.playerName = "Vodka"
+        }
+    }
+    func updateBot1(){
+        if playerBot1.money <= 0 {
+            playerBot1.money = 100000
+            playerBot1.image = "avatar7"
+            playerBot1.playerName = "Gin"
+        }
+    }
+    
+    
+    
+    
+    
 }

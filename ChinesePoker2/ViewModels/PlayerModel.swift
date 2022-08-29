@@ -84,19 +84,25 @@ class PlayerModel:ObservableObject {
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
                 Achievement(name: "1 Day Streak", description: "1day streak", image: "1day-streak"),
             ])]
+     
 
         if let data = UserDefaults.standard.data(forKey: savedKey) {
                 if let decoded = try? JSONDecoder().decode([Player].self, from: data) {
                     realPlayers = decoded
-                    if realPlayers.isEmpty {
-                        realPlayers = players
-                        save()
+                    if realPlayers.count == 0 {
+                        self.realPlayers = players
                     }
                     else{
                         return
                     }
                 }
             }
+        else{
+            if let encoded = try? JSONEncoder().encode(players) {
+                UserDefaults.standard.set(encoded, forKey: savedKey)
+            }
+            self.realPlayers = players
+        }
     }
     
     func findPlayerByName(name:String){

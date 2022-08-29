@@ -26,7 +26,7 @@ struct LaunchView: View {
             VStack(spacing:35){
                 VStack(spacing:20){
                     Text("CHINESE POKER").font(.title).foregroundColor(.white)
-                    Image("home_image1").resizable().aspectRatio(contentMode: .fit)
+                    Image("home_image2").resizable().aspectRatio(contentMode: .fit)
                 }.padding()
                 VStack{
                     Text("Please enter your name before play the game").foregroundColor(.white)

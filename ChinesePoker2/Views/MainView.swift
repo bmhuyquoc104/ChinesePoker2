@@ -79,7 +79,7 @@ struct MainView: View {
                                     } label: {
                                         Image(systemName: "lightbulb.circle").resizable().aspectRatio(contentMode: .fit).frame(width: 40, height: 40).foregroundColor(Color("secondary")).shadow(color: Color.yellow.opacity(0.5), radius: 15, x: 1, y: 1)
                                     }.offset(x:140,y:-5)
-                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot1?.playerName ?? "", image: model.playerBot1!.image, money: model.playerBot1?.money ?? 0, alignment: .bottomTrailing)
+                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot1.playerName , image: model.playerBot1.image, money: model.playerBot1.money ?? 0, alignment: .bottomTrailing)
                                     // Back home button
                                     Button {
                                         playSound(sound: "ClickButton", type: "mp3")
@@ -94,12 +94,12 @@ struct MainView: View {
                                     isShowFrontHandResult: $isShowFrontHandResult,
                                     isShowMiddleHandResult: $isShowMiddleHandResult,
                                     isShowBackHandResult: $isShowBackHandResult,
-                                    frontHandProfit: (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
-                                    secondHandProfit: (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
-                                    thirdHandProfit: (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 100),
-                                    frontHandRank: model.playerBot1?.rankFrontHand ?? 0,
-                                    secondHandRank: model.playerBot1?.rankMiddleHand ?? 0,
-                                    thirdHandRank: model.playerBot1?.rankBackHand ?? 0
+                                    frontHandProfit: (model.playerBot1.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                    secondHandProfit: (model.playerBot1.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                    thirdHandProfit: (model.playerBot1.rankBackHand ?? 0)*(model.betAmount ?? 100),
+                                    frontHandRank: model.playerBot1.rankFrontHand ?? 0,
+                                    secondHandRank: model.playerBot1.rankMiddleHand ?? 0,
+                                    thirdHandRank: model.playerBot1.rankBackHand ?? 0
                                 )
                             }
                             Spacer()
@@ -121,7 +121,7 @@ struct MainView: View {
                                 PlayerDeckView(cards: model.players[3].playerCards, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
                                 //MARK: PLAYER Button
                                 HStack (spacing:20){
-                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.myPlayer?.playerName ?? "", image: model.myPlayer!.image, money: model.myPlayer?.money ?? 0, alignment: .bottomTrailing)
+                                    PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.myPlayer?.playerName ?? "" , image: model.myPlayer!.image, money: model.myPlayer?.money ?? 0, alignment: .bottomTrailing)
                                     if isShowCompare {
                                         if (!showMiddleHand){
                                             Button {
@@ -173,23 +173,23 @@ struct MainView: View {
                                             let backHandProfit = (model.myPlayer?.rankBackHand ?? 0)*(model.betAmount ?? 100)
                                             
                                             // Player bot1
-                                            let frontHandProfitBot1 = (model.playerBot1?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
-                                            let middleHandProfitBot1 = (model.playerBot1?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
-                                            let backHandProfitBot1 = (model.playerBot1?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            let frontHandProfitBot1 = (model.playerBot1.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot1 = (model.playerBot1.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot1 = (model.playerBot1.rankBackHand ?? 0)*(model.betAmount ?? 100)
                                             
                                             // Player bot2
-                                            let frontHandProfitBot2 = (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
-                                            let middleHandProfitBot2 = (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
-                                            let backHandProfitBot2 = (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            let frontHandProfitBot2 = (model.playerBot2.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot2 = (model.playerBot2.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot2 = (model.playerBot2.rankBackHand ?? 0)*(model.betAmount ?? 100)
                                             
                                             // Player bot3
-                                            let frontHandProfitBot3 = (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 100)
-                                            let middleHandProfitBot3 = (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
-                                            let backHandProfitBot3 = (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 100)
+                                            let frontHandProfitBot3 = (model.playerBot3.rankFrontHand ?? 0)*(model.betAmount ?? 100)
+                                            let middleHandProfitBot3 = (model.playerBot3.rankMiddleHand ?? 0)*(model.betAmount ?? 100)
+                                            let backHandProfitBot3 = (model.playerBot3.rankBackHand ?? 0)*(model.betAmount ?? 100)
                                             
-                                            model.playerBot1?.money += frontHandProfitBot1 + middleHandProfitBot1 + backHandProfitBot1
-                                            model.playerBot2?.money += frontHandProfitBot2 + middleHandProfitBot2 + backHandProfitBot2
-                                            model.playerBot3?.money += frontHandProfitBot3 + middleHandProfitBot3 + backHandProfitBot3
+                                            model.playerBot1.money += frontHandProfitBot1 + middleHandProfitBot1 + backHandProfitBot1
+                                            model.playerBot2.money += frontHandProfitBot2 + middleHandProfitBot2 + backHandProfitBot2
+                                            model.playerBot3.money += frontHandProfitBot3 + middleHandProfitBot3 + backHandProfitBot3
                                             model.myPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
                                             
                                             playerModel.currentPlayer?.money += frontHandProfit + middleHandProfit + backHandProfit
@@ -217,7 +217,7 @@ struct MainView: View {
                         HStack{
                             //MARK: BOT2
                             VStack(alignment:.leading) {
-                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot2?.playerName ?? "", image: model.playerBot2!.image, money: model.playerBot2?.money ?? 0, alignment: .bottomTrailing)
+                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot2.playerName , image: model.playerBot2.image, money: model.playerBot2.money , alignment: .bottomTrailing)
                                 PlayerDeckView(cards: botHand2, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .leading)
                                 //MARK: Rank Hand bot2
                                 HStack{
@@ -226,12 +226,12 @@ struct MainView: View {
                                         isShowFrontHandResult: $isShowFrontHandResult,
                                         isShowMiddleHandResult: $isShowMiddleHandResult,
                                         isShowBackHandResult: $isShowBackHandResult,
-                                        frontHandProfit: (model.playerBot2?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
-                                        secondHandProfit: (model.playerBot2?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
-                                        thirdHandProfit: (model.playerBot2?.rankBackHand ?? 0)*(model.betAmount ?? 100),
-                                        frontHandRank: model.playerBot2?.rankFrontHand ?? 0,
-                                        secondHandRank: model.playerBot2?.rankMiddleHand ?? 0,
-                                        thirdHandRank: model.playerBot2?.rankBackHand ?? 0
+                                        frontHandProfit: (model.playerBot2.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                        secondHandProfit: (model.playerBot2.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                        thirdHandProfit: (model.playerBot2.rankBackHand ?? 0)*(model.betAmount ?? 100),
+                                        frontHandRank: model.playerBot2.rankFrontHand ?? 0,
+                                        secondHandRank: model.playerBot2.rankMiddleHand ?? 0,
+                                        thirdHandRank: model.playerBot2.rankBackHand ?? 0
                                     )
                                     Spacer()
                                 }
@@ -241,7 +241,7 @@ struct MainView: View {
                             Spacer()
                             //MARK: BOT3
                             VStack (alignment:.trailing) {
-                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot3?.playerName ?? "", image: model.playerBot3!.image, money: model.playerBot3?.money ?? 0, alignment: .bottomTrailing)
+                                PlayerAvatarView(width: geo.size.width, height: geo.size.height, name: model.playerBot3.playerName , image: model.playerBot3.image, money: model.playerBot3.money ?? 0, alignment: .bottomTrailing)
                                 PlayerDeckView(cards: botHand3, showFrontHand: $showFrontHand, showMiddleHand: $showMiddleHand, showBackHand: $showBackHand, alignment: .trailing)
                                 //MARK: Rank Hand bot 3
                                 HStack{
@@ -250,12 +250,12 @@ struct MainView: View {
                                         isShowFrontHandResult: $isShowFrontHandResult,
                                         isShowMiddleHandResult: $isShowMiddleHandResult,
                                         isShowBackHandResult: $isShowBackHandResult,
-                                        frontHandProfit: (model.playerBot3?.rankFrontHand ?? 0)*(model.betAmount ?? 100),
-                                        secondHandProfit: (model.playerBot3?.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
-                                        thirdHandProfit: (model.playerBot3?.rankBackHand ?? 0)*(model.betAmount ?? 100),
-                                        frontHandRank: model.playerBot3?.rankFrontHand ?? 0,
-                                        secondHandRank: model.playerBot3?.rankMiddleHand ?? 0,
-                                        thirdHandRank: model.playerBot3?.rankBackHand ?? 0
+                                        frontHandProfit: (model.playerBot3.rankFrontHand ?? 0)*(model.betAmount ?? 100),
+                                        secondHandProfit: (model.playerBot3.rankMiddleHand ?? 0)*(model.betAmount ?? 100),
+                                        thirdHandProfit: (model.playerBot3.rankBackHand ?? 0)*(model.betAmount ?? 100),
+                                        frontHandRank: model.playerBot3.rankFrontHand ?? 0,
+                                        secondHandRank: model.playerBot3.rankMiddleHand ?? 0,
+                                        thirdHandRank: model.playerBot3.rankBackHand ?? 0
                                     )
                                     
                                     Spacer()
@@ -269,7 +269,7 @@ struct MainView: View {
                 }.background(Color("Background")).ignoresSafeArea().blur(radius:isToggleGameSetting || isShowGameOver || isToggleHomeButton ? 3 : 0)
                 //MARK: GAME SETTING
                 if (isToggleGameSetting){
-                    GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 100, mode: model.mode ?? "").animation(.easeInOut, value: isShowGameOver)
+                    GameInfoView(width: geo.size.width, height: geo.size.height, isToggleGameSetting: $isToggleGameSetting, betAmount: model.betAmount ?? 100, mode: model.mode ?? "" ).animation(.easeInOut, value: isShowGameOver)
                 }
             
                 //MARK: GAME OVER
@@ -278,10 +278,19 @@ struct MainView: View {
                 }
                 
                 if (isToggleHomeButton){
-                    BackHomeView(isToggleHomeButton: $isToggleHomeButton,isShowMode:$isShowMode, width: geo.size.width, height: geo.size.height).animation(.easeInOut, value: isShowGameOver)
+                    BackHomeView(isToggleHomeButton: $isToggleHomeButton,isShowMode:$isShowMode, width: geo.size.width, height: geo.size.height)
                 }
             }
         }
+        .onChange(of: model.playerBot1.money, perform: { newValue in
+            model.updateBot1()
+        })
+        .onChange(of: model.playerBot2.money, perform: { newValue in
+            model.updateBot2()
+        })
+        .onChange(of: model.playerBot3.money, perform: { newValue in
+            model.updateBot3()
+        })
         .onChange(of: playerModel.currentPlayer?.money, perform: { value in
             playerModel.updateAchivement()
             playerModel.resetMoneyForUser()
