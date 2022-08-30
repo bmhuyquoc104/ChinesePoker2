@@ -1,19 +1,27 @@
-//
-//  BackHomeView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 28/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 28/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 28/08/2022)
+ Acknowledgement:
+ */
 
 import SwiftUI
 
 struct BackHomeView: View {
+    // Binding variable to update these variables from other views.
     @Binding var isToggleHomeButton:Bool
     @Binding var isShowMode:Bool
-
+    // Variable to get the width and height from other view
     var width:CGFloat
     var height:CGFloat
+    // Environment to control the presentation mode (sheet or fullscreen over)
     @Environment(\.presentationMode) var presentationMode
+    // Environment object to get access to these variables in the view model
     @EnvironmentObject var gameModel:GameModel
     @EnvironmentObject var playerModel:PlayerModel
     var body: some View {
@@ -30,9 +38,13 @@ struct BackHomeView: View {
                             Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
                         }
                         Button {
+                            // play sound
                             playSound(sound: "ClickButton", type: "mp3")
+                            // close choose mode view
                             isShowMode = false
+                            // create new players in case the user want to play again
                             gameModel.createPlayers(currentPlayer: playerModel.currentPlayer!)
+                            // dismiss the full screen cover and back to menu
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             Image(systemName: "checkmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("secondary")).frame(width: 40, height: 40)

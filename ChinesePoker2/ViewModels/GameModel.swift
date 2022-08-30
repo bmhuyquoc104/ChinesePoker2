@@ -1,13 +1,20 @@
-//
-//  GameModel.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 25/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 22/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 22/08/2022)
+ Acknowledgement:  https://www.youtube.com/watch?v=hJ3v6MtLGnI&t=1128s
+
+ */
 
 import Foundation
 
 class GameModel:ObservableObject{
+    // Published variable to access and update in other views
     @Published var mode:String?
     @Published var players = [Player]()
     @Published var betAmount:Int?
@@ -25,19 +32,17 @@ class GameModel:ObservableObject{
             playerBot1,playerBot2,playerBot3
         ]
         players = bot
-        
-        
-        print(currentPlayer)
-        
         players.append(currentPlayer)
-        
-        
+        // Create deck for each player
         var deck = Deck()
         deck.createDeck()
+        // Shuffle the deck
         deck.deckShuffle()
         
+        // random the player index
         let randomPlayerIndex = Int(arc4random()) % players.count
         
+        // Duel the card to each player in order
         while deck.cardLength() > 0 {
             for player in randomPlayerIndex...randomPlayerIndex + (players.count - 1) {
                 let i = player % players.count
@@ -45,16 +50,12 @@ class GameModel:ObservableObject{
                 players[i].playerCards.append(card)
             }
         }
-        //        playerBot1 = players[0]
-        //        playerBot2 = players[1]
-        //        playerBot3 = players[2]
         myPlayer = players[3]
     }
     
-    
-    
-    
+    // Function to let the bot arrange the deck
     func arrangeDeck(stack:Stack) ->Stack {
+        // Declare multiple variables to track if the handtype is exist or not
         var isPair = false
         var isTwoPair = false
         var isThreeOfAKind = false
@@ -137,8 +138,10 @@ class GameModel:ObservableObject{
             }
         }
         
-        
+        // Check if the mode is hard or not
         if mode == "Hard"{
+            // If the mode is hard -> arrange the deck by these hand types below
+            // Get cards that form four of a kind
             if isFourOfAKind {
                 for card in playerCardsByRank{
                     if card.rank == soretedRankCount[0].key{
@@ -154,7 +157,7 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            
+            // Get cards that form full house
             else if isFullHouse{
                 //            let firstIndex = soretedRankCount.firstIndex( where: {$0.value == 2})
                 for card in playerCardsByRank{
@@ -168,7 +171,7 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            
+            // Get cards that form flush
             else if isFlush{
                 for card in playerCardsByRank {
                     if possibleHands.count < 5 {
@@ -181,7 +184,7 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            
+            // Get cards that form three of a kind
             else if isThreeOfAKind{
                 if (playerCardsByRank.count != 3) {
                     for card in playerCardsByRank{
@@ -207,7 +210,7 @@ class GameModel:ObservableObject{
                 }
                 
             }
-            
+            // Get cards that form two pairs
             else if isTwoPair{
                 for card in playerCardsByRank{
                     if card.rank == soretedRankCount[0].key || card.rank == soretedRankCount[1].key{
@@ -223,7 +226,7 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            
+            // Get cards that form one pair
             else if isPair {
                 if playerCardsByRank.count != 3 {
                     for card in playerCardsByRank{
@@ -253,7 +256,7 @@ class GameModel:ObservableObject{
                     }
                 }
             }
-            
+            // Get cards that form high card
             else {
                 if playerCardsByRank.count != 3 {
                     for card in playerCardsByRank{
@@ -279,9 +282,9 @@ class GameModel:ObservableObject{
             }
         }
         
-        
-        
+        // Check if the mode is medium
         else if mode == "Medium"{
+            // Similar to hard but remove 4 of a kind and full house handtype -> make user have a higher chance to win
             if isFlush{
                 for card in playerCardsByRank {
                     if possibleHands.count < 5 {
@@ -391,7 +394,9 @@ class GameModel:ObservableObject{
             }
         }
         
+        // Check if mode is easy
         else if mode == "Easy"{
+            // Similar to hard but remove 4 of a kind and full house, flush handtype -> make user have a higher chance to win
             if isThreeOfAKind{
                 if (playerCardsByRank.count != 3) {
                     for card in playerCardsByRank{
@@ -488,6 +493,7 @@ class GameModel:ObservableObject{
             }
         }
         
+        // return the bothand that contain the best combination for possible hand
         var botHand = Stack()
         botHand = possibleHands
         return botHand
@@ -496,19 +502,21 @@ class GameModel:ObservableObject{
     
     // Function to determine the logic for the bot
     func botLogic(player:Player) -> Stack {
+        // Get the deck for this bot
         var playerCardsByRank = player.playerCards
+        // Arrange back hand
         let backHand = arrangeDeck(stack: playerCardsByRank)
-        
+        // Remove the back hand cards from deck arr (orginal 13, after slide -> new 8)
         playerCardsByRank.removeAll(where: { backHand.contains($0) })
+        // Arrange middle hand
         let middleHand = arrangeDeck(stack: playerCardsByRank)
+        // Remove the middle hand cards from deck arr (original 8, after slide -> new 3)
         playerCardsByRank.removeAll(where: { middleHand.contains($0) })
+        // Arrage front hand
         let frontHand = arrangeDeck(stack: playerCardsByRank)
+        // Return the new deck after rearrange back, middle, front (100% front < middle < back)
         var botHand = Stack()
         botHand = [frontHand[0],frontHand[1],frontHand[2],middleHand[0],middleHand[1],middleHand[2],middleHand[3],middleHand[4],backHand[0],backHand[1],backHand[2],backHand[3],backHand[4]]
-        //        var middleHand = Stack()
-        
-        
-        //        botHand = possibleHands
         return botHand
     }
     
@@ -570,7 +578,7 @@ class GameModel:ObservableObject{
     }
     
     
-    
+    // Function to calculate the score for each handtype case to compare if the value is equal (for example: 4 hands have pair handtype, to determine with one is the largest, calculate the score, highest -> first-ranked
     func calculateScore (stack:Stack,value:Int) -> Int{
         var score = 0
         var reward = 0
@@ -604,11 +612,13 @@ class GameModel:ObservableObject{
             score = 0
         }
         
+        // Score calculation for highcard case
         if (value == 1) {
             for i in 0..<soretedStack.count - 1{
                 let current = soretedStack[i].rank.rawValue
                 let next = soretedStack[i+1].rank.rawValue
                 let temp = current - next
+                // Check (A,Q,J) and (A,K,1) -> Need new calculation way instead of plus three cards because A,Q,J is next to each other and will has the higher score than A,K,1. Thus, it is incorrect -> implement unique score logic for to overcome this case
                 if (temp == 1) {
                     var tempScore = 0
                     switch soretedStack[i].rank.rawValue{
@@ -705,6 +715,7 @@ class GameModel:ObservableObject{
             }
             
         }
+        // Score calculation for pair case
         else if value == 2{
             if (sortedStackByRankAndOccurence.count == 2){
                 score += sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[0].key.rawValue * 20 + sortedStackByRankAndOccurence[1].key.rawValue
@@ -714,6 +725,7 @@ class GameModel:ObservableObject{
                 + sortedStackByRankAndOccurence[2].key.rawValue + sortedStackByRankAndOccurence[3].key.rawValue
             }
         }
+        // Score calculation for three of a kind case
         else if value == 4{
             if (sortedStackByRankAndOccurence.count == 1){
                 score += sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100 + sortedStackByRankAndOccurence[0].key.rawValue * 100
@@ -723,6 +735,7 @@ class GameModel:ObservableObject{
             }
             
         }
+        // Score calculation for 2 pairs case
         else if value == 3{
             for i in 0..<sortedStackByRankAndOccurence.count - 1{
                 let first = sortedStackByRankAndOccurence[0].key.rawValue
@@ -823,28 +836,34 @@ class GameModel:ObservableObject{
                 }
             }
         }
+        // Score calculation for straight case
         else if value == 5{
             for i in soretedStack {
                 score += i.rank.rawValue * reward
             }
         }
+        // Score calculation for flush case
         else if value == 6{
             for i in soretedStack {
                 score += i.rank.rawValue * reward
             }
         }
+        // Score calculation for full house case
         else if value == 7 {
             score += sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[0].key.rawValue * 1000 + sortedStackByRankAndOccurence[1].key.rawValue * 10 + sortedStackByRankAndOccurence[1].key.rawValue * 10
             
         }
+        // Score calculation for four of a kind case
         else if value == 8 {
             score += sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[0].key.rawValue * 1200 + sortedStackByRankAndOccurence[1].key.rawValue * 1
         }
+        // Score calculation for straight flush case
         else if value == 9{
             for i in soretedStack {
                 score += i.rank.rawValue * reward
             }
         }
+        // Score calculation for royal flush case
         else if value == 10{
             for i in soretedStack {
                 score += i.rank.rawValue * reward
@@ -854,6 +873,7 @@ class GameModel:ObservableObject{
         return score
     }
     
+    // Function to update the rank for front, middle,back hand for 4 players to compare in other views
     func rankDeck (hand:Hand,type:String,value:Int) {
         switch hand.name{
         case "bot1":
@@ -901,6 +921,7 @@ class GameModel:ObservableObject{
         }
     }
     
+    // Function to update the bot3 money if it is <=0, plus change the name and avatar to let the user feel like new player coming
     func updateBot3() {
         if playerBot3.money <= 0 {
             playerBot3.money = 100000
@@ -908,6 +929,7 @@ class GameModel:ObservableObject{
             playerBot3.playerName = "Vermouth"
         }
     }
+    // Function to update the bot2 money if it is <=0, plus change the name and avatar to let the user feel like new player coming
     func updateBot2(){
         if playerBot2.money <= 0 {
             playerBot2.money = 100000
@@ -915,6 +937,7 @@ class GameModel:ObservableObject{
             playerBot2.playerName = "Vodka"
         }
     }
+    // Function to update the bot money if it is <=0, plus change the name and avatar to let the user feel like new player coming
     func updateBot1(){
         if playerBot1.money <= 0 {
             playerBot1.money = 100000

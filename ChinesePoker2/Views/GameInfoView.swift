@@ -1,17 +1,26 @@
-//
-//  GameInfoView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 28/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 28/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 28/08/2022)
+ Acknowledgement:
+ */
 
 import SwiftUI
 
 struct GameInfoView: View {
+    // Variable to get the width and height from other view
     var width:CGFloat
     var height:CGFloat
+    // Binding variable to update these variables from other views
     @Binding var isToggleGameSetting:Bool
+    // Environment object to get access to these variables in the view model
     @EnvironmentObject var playerModel:PlayerModel
+    // Variable to get the betamount and mode from other view
     var betAmount:Int
     var mode:String
     
@@ -22,7 +31,9 @@ struct GameInfoView: View {
                 VStack(spacing:0){
                     HStack{
                         Button {
+                            // Close this view
                             isToggleGameSetting = false
+                            // play sound
                             playSound(sound: "ClickButton", type: "mp3")
                         } label: {
                             Image(systemName: "xmark.circle").resizable().aspectRatio(contentMode: .fit).foregroundColor(Color("primary")).frame(width: 40, height: 40)
@@ -47,6 +58,7 @@ struct GameInfoView: View {
                 
             }
         }
+        // update achievement when the money is changing
         .onChange(of: playerModel.currentPlayer?.money, perform: { newValue in
             playerModel.updateAchivement()
         })

@@ -1,16 +1,23 @@
-//
-//  LeaderBoardView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 26/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 26/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 26/08/2022)
+ Acknowledgement:
+ */
 
 import SwiftUI
 import AVFoundation
 
 
 struct LeaderBoardView: View {
+    // Environment object to get access to these variables in the view model
     @EnvironmentObject var playerModel: PlayerModel
+    // State variable to detect and show by condition
     @State var selectedPlayer:Player?
     var body: some View {
         GeometryReader{
@@ -25,22 +32,22 @@ struct LeaderBoardView: View {
                     }
                     VStack{
                         HStack(spacing:25){
-                                Button {
-                                    playSound(sound: "ClickButton", type: "mp3")
-                                    selectedPlayer = playerModel.realPlayers[1]
-                                } label: {
-                                    VStack{
-
-                                        Image(playerModel.realPlayers[1].image).resizable().aspectRatio(contentMode: .fit)
+                            Button {
+                                playSound(sound: "ClickButton", type: "mp3")
+                                selectedPlayer = playerModel.realPlayers[1]
+                            } label: {
+                                VStack{
+                                    
+                                    Image(playerModel.realPlayers[1].image).resizable().aspectRatio(contentMode: .fit)
                                         .clipShape(Capsule()).frame(width: 80, height: 80).shadow(color: .yellow.opacity(0.6), radius: 10)
                                     Text(playerModel.realPlayers[1].playerName).foregroundColor(.white)
                                     Text("$\(playerModel.realPlayers[1].money)").foregroundColor(Color("secondary"))
-                                    }.offset(y:75)
-                                }
-                                .sheet(item: $selectedPlayer) {
-                                    player in
-                                    AchievementView(player: player)
-                                }
+                                }.offset(y:75)
+                            }
+                            .sheet(item: $selectedPlayer) {
+                                player in
+                                AchievementView(player: player)
+                            }
                             Button {
                                 playSound(sound: "ClickButton", type: "mp3")
                                 selectedPlayer = playerModel.realPlayers[0]

@@ -1,24 +1,33 @@
-//
-//  ChinesePokerGameModel.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 23/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 22/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 22/08/2022)
+ Acknowledgement: https://www.hackingwithswift.com/books/ios-swiftui/saving-and-loading-data-with-userdefaults
+ */
 
 import Foundation
 
 class PlayerModel:ObservableObject {
+    // Published variable to access and update in other views
     @Published public var realPlayers:[Player] = [Player]()
     @Published public var currentPlayer:Player?
     @Published var currentIndex:Int?
     @Published var ranking:String?
     @Published var typeOfUser:String?
+    // declare key to access the data in userdefault
     let savedKey = "players"
     init(){
         getDataFromUserDefault()
     }
     
+    // Function to get the data from user default
     func getDataFromUserDefault(){
+        // Declare some static data
         let players = [
             Player(playerName: "Huy", isBot: false, money: 70000000, image: "daredevil",achievements: [
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
@@ -85,8 +94,10 @@ class PlayerModel:ObservableObject {
                 Achievement(name: "1 Day Streak", description: "1day streak", image: "1day-streak"),
             ])]
      
-
+        
+        // Check if the userdefault data is empty or not
         if let data = UserDefaults.standard.data(forKey: savedKey) {
+                // If data exist -> decode and load the data to the published realplayers
                 if let decoded = try? JSONDecoder().decode([Player].self, from: data) {
                     realPlayers = decoded
                     if realPlayers.count == 0 {
@@ -98,6 +109,7 @@ class PlayerModel:ObservableObject {
                 }
             }
         else{
+            // If data not exist -> encode the static data to userdefault
             if let encoded = try? JSONEncoder().encode(players) {
                 UserDefaults.standard.set(encoded, forKey: savedKey)
             }
@@ -105,10 +117,13 @@ class PlayerModel:ObservableObject {
         }
     }
     
+    // Function to check if the input name from user is existed or not
     func findPlayerByName(name:String){
+        // If is existed -> return that player from the database
         let playerIndex = realPlayers.firstIndex { Player in
             Player.playerName == name
         } ?? -1
+        // If not created new player and add to the data
         if playerIndex == -1 {
             self.currentPlayer = Player(playerName: name, money: 10000, image: "avatar4", achievements: [
                 Achievement(name: "Silver", description: "Earn $1000", image: "Silver"),
@@ -124,28 +139,33 @@ class PlayerModel:ObservableObject {
         }        
     }
     
+    // Function to remove all players in userdefault (only for testing)
     func removeAll() {
         realPlayers.removeAll()
         save()
     }
     
+    // Function to encode new player and add to database
     func save() {
         if let encoded = try? JSONEncoder().encode(realPlayers) {
             UserDefaults.standard.set(encoded, forKey: savedKey)
         }
     }
     
+    // Function to add player to dabase
     func add(player: Player) {
         realPlayers.append(player)
         save()
     }
     
+    // Function to find the top three richest players
     func findTopThree (){
         return realPlayers.sort(by: {
             $0.money > $1.money
         })
     }
     
+    // Function to find currentplayer by id
     func findCurrentPlayer(id:UUID){
         currentIndex = realPlayers.firstIndex { Player in
             Player.id == id
@@ -155,10 +175,9 @@ class PlayerModel:ObservableObject {
         }
     }
     
-    
+    // Function to automatically update achievement base on the current money from player and save to database
     func updateAchivement(){
         let money = currentPlayer?.money ?? 10000
-        print(money)
         if money < 20000 {
             ranking = "Silver"
         }
@@ -210,6 +229,7 @@ class PlayerModel:ObservableObject {
         save()
     }
     
+    // Function to automatically reset the money for user if their balance is <= 0
     func resetMoneyForUser() {
         if currentPlayer?.money ?? 0 <= 0 {
             currentPlayer?.money = 5000

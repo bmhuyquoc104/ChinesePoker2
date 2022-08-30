@@ -1,19 +1,24 @@
-//
-//  StartView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 26/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 26/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 26/08/2022)
+ Acknowledgement:
+ */
 
 import SwiftUI
 
 struct StartView: View {
     @StateObject var gameModel = GameModel()
+    // Environment object to get access to these variables in the view model
     @EnvironmentObject var playerModel:PlayerModel
     // State variable to check the current tab selection
     @State private var tabSelection = 1
-    // Initializer delegation
-    
+    // Variable requires passing from other view
     var name:String
     var body: some View {
         // Create tabview for display purposes

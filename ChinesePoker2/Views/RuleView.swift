@@ -1,13 +1,19 @@
-//
-//  RuleView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 26/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 26/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 26/08/2022)
+ Acknowledgement:
+ */
 
 import SwiftUI
 
 struct RuleView: View {
+    // declare columns to pass to lazyvgrid
     let columns = [
         GridItem(.adaptive(minimum: 70))
     ]
@@ -25,7 +31,7 @@ struct RuleView: View {
                     VStack(alignment:.leading,spacing:20){
                         VStack(alignment:.leading,spacing:15){
                             Text("I. Dealing").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("Each player will receive 13 random cards from dealer in clock wise order.").foregroundColor(.white)
+                            Text("Each player will receive 13 random cards from dealer in clockwise order.").foregroundColor(.white)
                             
                         }
                         
@@ -45,9 +51,9 @@ struct RuleView: View {
                             Text("IV. Scoring").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
                             Text("This part is where winning hands are determined.").foregroundColor(.white)
                             Text("The player has the highest-ranked hand win double of the bet amount.").foregroundColor(.white)
-                            Text("The player has the second highest-ranked hand win equal of the bet amout.").foregroundColor(.white)
+                            Text("The player has the second highest-ranked hand win equal of the bet amount.").foregroundColor(.white)
                             Text("The player has the lowest-ranked hand lose double of the bet amount.").foregroundColor(.white)
-                            Text("The player has the second loweset-ranked hand lose equal of the bet amount.").foregroundColor(.white)
+                            Text("The player has the second lowest-ranked hand lose equal of the bet amount.").foregroundColor(.white)
                         }
                         VStack(alignment:.leading,spacing:15){
                             Text("V. Next Hand").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
@@ -56,7 +62,7 @@ struct RuleView: View {
                         
                         VStack(alignment:.leading,spacing:15){
                             Text("VI. End game").font(.system(size: 20)).bold().foregroundColor(Color("secondary"))
-                            Text("After comparing all hands, the player see the result (winning or losing money).").foregroundColor(.white)
+                            Text("After comparing all hands, the player sees the result (winning or losing money).").foregroundColor(.white)
                             Text("Player can play again or leave the table.").foregroundColor(.white)
                         }
                         
@@ -140,7 +146,7 @@ struct RuleView: View {
                                     }.padding()
                                 }
                                 VStack(alignment:.leading,spacing:5){
-                                    Text("• Flush: All cards has same suit").foregroundColor(.white)
+                                    Text("• Flush: All cards have same suit").foregroundColor(.white)
                                     HStack(spacing:-10){
                                         Spacer()
                                         Image("Spade Ace").resizable().aspectRatio(contentMode: .fit).frame(width: 70, height: 70)

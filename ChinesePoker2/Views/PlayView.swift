@@ -1,23 +1,29 @@
-//
-//  ContentView.swift
-//  ChinesePoker2
-//
-//  Created by Võ Quốc Huy on 22/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Your name (e.g. Vo Quoc Huy)
+ ID: Your student id (e.g. s3823236)
+ Created  date: dd/mm/yyyy (e.g. 22/08/2022)
+ Last modified: dd/mm/yyyy (e.g. 29/08/2022)
+ */
 
 import SwiftUI
 import AVFoundation
 
 struct PlayView: View {
-    // Get the presentation mode from other views
+    // Environment to control the presentation mode (sheet or fullscreen over)
     @Environment(\.presentationMode) var presentationMode
+    // Environment object to get access to these variables in the view model
     @EnvironmentObject var model: CardModel
     @EnvironmentObject var playerModel:GameModel
+    // Binding variable to update these variables from other views
     @Binding var showFrontHand: Bool
     @Binding var isShowCompare: Bool
     @Binding var isShowArrange: Bool
     @Binding var isShowFrontHandResult: Bool
-    
+    // State variable to check the current tab selection
     @State var showAlert:Bool = false
     @State var isValidHandFrontHand:Bool = false
     @State var isValidHandMiddleHand:Bool = false
@@ -30,11 +36,12 @@ struct PlayView: View {
                 Spacer()
                 
                 VStack{
+                    // Show good or bad deck base on 3 hands are valid or not
                     VStack{
                         if (isValidHandFrontHand && isValidHandMiddleHand && isValidHandBackHand) {
                             
                             ZStack {
-                               
+                                
                                 HStack{
                                     Text("GOOD DECK").font(.system(size: 30)).foregroundColor(.yellow).italic()
                                 }
@@ -47,21 +54,21 @@ struct PlayView: View {
                                     
                                 }
                             }
-                          
+                            
                         }
                         
                     }.offset(y:-50).animation(.easeInOut(duration: 1.0), value: isValidHandFrontHand && isValidHandMiddleHand && isValidHandBackHand)
                     VStack(spacing:20){
-                      
-                        // MAKR: FRONT HAND
+                        
+                        // MARK: FRONT HAND
                         VStack () {
-                         
+                            
                             VStack (alignment:.leading) {
                                 HStack(spacing:5) {
                                     ForEach(0 ..< playerModel.players[3].playerCards.count, id: \.self){
                                         index in
                                         if (index < 3){
-                                    
+                                            
                                             Image(playerModel.players[3].playerCards[index].image)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit).frame(width: geo.size.width/5.35)
@@ -70,9 +77,9 @@ struct PlayView: View {
                                                     return NSItemProvider(contentsOf: URL(string: "\(playerModel.players[3].playerCards[index].id)")!)!
                                                 }
                                                 .onDrop(of: [.url], delegate: DropViewDelegate(card: playerModel.players[3].playerCards[index],models: model,playerModel: playerModel))
-                                                    
-
-
+                                            
+                                            
+                                            
                                         }
                                     }
                                     .onAppear {
@@ -98,7 +105,7 @@ struct PlayView: View {
                                             }
                                         }
                                     }
-                                   
+                                    
                                 }
                                 
                             }
@@ -106,9 +113,8 @@ struct PlayView: View {
                         
                         
                         // MARK: MIDDLE HAND
-                        
                         VStack() {
-                           
+                            
                             VStack (alignment:.leading) {
                                 HStack (spacing:5) {
                                     ForEach(0 ..< playerModel.players[3].playerCards.count, id: \.self){
@@ -155,7 +161,7 @@ struct PlayView: View {
                         // MARK: BACK HAND
                         
                         VStack(spacing:0) {
-                           
+                            
                             VStack (alignment:.leading) {
                                 HStack(spacing:5) {
                                     ForEach(0 ..< playerModel.players[3].playerCards.count, id: \.self){
@@ -194,12 +200,13 @@ struct PlayView: View {
                                             }
                                         }
                                     }
-                                        
+                                    
                                 }
                                 .padding(.leading,5)
                             }
                         }
                     }
+                    // check the deck of player when it appear
                     .onAppear {
                         model.evaluateFrontHand(cards: [playerModel.players[3].playerCards[0],playerModel.players[3].playerCards[1],playerModel.players[3].playerCards[2]])
                         model.evaluateBackHand(cards: [playerModel.players[3].playerCards[8],playerModel.players[3].playerCards[9],playerModel.players[3].playerCards[10],playerModel.players[3].playerCards[11],playerModel.players[3].playerCards[12]])
@@ -216,9 +223,6 @@ struct PlayView: View {
                             let temp = [sortedByKeyRank[0].rank.rawValue,sortedByKeyRank[1].rank.rawValue,sortedByKeyRank[2].rank.rawValue]
                             
                             let temp2 = [sortedByKeyRank2[0].rank.rawValue,sortedByKeyRank2[1].rank.rawValue,sortedByKeyRank2[2].rank.rawValue]
-                            print(temp)
-                            print(temp2)
-                            
                             var isValid = false
                             for (e1, e2) in zip(temp, temp2) {
                                 if (e1 < e2 ) {
@@ -276,8 +280,6 @@ struct PlayView: View {
                             let mappedItems2 = arr2.map { ($0.rank.rawValue, 1) }
                             let counts2 = Dictionary(mappedItems2, uniquingKeysWith: +)
                             let sortedByValueDictionary2 = counts2.sorted { $0.1 > $1.1 }
-                            print(sortedByValueDictionary)
-                            print(sortedByValueDictionary2)
                             if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
@@ -355,7 +357,6 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                            print(isValid)
                             if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
                                 && isValid){
                                 isValidHandFrontHand = true
@@ -433,7 +434,6 @@ struct PlayView: View {
                                     continue
                                 }
                             }
-                            print(isValid)
                             if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]
                                 && isValid){
                                 isValidHandFrontHand = true
@@ -522,6 +522,7 @@ struct PlayView: View {
                         }
                         
                     }
+                    // check the deck of player when it changing the index
                     .onChange(of: playerModel.players[3].playerCards) { newValue in
                         model.evaluateFrontHand(cards: [playerModel.players[3].playerCards[0],playerModel.players[3].playerCards[1],playerModel.players[3].playerCards[2]])
                         model.evaluateBackHand(cards: [playerModel.players[3].playerCards[8],playerModel.players[3].playerCards[9],playerModel.players[3].playerCards[10],playerModel.players[3].playerCards[11],playerModel.players[3].playerCards[12]])
@@ -529,6 +530,7 @@ struct PlayView: View {
                         let arr:Stack = [playerModel.players[3].playerCards[0],playerModel.players[3].playerCards[1],playerModel.players[3].playerCards[2]]
                         let arr2:Stack = [playerModel.players[3].playerCards[3],playerModel.players[3].playerCards[4],playerModel.players[3].playerCards[5],playerModel.players[3].playerCards[6],playerModel.players[3].playerCards[7]]
                         let arr3:Stack = [playerModel.players[3].playerCards[8],playerModel.players[3].playerCards[9],playerModel.players[3].playerCards[10],playerModel.players[3].playerCards[11],playerModel.players[3].playerCards[12]]
+                        // MARK: Check if front hand = midlle hand and hand type =  highcard
                         if (model.frontHandValue == model.middleHandValue && model.frontHandValue == 1){
                             let sortedByKeyRank2 = arr2.sorted { $0.rank.rawValue > $1.rank.rawValue }
                             let sortedByKeyRank = arr.sorted { $0.rank.rawValue > $1.rank.rawValue }
@@ -536,9 +538,6 @@ struct PlayView: View {
                             let temp = [sortedByKeyRank[0].rank.rawValue,sortedByKeyRank[1].rank.rawValue,sortedByKeyRank[2].rank.rawValue]
                             
                             let temp2 = [sortedByKeyRank2[0].rank.rawValue,sortedByKeyRank2[1].rank.rawValue,sortedByKeyRank2[2].rank.rawValue]
-                            print(temp)
-                            print(temp2)
-                            
                             var isValid = false
                             for (e1, e2) in zip(temp, temp2) {
                                 if (e1 < e2 ) {
@@ -565,7 +564,7 @@ struct PlayView: View {
                             }
                         }
                         
-                        
+                        // MARK: Check if front hand = midlle hand and hand type =  pair
                         if (model.frontHandValue == model.middleHandValue && model.frontHandValue == 2){
                             let mappedItems = arr.map { ($0.rank.rawValue, 1) }
                             let counts = Dictionary(mappedItems, uniquingKeysWith: +)
@@ -588,7 +587,7 @@ struct PlayView: View {
                             }
                         }
                         
-                        
+                        // MARK: Check if front hand = midlle hand and hand type =  2 pairs
                         if (model.frontHandValue == model.middleHandValue && model.frontHandValue == 4){
                             let mappedItems = arr.map { ($0.rank.rawValue, 1) }
                             let counts = Dictionary(mappedItems, uniquingKeysWith: +)
@@ -596,8 +595,6 @@ struct PlayView: View {
                             let mappedItems2 = arr2.map { ($0.rank.rawValue, 1) }
                             let counts2 = Dictionary(mappedItems2, uniquingKeysWith: +)
                             let sortedByValueDictionary2 = counts2.sorted { $0.1 > $1.1 }
-                            print(sortedByValueDictionary)
-                            print(sortedByValueDictionary2)
                             if (sortedByValueDictionary[0] <= sortedByValueDictionary2[0]){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
@@ -676,24 +673,24 @@ struct PlayView: View {
                                 }
                             }
                             if (sortedByValueDictionary[0] < sortedByValueDictionary2[0]
-                                ){
+                            ){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
                                 isValidHandMiddleHand = true
                             }
                             else if (sortedByValueDictionary[0] == sortedByValueDictionary2[0]
-                                && isValid){
+                                     && isValid){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
                                 isValidHandMiddleHand = true
                             }
                             else if
                                 (sortedByValueDictionary[0] == sortedByValueDictionary2[0]
-                                    && !isValid){
+                                 && !isValid){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = false
                                 isValidHandMiddleHand = false
-                                }
+                            }
                             else{
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = false
@@ -766,7 +763,7 @@ struct PlayView: View {
                                 }
                             }
                             if (sortedByValueDictionary[0] < sortedByValueDictionary2[0]
-                                ){
+                            ){
                                 isValidHandFrontHand = true
                                 isValidHandBackHand = true
                                 isValidHandMiddleHand = true
@@ -844,7 +841,7 @@ struct PlayView: View {
                             }
                         }
                         
-                        
+                        //MARK: Check other cases
                         if (model.frontHandValue < model.middleHandValue && model.middleHandValue < model.backHandValue){
                             isValidHandFrontHand = true
                             isValidHandBackHand = true
@@ -874,10 +871,13 @@ struct PlayView: View {
                 }
                 VStack{
                     // Button to close the current full screen over view
+                    // If the deck is bad -> show alert
                     if !(isValidHandFrontHand && isValidHandMiddleHand && isValidHandBackHand){
                         Button {
+                            // play sound
                             playSound(sound: "ClickButton", type: "wav")
-                           showAlert = true
+                            // show alert
+                            showAlert = true
                         } label: {
                             ZStack {
                                 Rectangle().foregroundColor(Color("primary").opacity(0.4)).clipShape(Capsule()).frame(width: geo.size.width/2.8, height: geo.size.height/15).shadow(color: .white.opacity(0.6), radius: 3)
@@ -885,18 +885,21 @@ struct PlayView: View {
                             }}.padding(.top,30).alert(isPresented: $showAlert) {
                                 Alert(title: Text("BAD ARRANGE"), message: Text("Please rearrange the deck."), dismissButton: .default(Text("Accept it!")))
                             }
-                        }
-                        
+                    }
+                    
                     else{
                         Button {
+                            // playsound
                             playSound(sound: "Done", type: "wav")
+                            // show soundtrack base on the rankfronthand
                             if (playerModel.myPlayer?.rankFrontHand ?? 0 > 0){
                                 playSound(sound: "WinHand", type: "mp3")
                             }
                             else{
                                 playSound(sound: "LoseHand", type: "mp3")
-
+                                
                             }
+                            // close this view
                             presentationMode.wrappedValue.dismiss()
                             showFrontHand = true
                             isShowCompare = true
@@ -908,7 +911,7 @@ struct PlayView: View {
                                 Text("Complete").foregroundColor(.white).font(.system(size: 20))
                             }}.padding(.top,30)
                     }
-                  
+                    
                 }
                 Spacer()
             }
