@@ -15,25 +15,26 @@
 		447F89E128B823C900A18B7A /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E028B823C900A18B7A /* LeaderBoardView.swift */; };
 		447F89E328B832AF00A18B7A /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E228B832AF00A18B7A /* RuleView.swift */; };
 		447F89E528B867C000A18B7A /* ChooseModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E428B867C000A18B7A /* ChooseModeView.swift */; };
-		447F89E828B9384600A18B7A /* MainView.wav in Resources */ = {isa = PBXBuildFile; fileRef = 447F89E728B9384600A18B7A /* MainView.wav */; };
 		447F89EA28B9386700A18B7A /* LoadSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89E928B9386700A18B7A /* LoadSound.swift */; };
-		447F89EC28B94B4A00A18B7A /* HomeView.wav in Resources */ = {isa = PBXBuildFile; fileRef = 447F89EB28B94B4A00A18B7A /* HomeView.wav */; };
-		447F89F328B94BC300A18B7A /* WinHand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447F89ED28B94BC300A18B7A /* WinHand.mp3 */; };
-		447F89F428B94BC300A18B7A /* LoseHand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447F89EE28B94BC300A18B7A /* LoseHand.mp3 */; };
-		447F89F528B94BC300A18B7A /* Victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447F89EF28B94BC300A18B7A /* Victory.mp3 */; };
-		447F89F628B94BC300A18B7A /* LoseGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447F89F028B94BC300A18B7A /* LoseGame.mp3 */; };
-		447F89F728B94BC300A18B7A /* CardArrange.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447F89F128B94BC300A18B7A /* CardArrange.mp3 */; };
-		447F89F828B94BC300A18B7A /* Done.wav in Resources */ = {isa = PBXBuildFile; fileRef = 447F89F228B94BC300A18B7A /* Done.wav */; };
 		447F89FA28B9C4E400A18B7A /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F89F928B9C4E400A18B7A /* AchievementView.swift */; };
 		44BA413C28B36F4D00709ADA /* ChinesePoker2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */; };
 		44BA413E28B36F4D00709ADA /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA413D28B36F4D00709ADA /* PlayView.swift */; };
 		44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA413F28B36F4F00709ADA /* Assets.xcassets */; };
 		44BA414328B36F4F00709ADA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BA414228B36F4F00709ADA /* Preview Assets.xcassets */; };
 		44BA414D28B3774600709ADA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA414C28B3774600709ADA /* Card.swift */; };
+		44C7E0DC28BE1D5A007AECD0 /* CardArrange.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D328BE1D5A007AECD0 /* CardArrange.mp3 */; };
+		44C7E0DD28BE1D5A007AECD0 /* LoseGame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D428BE1D5A007AECD0 /* LoseGame.mp3 */; };
+		44C7E0DE28BE1D5A007AECD0 /* MainView.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D528BE1D5A007AECD0 /* MainView.wav */; };
+		44C7E0DF28BE1D5A007AECD0 /* Victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D628BE1D5A007AECD0 /* Victory.mp3 */; };
+		44C7E0E028BE1D5A007AECD0 /* Done.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D728BE1D5A007AECD0 /* Done.wav */; };
+		44C7E0E128BE1D5A007AECD0 /* WinHand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D828BE1D5A007AECD0 /* WinHand.mp3 */; };
+		44C7E0E228BE1D5A007AECD0 /* ClickButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0D928BE1D5A007AECD0 /* ClickButton.mp3 */; };
+		44C7E0E328BE1D5A007AECD0 /* LoseHand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0DA28BE1D5A007AECD0 /* LoseHand.mp3 */; };
+		44C7E0E428BE1D5A007AECD0 /* Background2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0DB28BE1D5A007AECD0 /* Background2.wav */; };
+		44C7E0E628BE1D67007AECD0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C7E0E528BE1D67007AECD0 /* Launch Screen.storyboard */; };
 		44D0857D28B39C4E00DE15D7 /* DropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */; };
 		44D0857F28B39F0800DE15D7 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D0857E28B39F0800DE15D7 /* CardModel.swift */; };
 		44D617B528B51EAB00F576C1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D617B428B51EAB00F576C1 /* MainView.swift */; };
-		44D736BC28BA5D200011903F /* ClickButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D736BB28BA5D200011903F /* ClickButton.mp3 */; };
 		44D736C128BB1B3C0011903F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736C028BB1B3C0011903F /* ButtonView.swift */; };
 		44D736C328BB209F0011903F /* PlayerDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736C228BB209F0011903F /* PlayerDeckView.swift */; };
 		44D736C528BB23E90011903F /* RankHandPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736C428BB23E90011903F /* RankHandPlayerView.swift */; };
@@ -42,8 +43,6 @@
 		44D736CB28BB36060011903F /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CA28BB36060011903F /* GameInfoView.swift */; };
 		44D736CD28BB700F0011903F /* BackHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CC28BB700F0011903F /* BackHomeView.swift */; };
 		44D736CF28BB9A440011903F /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D736CE28BB9A440011903F /* LaunchView.swift */; };
-		44D736D128BCA0D30011903F /* Background2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44D736D028BCA0D30011903F /* Background2.wav */; };
-		44D736D528BCEF850011903F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44D736D428BCEF850011903F /* Launch Screen.storyboard */; };
 		44EA835F28B78D8E00375F9B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA835E28B78D8E00375F9B /* GameModel.swift */; };
 		44EA836228B7938100375F9B /* SortDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836128B7938100375F9B /* SortDeck.swift */; };
 		44EA836828B7B79B00375F9B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA836728B7B79B00375F9B /* HomeView.swift */; };
@@ -58,15 +57,7 @@
 		447F89E028B823C900A18B7A /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
 		447F89E228B832AF00A18B7A /* RuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
 		447F89E428B867C000A18B7A /* ChooseModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseModeView.swift; sourceTree = "<group>"; };
-		447F89E728B9384600A18B7A /* MainView.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = MainView.wav; path = ../../../../../Downloads/MainView.wav; sourceTree = "<group>"; };
 		447F89E928B9386700A18B7A /* LoadSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadSound.swift; sourceTree = "<group>"; };
-		447F89EB28B94B4A00A18B7A /* HomeView.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = HomeView.wav; path = ../../../../../Downloads/HomeView.wav; sourceTree = "<group>"; };
-		447F89ED28B94BC300A18B7A /* WinHand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WinHand.mp3; path = ../../../../../Downloads/WinHand.mp3; sourceTree = "<group>"; };
-		447F89EE28B94BC300A18B7A /* LoseHand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LoseHand.mp3; path = ../../../../../Downloads/LoseHand.mp3; sourceTree = "<group>"; };
-		447F89EF28B94BC300A18B7A /* Victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Victory.mp3; path = ../../../../../Downloads/Victory.mp3; sourceTree = "<group>"; };
-		447F89F028B94BC300A18B7A /* LoseGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LoseGame.mp3; path = ../../../../../Downloads/LoseGame.mp3; sourceTree = "<group>"; };
-		447F89F128B94BC300A18B7A /* CardArrange.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CardArrange.mp3; path = ../../../../../Downloads/CardArrange.mp3; sourceTree = "<group>"; };
-		447F89F228B94BC300A18B7A /* Done.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Done.wav; path = ../../../../../Downloads/Done.wav; sourceTree = "<group>"; };
 		447F89F928B9C4E400A18B7A /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
 		44BA413828B36F4D00709ADA /* ChinesePoker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinesePoker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BA413B28B36F4D00709ADA /* ChinesePoker2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePoker2App.swift; sourceTree = "<group>"; };
@@ -74,10 +65,19 @@
 		44BA413F28B36F4F00709ADA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44BA414228B36F4F00709ADA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		44BA414C28B3774600709ADA /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		44C7E0D328BE1D5A007AECD0 /* CardArrange.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CardArrange.mp3; sourceTree = "<group>"; };
+		44C7E0D428BE1D5A007AECD0 /* LoseGame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LoseGame.mp3; sourceTree = "<group>"; };
+		44C7E0D528BE1D5A007AECD0 /* MainView.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MainView.wav; sourceTree = "<group>"; };
+		44C7E0D628BE1D5A007AECD0 /* Victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Victory.mp3; sourceTree = "<group>"; };
+		44C7E0D728BE1D5A007AECD0 /* Done.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Done.wav; sourceTree = "<group>"; };
+		44C7E0D828BE1D5A007AECD0 /* WinHand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WinHand.mp3; sourceTree = "<group>"; };
+		44C7E0D928BE1D5A007AECD0 /* ClickButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ClickButton.mp3; sourceTree = "<group>"; };
+		44C7E0DA28BE1D5A007AECD0 /* LoseHand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LoseHand.mp3; sourceTree = "<group>"; };
+		44C7E0DB28BE1D5A007AECD0 /* Background2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Background2.wav; sourceTree = "<group>"; };
+		44C7E0E528BE1D67007AECD0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		44D0857C28B39C4E00DE15D7 /* DropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropViewDelegate.swift; sourceTree = "<group>"; };
 		44D0857E28B39F0800DE15D7 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		44D617B428B51EAB00F576C1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		44D736BB28BA5D200011903F /* ClickButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ClickButton.mp3; path = ../../../../../Downloads/ClickButton.mp3; sourceTree = "<group>"; };
 		44D736C028BB1B3C0011903F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		44D736C228BB209F0011903F /* PlayerDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDeckView.swift; sourceTree = "<group>"; };
 		44D736C428BB23E90011903F /* RankHandPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankHandPlayerView.swift; sourceTree = "<group>"; };
@@ -86,8 +86,6 @@
 		44D736CA28BB36060011903F /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		44D736CC28BB700F0011903F /* BackHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackHomeView.swift; sourceTree = "<group>"; };
 		44D736CE28BB9A440011903F /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
-		44D736D028BCA0D30011903F /* Background2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Background2.wav; path = ../../../../../Downloads/Background2.wav; sourceTree = "<group>"; };
-		44D736D428BCEF850011903F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../../../Daredevil-App/Daredevil App/Views/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		44EA835E28B78D8E00375F9B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		44EA836128B7938100375F9B /* SortDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDeck.swift; sourceTree = "<group>"; };
 		44EA836728B7B79B00375F9B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -107,16 +105,15 @@
 		447F89E628B9380500A18B7A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				44D736D028BCA0D30011903F /* Background2.wav */,
-				44D736BB28BA5D200011903F /* ClickButton.mp3 */,
-				447F89F128B94BC300A18B7A /* CardArrange.mp3 */,
-				447F89F228B94BC300A18B7A /* Done.wav */,
-				447F89F028B94BC300A18B7A /* LoseGame.mp3 */,
-				447F89EE28B94BC300A18B7A /* LoseHand.mp3 */,
-				447F89EF28B94BC300A18B7A /* Victory.mp3 */,
-				447F89ED28B94BC300A18B7A /* WinHand.mp3 */,
-				447F89EB28B94B4A00A18B7A /* HomeView.wav */,
-				447F89E728B9384600A18B7A /* MainView.wav */,
+				44C7E0DB28BE1D5A007AECD0 /* Background2.wav */,
+				44C7E0D928BE1D5A007AECD0 /* ClickButton.mp3 */,
+				44C7E0D728BE1D5A007AECD0 /* Done.wav */,
+				44C7E0D328BE1D5A007AECD0 /* CardArrange.mp3 */,
+				44C7E0D428BE1D5A007AECD0 /* LoseGame.mp3 */,
+				44C7E0DA28BE1D5A007AECD0 /* LoseHand.mp3 */,
+				44C7E0D528BE1D5A007AECD0 /* MainView.wav */,
+				44C7E0D628BE1D5A007AECD0 /* Victory.mp3 */,
+				44C7E0D828BE1D5A007AECD0 /* WinHand.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -173,7 +170,7 @@
 		44BA414A28B376BA00709ADA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				44D736D428BCEF850011903F /* Launch Screen.storyboard */,
+				44C7E0E528BE1D67007AECD0 /* Launch Screen.storyboard */,
 				44D736BF28BB1B290011903F /* ReusableView */,
 				44BA413D28B36F4D00709ADA /* PlayView.swift */,
 				44D617B428B51EAB00F576C1 /* MainView.swift */,
@@ -281,19 +278,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				447F89F528B94BC300A18B7A /* Victory.mp3 in Resources */,
-				447F89F328B94BC300A18B7A /* WinHand.mp3 in Resources */,
-				447F89EC28B94B4A00A18B7A /* HomeView.wav in Resources */,
 				44BA414328B36F4F00709ADA /* Preview Assets.xcassets in Resources */,
-				44D736BC28BA5D200011903F /* ClickButton.mp3 in Resources */,
-				44D736D528BCEF850011903F /* Launch Screen.storyboard in Resources */,
+				44C7E0E028BE1D5A007AECD0 /* Done.wav in Resources */,
+				44C7E0DC28BE1D5A007AECD0 /* CardArrange.mp3 in Resources */,
 				44BA414028B36F4F00709ADA /* Assets.xcassets in Resources */,
-				447F89F728B94BC300A18B7A /* CardArrange.mp3 in Resources */,
-				447F89F828B94BC300A18B7A /* Done.wav in Resources */,
-				447F89F428B94BC300A18B7A /* LoseHand.mp3 in Resources */,
-				44D736D128BCA0D30011903F /* Background2.wav in Resources */,
-				447F89E828B9384600A18B7A /* MainView.wav in Resources */,
-				447F89F628B94BC300A18B7A /* LoseGame.mp3 in Resources */,
+				44C7E0DE28BE1D5A007AECD0 /* MainView.wav in Resources */,
+				44C7E0DD28BE1D5A007AECD0 /* LoseGame.mp3 in Resources */,
+				44C7E0E228BE1D5A007AECD0 /* ClickButton.mp3 in Resources */,
+				44C7E0E328BE1D5A007AECD0 /* LoseHand.mp3 in Resources */,
+				44C7E0E128BE1D5A007AECD0 /* WinHand.mp3 in Resources */,
+				44C7E0E428BE1D5A007AECD0 /* Background2.wav in Resources */,
+				44C7E0DF28BE1D5A007AECD0 /* Victory.mp3 in Resources */,
+				44C7E0E628BE1D67007AECD0 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
