@@ -53,24 +53,31 @@ Chinese Poker App is the application that made by Huy Vo to let the user get to 
 ![Leader Board view](https://i.imgur.com/R5hdLDO.png)
 
 - Achievement View
+  
 ![Achievement View](https://i.imgur.com/CxY8Eb5.png)
 
 - Rule View
+  
 ![Rule View](https://i.imgur.com/XgCm5K9.png)
 
 - Choose mode view
+  
 ![Choose mode View](https://i.imgur.com/1npJvlG.png)
 
 - Game View
+  
 ![Game View](https://i.imgur.com/7R4oLbg.png)
 
 - Play View
+  
 ![Play View](https://i.imgur.com/JgzrdZi.png)
 
 - Game Setting View
+  
 ![Game Setting View](https://i.imgur.com/yY1HlKw.png)
 
 - Back Button View
+  
 ![Back Button View](https://i.imgur.com/71Gxrw2.png)
 
 <!-- TechStack -->
@@ -93,7 +100,6 @@ Chinese Poker App is the application that made by Huy Vo to let the user get to 
 -    Implement rule view
 -    Background music for all views
 -    Effect sound when user click button, winning or losing each hand, result at the end (either win or lose)
--    
 
 ####    ***Extra Features:***
 -    Splash screen that only show when the app is starting.
@@ -133,9 +139,9 @@ In later version, the following features will be added in:
 <!-- Contact -->
 ## :handshake: Contact
 
-Gmail: bmhuyquoc104@gmail.com
-
-Project Link: [https://github.com/bmhuyquoc104/Daredevil-App](https://github.com/bmhuyquoc104/Daredevil-App)
+   Gmail: bmhuyquoc104@gmail.com  
+   
+ 	 Project Link: https://github.com/bmhuyquoc104/ChinesePoker2
 
 
 
